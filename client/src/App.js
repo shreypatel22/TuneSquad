@@ -15,7 +15,6 @@ export default function App() {
         />
         <nav className="sidebar__menu">
           <UserProfile code={code} />
-          {/* <PlaylistNameList ></PlaylistNameList> */}
         </nav>
       </section>
       <section className="content-display">
