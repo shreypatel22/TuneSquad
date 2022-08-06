@@ -12,16 +12,36 @@ export default function useAuth(code) {
         code,
       })
       .then(res => {
-        setAccessToken(res.data.accessToken)
-        setRefreshToken(res.data.refreshToken)
-        setExpiresIn(res.data.expiresIn)
-        window.history.pushState({}, null, '/')
+        console.log(res.data)
+        // setAccessToken(res.data.accessToken)
+        // setRefreshToken(res.data.refreshToken)
+        // setExpiresIn(res.data.expiresIn)
+        // window.history.pushState({}, null, '/')
       })
       .catch(() => {
         window.location = "/"
       })
   }, [code])
 
-  return accessToken
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:3001/refresh", {
+  //       refreshToken,
+  //     })
+  //     .then(res => {
+  //       console.log("hello")
+  //       // setAccessToken(res.data.accessToken)
+  //       // setRefreshToken(res.data.refreshToken)
+  //       // setExpiresIn(res.data.expiresIn)
+  //       // window.history.pushState({}, null, '/')
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       console.log("hello")
+  //       // window.location = "/"
+  //     })
+  // }, [refreshToken, expiresIn])
+
+  // return accessToken
 }
 
