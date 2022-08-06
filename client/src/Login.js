@@ -1,4 +1,5 @@
 import React from "react"
+import './Login.scss'
 
 
 const AUTH_URL =
@@ -6,12 +7,10 @@ const AUTH_URL =
 
   export default function Login() {
   return (
-    <section>
       <a href={AUTH_URL}>
-      <button >
+      <button className="login-button">
         Login With Spotify
       </button>
       </a>
-    </section>
   )
 }
