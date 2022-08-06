@@ -1,6 +1,6 @@
 import './App.scss';
 import Login from './Login';
-import UserProfile from './UserProfile';;
+import UserProfile from './UserProfile';
 
 const code = new URLSearchParams(window.location.search).get('code')
 export default function App() {
