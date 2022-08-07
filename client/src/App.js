@@ -1,6 +1,8 @@
 import './App.scss';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import PlaylistNameList from './PlaylistNameList';
+import PlaylistItems from './PlaylistItems';
 
 const code = new URLSearchParams(window.location.search).get('code')
 export default function App() {
@@ -15,10 +17,11 @@ export default function App() {
         />
         <nav className="sidebar__menu">
           <Dashboard code={code} />
+          <PlaylistNameList />
         </nav>
       </section>
       <section className="content-display">
-    
+        <PlaylistItems/>
       </section>
     </main>
     )
