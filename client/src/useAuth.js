@@ -41,5 +41,5 @@ export default function useAuth(code) {
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 
-  return accessToken;
+  return {accessToken, setAccessToken};
 }

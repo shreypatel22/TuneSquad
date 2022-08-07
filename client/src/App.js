@@ -1,6 +1,6 @@
 import './App.scss';
 import Login from './Login';
-import PlaylistNameList from './PlaylistNameList';
+import PlaylistSidebar from './PlaylistSidebar';
 import PlaylistItems from './PlaylistItems';
 import UserProfile from './UserProfile';
 
@@ -17,7 +17,7 @@ export default function App() {
         />
         <nav className="sidebar__menu">
           <UserProfile code={code} />
-          <PlaylistNameList />
+          <PlaylistSidebar />
         </nav>
       </section>
       <section className="content-display">
