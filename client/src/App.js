@@ -1,5 +1,7 @@
 import './App.scss';
 import Login from './Login';
+import PlaylistNameList from './PlaylistNameList';
+import PlaylistItems from './PlaylistItems';
 import UserProfile from './UserProfile';
 
 const code = new URLSearchParams(window.location.search).get('code')
@@ -15,10 +17,11 @@ export default function App() {
         />
         <nav className="sidebar__menu">
           <UserProfile code={code} />
+          <PlaylistNameList />
         </nav>
       </section>
       <section className="content-display">
-    
+        <PlaylistItems/>
       </section>
     </main>
     )

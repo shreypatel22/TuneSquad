@@ -3,8 +3,7 @@ $Montserrat: 'Montserrat', serif;
 
 .login-button {
   text-align: center;
-  margin-top: 50px;
-  margin-left: 70px;
+  margin: 50px;
   width: 200px;
   height: 40px;
   left: 40px;
@@ -14,4 +13,6 @@ $Montserrat: 'Montserrat', serif;
   border-radius: 50px;
   color: #ee5d88;
   font-family: $Montserrat;
+  font-size: 15px;
+  font-weight: 500;
 }
