@@ -16,6 +16,8 @@ module.exports = () => {
     })
 
     spotifyApi.authorizationCodeGrant(code).then(data => {
+      // spotifyApi.setAccessToken(data.body['access_token']);
+      // spotifyApi.setRefreshToken(data.body['refresh_token']);      
       res.json({
         accessToken: data.body.access_token,
         refreshToken: data.body.refresh_token,

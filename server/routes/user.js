@@ -21,7 +21,7 @@ module.exports = () => {
     .then((data) => {
       res.json({
         name: data.body.display_name,
-        profileImage: data.body.images[0].url,
+        // profileImage: data.body.images[0].url,
       })
       console.log('Some information about the authenticated user', data.body);
     }).catch(err => {

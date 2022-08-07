@@ -4,6 +4,7 @@ import PlaylistSidebar from './PlaylistSidebar';
 import PlaylistItems from './PlaylistItems';
 import UserProfile from './UserProfile';
 
+
 const code = new URLSearchParams(window.location.search).get('code')
 export default function App() {
   if (code) {
