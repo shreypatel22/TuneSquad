@@ -11,7 +11,7 @@ export default function PlaylistItem() {
       <img
            className="playlist-item-image"
            src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
-           alt="Playlist Image"
+           alt="Playlist"
          />
     </Container>
  
