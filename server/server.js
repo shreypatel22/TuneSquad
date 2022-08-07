@@ -12,6 +12,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const refreshRouter = require('./routes/refresh');
+const logoutRouter = require('./routes/logout');
+const getUser = require('./routes/getUser');
 
 const app = express();
 
@@ -27,8 +29,10 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login', loginRouter());
 app.use('/refresh', refreshRouter())
+app.use('/login', loginRouter());
+app.use('/logout', logoutRouter());
+app.use('/getUser', getUser())
 
 app.listen(3001, () => {
   console.log('listening on 3001')

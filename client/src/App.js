@@ -1,5 +1,6 @@
 import './App.scss';
 import Login from './Login';
+
 import Dashboard from './Dashboard';
 
 const code = new URLSearchParams(window.location.search).get('code')
@@ -14,7 +15,7 @@ export default function App() {
           alt="TuneSquad"
         />
         <nav className="sidebar__menu">
-          <Dashboard code={code} />
+          <Dashboard code={code} />          
         </nav>
       </section>
       <section className="content-display">
