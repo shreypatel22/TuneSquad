@@ -1,8 +1,10 @@
 import './SideNav.scss';
 import Login from './Login';
 import PlaylistSidebar from './PlaylistSidebar';
-import PlaylistItems from './PlaylistItems';
+import PlaylistItem from './PlaylistItem';
 import UserProfile from './UserProfile';
+import { AddIcon } from '@chakra-ui/icons'
+
 
 
 export default function SideNav({code}) {
@@ -17,7 +19,11 @@ export default function SideNav({code}) {
         />
         <nav className="sidebar__menu">
           <UserProfile code={code} />
-          <PlaylistSidebar />
+          <button className='new-playlist-button'>
+          <AddIcon className='icon-button' w={18} h={18} />
+          New Playlist
+          </button>
+          <PlaylistSidebar /> 
         </nav>
       </section>
     </main>

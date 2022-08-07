@@ -1,5 +1,6 @@
+////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
 import React from "react"
-import './PlaylistItems.scss'
+import './PlaylistItem.scss'
 import { Container } from '@chakra-ui/react'
 
 

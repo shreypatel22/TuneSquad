@@ -40,7 +40,24 @@ $Montserrat: 'Montserrat', serif;
 }
 
 
-
+.new-playlist-button {
+  text-align: center;
+  margin: 50px;
+  width: 200px;
+  height: 40px;
+  left: 40px;
+  top: 250px;
+  background: #3A406D;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 15px;
+  font-weight: 500;
+}
+.icon-button {
+  margin-right: 20px;
+}
 // body {
 //   background: linear-gradient(180deg, #03082A, #1eb3ff, #03082A, #ce2ad6, #03082A, #ee5d88);
 //   background-size: 1200% 1200%;
