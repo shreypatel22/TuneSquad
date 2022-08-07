@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+$Montserrat: 'Montserrat', serif;
 
 .login-button {
   text-align: center;
-  margin-top: 50px;
-  margin-left: 70px;
+  margin: 50px;
   width: 200px;
   height: 40px;
   left: 40px;
@@ -13,4 +12,7 @@
   border: 1px solid #000000;
   border-radius: 50px;
   color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 15px;
+  font-weight: 500;
 }

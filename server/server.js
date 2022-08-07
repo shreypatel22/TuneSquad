@@ -13,7 +13,8 @@ const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const refreshRouter = require('./routes/refresh');
 const logoutRouter = require('./routes/logout');
-const getUser = require('./routes/getUser');
+const userRouter = require('./routes/user');
+
 
 const app = express();
 
@@ -32,7 +33,8 @@ app.use('/users', usersRouter);
 app.use('/refresh', refreshRouter())
 app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
-app.use('/getUser', getUser())
+app.use('/user', userRouter())
+
 
 app.listen(3001, () => {
   console.log('listening on 3001')

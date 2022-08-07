@@ -11,21 +11,18 @@ export default function Logout({code, accessToken, setAccessToken}) {
     axios.post('http://localhost:3001/logout', {})
     .then(function (response) {
       setAccessToken("")
+      code = null;
       console.log(response);
+      window.location.href = "/"    
     })
     .catch(function (error) {
       console.log(error);
     });
   }
   
-  return (      
-    <div>
-      <button className="login-button" onClick={logout}>
-        Logout
-      </button>
-
-      <p>{accessToken}</p>
-
-    </div>   
+  return (          
+    <button className="login-button" onClick={logout}>
+      Logout
+    </button>          
   )
 }
