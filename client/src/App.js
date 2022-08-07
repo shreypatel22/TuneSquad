@@ -1,8 +1,8 @@
 import './App.scss';
 import Login from './Login';
-import Dashboard from './Dashboard';
 import PlaylistNameList from './PlaylistNameList';
 import PlaylistItems from './PlaylistItems';
+import UserProfile from './UserProfile';
 
 const code = new URLSearchParams(window.location.search).get('code')
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
           alt="TuneSquad"
         />
         <nav className="sidebar__menu">
-          <Dashboard code={code} />
+          <UserProfile code={code} />
           <PlaylistNameList />
         </nav>
       </section>
