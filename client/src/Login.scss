@@ -13,4 +13,10 @@ $Montserrat: 'Montserrat', serif;
   font-family: $Montserrat;
   font-size: 15px;
   font-weight: 500;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+  }
+
 }
