@@ -1,28 +1,34 @@
-import { useState, React } from 'react';
-import useAuth from './useAuth';
-import axios from 'axios';
-import Logout from './Logout';
+import { useState, React, useEffect } from "react";
+import useAuth from "./useAuth";
+import axios from "axios";
+import Logout from "./Logout";
+import "./Login.scss";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { TriangleDownIcon } from "@chakra-ui/icons";
 
-export default function UserProfile({code}) {
-  const {accessToken, setAccessToken} = useAuth(code)
-  const [username, setUsername] = useState()
-  const getMe = () => {
-    axios.post('http://localhost:3001/user', {accessToken})
-    .then((response) => {      
-      setUsername(response.data.name)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-  
+export default function UserProfile({ code }) {
+  const { accessToken, setAccessToken, username, setUsername } = useAuth(code);
   return (
+    <div>
+      <Menu>
+        <MenuButton
+          className="login-button"
+          as={Button}
 
-      <div>
-        <button className="login-button" onClick={getMe}>
+          rightIcon={<TriangleDownIcon w={10} h={10} />}
+        >
           {username}
-        </button>
-        <Logout code={code} accessToken={accessToken} setAccessToken={setAccessToken}/>
-      </div>
-  )
+        </MenuButton>
+        <MenuList>
+          <MenuItem>
+            <Logout
+              code={code}
+              accessToken={accessToken}
+              setAccessToken={setAccessToken}
+            />
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    </div>
+  );
 }

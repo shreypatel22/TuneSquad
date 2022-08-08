@@ -5,6 +5,7 @@ import './PlaylistSidebar.scss'
 
 export default function PlaylistSidebar() {
   return (
+    
       <p>Playlist</p> 
   )
 }

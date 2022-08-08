@@ -1,5 +1,6 @@
+////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
 import React from "react"
-import './PlaylistItems.scss'
+import './PlaylistItem.scss'
 import { Container } from '@chakra-ui/react'
 
 
@@ -11,7 +12,7 @@ export default function PlaylistItem() {
       <img
            className="playlist-item-image"
            src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
-           alt="Playlist Image"
+           alt="Playlist"
          />
     </Container>
  

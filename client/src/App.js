@@ -1,31 +1,32 @@
-import './App.scss';
-import Login from './Login';
-import PlaylistSidebar from './PlaylistSidebar';
-import PlaylistItems from './PlaylistItems';
-import UserProfile from './UserProfile';
+import "./App.scss";
+import PlaylistContainer from "./PlaylistContainer";
+import PlaylistItem from "./PlaylistItem";
+import "./PlaylistItem.scss";
+import SideNav from "./SideNav";
+import Login from "./Login";
 
-
-const code = new URLSearchParams(window.location.search).get('code')
+const code = new URLSearchParams(window.location.search).get("code");
 export default function App() {
   if (code) {
     return (
       <main className="layout">
-      <section className="sidebar">
-        <img
-          className="sidebar--centered"
-          src="images/logo.png"
-          alt="TuneSquad"
-        />
-        <nav className="sidebar__menu">
-          <UserProfile code={code} />
-          <PlaylistSidebar />
-        </nav>
-      </section>
-      <section className="content-display">
-        <PlaylistItems/>
-      </section>
-    </main>
-    )
+        <section className="sidebar">
+          <img
+            className="sidebar--centered"
+            src="images/logo.png"
+            alt="TuneSquad"
+          />
+          <nav className="sidebar__menu">
+            <div>
+              <SideNav code={code} />
+            </div>
+          </nav>
+        </section>
+        <section className="content-display">
+          <PlaylistItem code={code} />
+        </section>
+      </main>
+    );
   } else {
     return (
       <main className="layout">
@@ -39,11 +40,8 @@ export default function App() {
             <Login />
           </nav>
         </section>
-        <section className="content-display">
-       
-        </section>
+        <section className="content-display"></section>
       </main>
     );
   }
 }
-
