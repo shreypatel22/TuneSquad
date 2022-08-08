@@ -7,41 +7,14 @@ import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 
 export default function UserProfile({ code }) {
-  const { accessToken, setAccessToken } = useAuth(code);
-  const [username, setUsername] = useState();
-  //   useEffect(() => {
-  //     const getMe = () => {
-  //     axios
-  //       .post("http://localhost:3001/user", { accessToken })
-  //       .then((response) => {
-  //         setUsername(response.data.name);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //       console.log(username, "!!!!!!!!!!!!!!!")
-  //   };
-  // }, [username]);
-
-  const getMe = () => {
-    axios
-      .post("http://localhost:3001/user", { accessToken })
-      .then((response) => {
-        setUsername(response.data.name);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    console.log(username, "!!!!!!!!!!!!!!!");
-  };
-
+  const { accessToken, setAccessToken, username, setUsername } = useAuth(code);
   return (
     <div>
       <Menu>
         <MenuButton
           className="login-button"
           as={Button}
-          onClick={getMe}
+
           rightIcon={<TriangleDownIcon w={10} h={10} />}
         >
           {username}

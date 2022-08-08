@@ -1,7 +1,6 @@
 import './SideNav.scss';
 import Login from './Login';
 import PlaylistSidebar from './PlaylistSidebar';
-import PlaylistItem from './PlaylistItem';
 import UserProfile from './UserProfile';
 import { AddIcon } from '@chakra-ui/icons'
 
