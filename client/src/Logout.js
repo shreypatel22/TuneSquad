@@ -21,8 +21,8 @@ export default function Logout({code, accessToken, setAccessToken}) {
   }
   
   return (          
-    <button className="login-button" onClick={logout}>
+    <div className="login-button" onClick={logout}>
       Logout
-    </button>          
+    </div>          
   )
 }
