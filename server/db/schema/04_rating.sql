@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS  rating CASCADE;
+
+CREATE TABLE rating (
+id SERIAL PRIMARY KEY NOT NULL,
+track_playlist_id INTEGER REFERENCES track_playlist(id) ON DELETE CASCADE,
+user_id  VARCHAR(255) NOT NULL, 
+rating_number INTEGER
+);

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const spotifyWebApi = require('spotify-web-api-node');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const db = require('./configs/db.config');
 
 
 const indexRouter = require('./routes/index');
@@ -30,11 +31,6 @@ app.use('/', indexRouter);
 app.use('/refresh', refreshRouter())
 app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
-
-
-app.listen(3001, () => {
-  console.log('listening on 3001')
-})
 
 
 module.exports = app;
