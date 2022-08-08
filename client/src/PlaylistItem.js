@@ -9,7 +9,7 @@ import { Container, SimpleGrid, Box } from '@chakra-ui/react';
 export default function PlaylistItem() {
   return (
     <div>
-      <SimpleGrid minChildWidth='300px' >
+      <SimpleGrid minChildWidth='320px' >
         <Box className="playlistItem-container">
         <img
           className="playlist-item-image"

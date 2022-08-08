@@ -4,6 +4,7 @@ import "./PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
 
+
 const code = new URLSearchParams(window.location.search).get("code");
 export default function App() {
   if (code) {
