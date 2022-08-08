@@ -3,13 +3,8 @@ import useAuth from "./useAuth";
 import axios from "axios";
 import Logout from "./Logout";
 import "./Login.scss";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { TriangleDownIcon } from "@chakra-ui/icons";
 
 export default function UserProfile({ code }) {
   const { accessToken, setAccessToken } = useAuth(code);
@@ -43,7 +38,12 @@ export default function UserProfile({ code }) {
   return (
     <div>
       <Menu>
-        <MenuButton className="login-button" as={Button} onClick={getMe}>
+        <MenuButton
+          className="login-button"
+          as={Button}
+          onClick={getMe}
+          rightIcon={<TriangleDownIcon w={10} h={10} />}
+        >
           {username}
         </MenuButton>
         <MenuList>
