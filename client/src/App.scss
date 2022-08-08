@@ -1,46 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-$Montserrat: 'Montserrat', serif;
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+$Montserrat: "Montserrat", serif;
 
 .layout {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
 }
 
 .sidebar {
- display: flex;
- flex-direction: column;
-
-
- &--centered {
-   align-self: center;
-   height: 300px;
-   width: 350px;
-   margin-right: auto;
-
- }
-
-  &__menu {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 100%;
-  background: #03082A;
-  font-family: $Montserrat;
-  color: white;
+
+  &--centered {
+    align-self: center;
+    height: 300px;
+    width: 350px;
+    margin-right: auto;
   }
 
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background: #03082a;
+    font-family: $Montserrat;
+    color: white;
+  }
 }
 
 .content-display {
   height: 100vh;
   width: 100vw;
-  background: rgb(2,0,36);
-  background: linear-gradient(180deg, rgba(2,0,36,1) 39%, rgba(2,0,36,1) 53%, rgba(142,29,158,1) 75%, rgba(206,42,214,1) 82%, rgba(126,104,233,1) 90%, rgba(30,179,255,1) 96%);
+  background: linear-gradient(45deg, rgba(206, 42, 214, 1) 0%, darken(#292c46, 0%) 100%);
+  animation: background 1s ease infinite;
+  // background: rgb(41, 44, 70);
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(41, 44, 70, 1) 0%,
+  //   rgba(58, 64, 109, 1) 69%,
+  //   rgba(206, 42, 214, 1) 96%
+  // );
 }
-
-
-
+@keyframes background { 
+  0% {
+    background-position: 0% 50%;
+  }
+  
+  50% {
+    background-position: 100% 50%;
+  }
+  
+  100% {
+    background-position: 0% 50%;
+  }
+}
 // body {
 //   background: linear-gradient(180deg, #03082A, #1eb3ff, #03082A, #ce2ad6, #03082A, #ee5d88);
 //   background-size: 1200% 1200%;
