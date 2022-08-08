@@ -1,8 +1,8 @@
 import "./App.scss";
-import PlaylistItem from "./PlaylistItem";
 import "./PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
+import PlaylistContainer from "./PlaylistContainer";
 
 
 const code = new URLSearchParams(window.location.search).get("code");
@@ -21,7 +21,7 @@ export default function App() {
           </nav>
         </section>
         <section className="content-display">
-          <PlaylistItem code={code} />
+          <PlaylistContainer code={code} />
         </section>
       </main>
     );
