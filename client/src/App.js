@@ -1,5 +1,4 @@
 import "./App.scss";
-import PlaylistContainer from "./PlaylistContainer";
 import PlaylistItem from "./PlaylistItem";
 import "./PlaylistItem.scss";
 import SideNav from "./SideNav";
@@ -17,9 +16,7 @@ export default function App() {
             alt="TuneSquad"
           />
           <nav className="sidebar__menu">
-            <div>
-              <SideNav code={code} />
-            </div>
+              <SideNav code={code} /> 
           </nav>
         </section>
         <section className="content-display">
