@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -15,6 +15,7 @@ import {
   ChakraProvider
 } from '@chakra-ui/react'
 import './PlaylistModal.scss'
+import axios from 'axios'
 
 // useContext (since this isnt a parent/child relation)
 // axios
@@ -23,9 +24,24 @@ import './PlaylistModal.scss'
 
 export default function PlaylistModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
+
+  const [playlistName, setPlaylistName] = useState()
+  const [coverURL, setCoverURL] = useState()
+  const [description, setDescription] = useState()
+ 
+  const savePlaylist = () => {
+    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description})
+    .then(function (response) {      
+      console.log(response);
+      window.location.href = "/" 
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
 
   return (
     <>     
@@ -45,17 +61,17 @@ export default function PlaylistModal() {
 
             <FormControl>
               <FormLabel>Playlist Name</FormLabel>
-              <Input ref={initialRef} placeholder='Playlist Name' />
+              <Input ref={initialRef} placeholder='Playlist Name' onChange={(event) => setPlaylistName(event.target.value)} />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Playlist Cover Image URL</FormLabel>
-              <Input placeholder='Playlist Cover Image URL' />
+              <Input placeholder='Playlist Cover Image URL' onChange={(event) => setCoverURL(event.target.value)} />
             </FormControl>
             
             <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
-              <Input placeholder='Description' />
+              <Input placeholder='Description' onChange={(event) => setDescription(event.target.value)} />
             </FormControl>
 
           </ModalBody>
