@@ -7,11 +7,12 @@ import PlaylistItem from "./PlaylistItem"
   // useState chagnes based on how many items are in the database
 // use hooks and api calls
 
-// const [playlists, setPlaylist] = useState()
+// const [playlists, setPlaylists] = useState()
 
 
 
 export default function PlaylistContainer(code) {
+  
   return(
     <PlaylistItem code={code} />
   )

@@ -30,9 +30,10 @@ export default function PlaylistModal({setOpenModal}) {
   const [playlistName, setPlaylistName] = useState()
   const [coverURL, setCoverURL] = useState()
   const [description, setDescription] = useState()
+  const accessToken = localStorage.getItem('access_token')
  
   const savePlaylist = () => {
-    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description})
+    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken})
     .then(function (response) {      
       console.log(response);      
       setOpenModal(false)
