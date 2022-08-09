@@ -13,6 +13,7 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const refreshRouter = require('./routes/refresh');
 const logoutRouter = require('./routes/logout');
+const newPlaylistRouter = require('./routes/newPlaylist');
 
 
 const app = express();
@@ -31,6 +32,7 @@ app.use('/', indexRouter);
 app.use('/refresh', refreshRouter())
 app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
+app.use('/newPlaylist', newPlaylistRouter());
 
 
 module.exports = app;

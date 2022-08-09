@@ -14,6 +14,7 @@ export default function useAuth(code) {
       })
       .then((res) => {
         setAccessToken(res.data.accessToken);
+        localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));        
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
         setUsername(res.data.name)
@@ -33,6 +34,7 @@ export default function useAuth(code) {
         })
         .then(res => {
           setAccessToken(res.data.accessToken)
+          localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
           setExpiresIn(res.data.expiresIn)
         })
         .catch((err) => {
