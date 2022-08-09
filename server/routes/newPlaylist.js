@@ -7,28 +7,30 @@ const bodyParser = require("body-parser");
 module.exports = () => {
   router.post("/", (req, res) => {
     console.log(req.body)
+    const { playlistName, coverURL, description, accessToken } = req.body
     
-    res.json({test:"test"})
-    // const spotifyApi = new spotifyWebApi({
-    //   redirectUri: process.env.REDIRECT_URI,
-    //   clientId: process.env.CLIENT_ID,
-    //   clientSecret: process.env.CLIENT_SECRET,
-    // });
+    // res.json({playlistName, coverURL, description, accessToken})
+    const spotifyApi = new spotifyWebApi({
+      redirectUri: process.env.REDIRECT_URI,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+    });
+    console.log(typeof accessToken)
+    spotifyApi.setAccessToken(accessToken);
 
-
-    // spotifyApi
-    //   .createPlaylist("My playlist", {
-    //     description: "My description",
-    //     public: true,
-    //   })
-    //   .then(
-    //     function (data) {
-    //       console.log("Created playlist!");
-    //     },
-    //     function (err) {
-    //       console.log("Something went wrong!", err);
-    //     }
-    //   );
+    spotifyApi
+      .createPlaylist(playlistName, {
+        description: description,
+        public: true,
+      })
+      .then(
+        function (data) {
+          console.log("Created playlist!");
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
 
     // spotifyApi.authorizationCodeGrant(code).then((authData) => {
     //   spotifyApi.setAccessToken(authData.body.access_token);
