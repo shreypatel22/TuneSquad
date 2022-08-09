@@ -6,7 +6,9 @@ const bodyParser = require("body-parser");
 
 module.exports = () => {
   router.post("/", (req, res) => {
-    console.log(req.body)    
+    console.log(req.body)
+    
+    res.json({test:"test"})
     // const spotifyApi = new spotifyWebApi({
     //   redirectUri: process.env.REDIRECT_URI,
     //   clientId: process.env.CLIENT_ID,

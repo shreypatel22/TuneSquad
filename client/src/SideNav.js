@@ -12,7 +12,7 @@ const [openModal, setOpenModal] = useState(false)
 
   return (
     <section className='sidebar-component'>
-      {openModal && <PlaylistModal />}
+      {openModal && <PlaylistModal setOpenModal={setOpenModal} />}
       <UserProfile code={code} />
       <button className='new-playlist-button' onClick={() => setOpenModal(true)}>
         <AddIcon className='icon-button' w={18} h={18} />
@@ -20,6 +20,5 @@ const [openModal, setOpenModal] = useState(false)
       </button>
       <PlaylistSidebar />
     </section>
-
   );
 }

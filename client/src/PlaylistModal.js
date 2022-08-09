@@ -22,7 +22,7 @@ import axios from 'axios'
 // that will sotre info in context and the db
 // then the PlaylistContainer will access this context and dynamic render components
 
-export default function PlaylistModal() {
+export default function PlaylistModal({setOpenModal}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -34,8 +34,9 @@ export default function PlaylistModal() {
   const savePlaylist = () => {
     axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description})
     .then(function (response) {      
-      console.log(response);
-      window.location.href = "/" 
+      console.log(response);      
+      setOpenModal(false)
+      // window.location.href = "/" 
     })
     .catch(function (error) {
       console.log(error);
