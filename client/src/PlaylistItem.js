@@ -1,15 +1,15 @@
 ////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
-import React from "react";
+import { useState, React } from "react";
 import './PlaylistItem.scss';
 import { Container, SimpleGrid, Box } from '@chakra-ui/react';
+import Playlist from './Playlist';
 
 
 
-
-export default function PlaylistItem() {
+export default function PlaylistItem({setOpenPlaylist}) {
   return (
     <div>
-      <SimpleGrid minChildWidth='320px' >
+      <SimpleGrid minChildWidth='320px' onClick={() => setOpenPlaylist(true)}>
         <Box className="playlistItem-container">
         <img
           className="playlist-item-image"

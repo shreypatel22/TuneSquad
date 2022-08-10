@@ -1,4 +1,5 @@
 /////////// HOMEPAGE VIEW OF ALL PLAYLISTS //////////////
+import { propNames } from "@chakra-ui/react";
 import PlaylistItem from "./PlaylistItem"
 
 
@@ -14,9 +15,9 @@ import PlaylistItem from "./PlaylistItem"
 // react router setup
 
 
-export default function PlaylistContainer(code) {
+export default function PlaylistContainer(props) {
   
   return(
-    <PlaylistItem code={code} />
+    <PlaylistItem code={props.code} setOpenPlaylist={props.setOpenPlaylist}/>
   )
 }
