@@ -3,6 +3,7 @@ import "./PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
 import PlaylistContainer from "./PlaylistContainer";
+import SearchBar from "./SearchBar";
 
 
 const code = new URLSearchParams(window.location.search).get("code");
@@ -22,6 +23,7 @@ export default function App() {
         </section>
         <section className="content-display">
           <PlaylistContainer code={code} />
+          <SearchBar />
         </section>
       </main>
     );
