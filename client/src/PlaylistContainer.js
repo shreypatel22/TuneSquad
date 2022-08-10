@@ -14,6 +14,12 @@ import PlaylistItem from "./PlaylistItem"
 // react router setup
 
 
+// get allPlaylists (select *) (done on app lvl so you can pass playlists down)
+// create a default UseState
+// useeffect to pull db (useeffect has the db helper)
+  // set it to useState
+  // map to generate playlistitems
+
 export default function PlaylistContainer(code) {
   
   return(
