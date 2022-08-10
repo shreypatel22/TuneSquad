@@ -1,13 +1,16 @@
+import { useState} from 'react'
 import "./App.scss";
 import "./PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
 import PlaylistContainer from "./PlaylistContainer";
+import Playlist from './Playlist';
 import SearchBar from "./SearchBar";
 
 
 const code = new URLSearchParams(window.location.search).get("code");
 export default function App() {
+  const [openPlaylist, setOpenPlaylist] = useState(false)
   if (code) {
     return (
       <main className="layout">
@@ -16,14 +19,17 @@ export default function App() {
             className="sidebar--centered"
             src="images/logo.png"
             alt="TuneSquad"
-          />
+            onClick={() => window.location.href = "/"}
+            />
           <nav className="sidebar__menu">
               <SideNav code={code} /> 
           </nav>
         </section>
         <section className="content-display">
-          <PlaylistContainer code={code} />
-          <SearchBar />
+          {openPlaylist ?
+         <Playlist setOpenPlaylist={setOpenPlaylist} />
+            :
+          <PlaylistContainer code={code} setOpenPlaylist={setOpenPlaylist}/>}
         </section>
       </main>
     );
