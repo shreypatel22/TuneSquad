@@ -1,6 +1,6 @@
 import { useState} from 'react'
-import "./App.scss";
-import "./PlaylistItem.scss";
+import "./style/App.scss";
+import "./style/PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
 import PlaylistContainer from "./PlaylistContainer";

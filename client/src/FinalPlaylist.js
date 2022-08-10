@@ -5,7 +5,7 @@ import {
   Box,
   Button
 } from '@chakra-ui/react';
-import './PlaylistModal.scss';
+import './style/PlaylistModal.scss';
 import axios from 'axios';
 import PlaylistItem from './PlaylistItem';
 import SearchBar from './SearchBar';

@@ -110,9 +110,5 @@ export default function SearchBar({setOpenSearchBar}) {
         </ModalContent>
       </Modal>
     </ChakraProvider>
-    //     <div>
-    //       <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
-    //     </div>
-    // </div>
   );
 }
