@@ -32,7 +32,7 @@ app.use('/', indexRouter);
 app.use('/refresh', refreshRouter())
 app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
-app.use('/newPlaylist', newPlaylistRouter());
+app.use('/newPlaylist', newPlaylistRouter(db));
 
 
 module.exports = app;

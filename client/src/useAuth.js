@@ -18,6 +18,7 @@ export default function useAuth(code) {
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
         setUsername(res.data.name)
+        localStorage.setItem("username", JSON.stringify(res.data.name));   
         window.history.pushState({}, null, "/");
       })
       .catch(() => {
