@@ -11,7 +11,7 @@ const {
 module.exports = (db) => {
   router.post("/", (req, res) => {
     // console.log(req.body)
-    const { playlistName, coverURL, description, accessToken, username } = req.body;
+    const { playlistName, coverURL, description, accessToken, userID } = req.body;
 
     const spotifyApi = new spotifyWebApi({
       redirectUri: process.env.REDIRECT_URI,
@@ -34,10 +34,10 @@ module.exports = (db) => {
           const playlistID = uri.slice(17);          
           const createdDate = getDate();
 
-          addPlaylist(db, playlistName, username, playlistID, createdDate)
+          addPlaylist(db, playlistName, userID, playlistID, createdDate)
             .then(data => {
               // console.log('------')
-              res.json({playlistName, username, playlistID, createdDate});
+              res.json({playlistName, userID, playlistID, createdDate});
             });      
         },
         function (err) {

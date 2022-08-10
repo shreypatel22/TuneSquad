@@ -5,8 +5,8 @@ const addPlaylist = (db, playlistName, username, playlistID, date) => {
     .catch((err) =>  console.log(err.message));  
 };
 
-const getAllPlaylists = (db) => {
-  return db.query(`SELECT * FROM playlist;`)
+const getMyCreatedPlaylists = (db, userID) => {
+  return db.query(`SELECT * FROM playlist WHERE admin_id = $1;`, [userID])
     .then(data => {return data.rows})
 }
 
@@ -21,6 +21,6 @@ const getDate = () => {
 
 module.exports = {
   addPlaylist,
-  getAllPlaylists,
+  getMyCreatedPlaylists,
   getDate
 }

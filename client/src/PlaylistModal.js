@@ -17,11 +17,6 @@ import {
 import './PlaylistModal.scss'
 import axios from 'axios'
 
-// useContext (since this isnt a parent/child relation)
-// axios
-// that will sotre info in context and the db
-// then the PlaylistContainer will access this context and dynamic render components
-
 export default function PlaylistModal({setOpenModal}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
@@ -32,9 +27,10 @@ export default function PlaylistModal({setOpenModal}) {
   const [description, setDescription] = useState()
   const accessToken = JSON.parse(localStorage.getItem('access_token'));
   const username = JSON.parse(localStorage.getItem('username'));
+  const userID = JSON.parse(localStorage.getItem('userID'));
  
   const savePlaylist = () => {
-    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken, username})
+    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken, userID})
     .then(function (response) {      
       console.log(response);      
       setOpenModal(false)

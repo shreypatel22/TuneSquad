@@ -22,12 +22,12 @@ export default function App() {
   // }, [playlists]);
 
   const [playlists, setPlaylists] = useState()
-  const username = JSON.parse(localStorage.getItem('username'));
+  const userID = JSON.parse(localStorage.getItem('userID'));
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/playlists/${username}`)
-      .then((res) => console.log(res))
+      .get(`http://localhost:3001/playlists/${userID}`)
+      .then((res) => console.log(res.data.playlists))
       .catch((err) => console.log(err))
   }, [playlists]);
 

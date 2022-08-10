@@ -1,17 +1,17 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const { getAllPlaylists } = require("./helper_functions");
+const { getMyCreatedPlaylists } = require("./helper_functions");
 
 module.exports = (db) => {
-  router.get("/:username", (req, res) => {
+  router.get("/:userID", (req, res) => {
 
-    console.log("user", req.params.user);
-    const username = req.params.user;
+    console.log("user", req.params);
+    const userID = req.params.userID;
 
-    getAllPlaylists(db).then((data) => {
+    getMyCreatedPlaylists(db, userID).then((data) => {
       console.log(data);
-      res.json({data})
+      res.json({playlists: data})
     });
   });
   return router;
