@@ -28,16 +28,15 @@ module.exports = (db) => {
       })
       .then(
         function (data) {
-          // console.log(data);
-          console.log('db', db);
+          // console.log(data);          
           const uri = data.body.uri;
-          const playlistID = uri.slice(17);          
+          const playlistID = uri.slice(17);
           const createdDate = getDate();
 
           addPlaylist(db, playlistName, userID, playlistID, createdDate)
             .then(data => {
-              // console.log('------')
-              res.json({playlistName, userID, playlistID, createdDate});
+              console.log('------', data.rows[0])
+              res.json({newPlaylist: data.rows[0]});
             });      
         },
         function (err) {

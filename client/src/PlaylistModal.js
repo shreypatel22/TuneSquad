@@ -17,7 +17,7 @@ import {
 import './PlaylistModal.scss'
 import axios from 'axios'
 
-export default function PlaylistModal({setOpenModal}) {
+export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -29,11 +29,17 @@ export default function PlaylistModal({setOpenModal}) {
   const username = JSON.parse(localStorage.getItem('username'));
   const userID = JSON.parse(localStorage.getItem('userID'));
  
+// get playlists from props
+// using ... and setplaylist update the state
+  // setPlaylist((prev) => [...prev, newPlaylist])
+
   const savePlaylist = () => {
     axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken, userID})
-    .then(function (response) {      
-      console.log(response);      
+    .then(function ({data}) {      
+      console.log('---', data.newPlaylist);
+      setPlaylists((prev) => [...prev, data.newPlaylist])
       setOpenModal(false)
+      console.log('playlists', playlists)
       // window.location.href = "/" 
     })
     .catch(function (error) {
@@ -41,7 +47,7 @@ export default function PlaylistModal({setOpenModal}) {
     });
   }
 
-
+  
   return (
     <>     
       <ChakraProvider>
@@ -55,7 +61,7 @@ export default function PlaylistModal({setOpenModal}) {
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
           <ModalHeader color="#ee5d88" fontWeight='bold'>Create Your Playlist</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton onClick={() => setOpenModal(false)}/>
           <ModalBody pb={6}>
 
             <FormControl>
@@ -78,7 +84,7 @@ export default function PlaylistModal({setOpenModal}) {
             <Button backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3} onClick={savePlaylist}>
               Save
             </Button>
-            <Button onClick={onClose} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
+            <Button onClick={() => setOpenModal(false)} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
               Cancel
             </Button>
           </ModalFooter>
@@ -87,4 +93,4 @@ export default function PlaylistModal({setOpenModal}) {
       </ChakraProvider>
     </>
   )
-} 
+}

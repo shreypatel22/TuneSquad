@@ -24,6 +24,7 @@ export default function useAuth(code) {
         console.log('userIDD', res.data.userID)
         localStorage.setItem("userID", JSON.stringify(res.data.userID));
         window.history.pushState({}, null, "/");
+        // window.location = "/";
       })
       .catch(() => {
         window.location = "/";

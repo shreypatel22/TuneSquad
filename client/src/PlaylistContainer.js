@@ -20,9 +20,31 @@ import PlaylistItem from "./PlaylistItem"
   // set it to useState
   // map to generate playlistitems
 
-export default function PlaylistContainer(code) {
-  
+
+
+
+export default function PlaylistContainer({code, playlists}) {  
+  console.log('playlistsCon', playlists)
+
+
+  const tests = playlists.map(playlist => {
+    return (<p key={playlist.id}>{playlist.name}</p>)
+  })
+
+
+
+
+
+
+
+
   return(
-    <PlaylistItem code={code} />
+
+    <div>
+      {/* <PlaylistItem code={code} /> */}
+      {tests}
+    </div>
+    
   )
+
 }
