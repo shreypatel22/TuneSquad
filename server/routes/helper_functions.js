@@ -1,15 +1,26 @@
 const addPlaylist = (db, playlistName, username, playlistID, date) => {
   console.log(playlistName, username, playlistID, date)
-  return db.query(`INSERT INTO playlist (name, admin_id, spotify_playlist_id, date_created, status) 
+  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status) 
   VALUES ($1, $2, $3, $4, 'open')
   RETURNING *;`, [playlistName, username, playlistID, date])
     .catch((err) =>  console.log(err.message));  
 };
 
 const getMyCreatedPlaylists = (db, userID) => {
-  return db.query(`SELECT * FROM playlist WHERE admin_id = $1;`, [userID])
+  return db.query(`SELECT * FROM playlists WHERE admin_id = $1;`, [userID])
     .then(data => {return data.rows})
 }
+
+const getMyVoterPlaylists = (db, userID) => {
+  return db.query(`SELECT * FROM playlists JOIN voter_playlists ON playlist_id = playlists.id WHERE user_id = $1;`, [userID])
+    .then(data => {return data.rows})
+}
+
+const getAllMyPlaylists = (db, userID) => {
+  const queries = [getMyCreatedPlaylists(db, userID), getMyVoterPlaylists(db, userID)];
+  return Promise.all(queries).catch(err =>
+    console.log("getAllMyPlaylists: ", err.message));
+};
 
 const getDate = () => {
   const today = new Date();
@@ -23,5 +34,7 @@ const getDate = () => {
 module.exports = {
   addPlaylist,
   getMyCreatedPlaylists,
+  getMyVoterPlaylists,
+  getAllMyPlaylists,
   getDate
 }

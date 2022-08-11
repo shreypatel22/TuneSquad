@@ -62,18 +62,3 @@ export default function App() {
     );
   }
 }
-
-
-
-
-
-// const db = require('../../server/configs/db.config');
-  // const getAllPlaylists = (db) => {
-  //   return db.query(`SELECT * FROM playlist;`)
-  //     .then(data => {return data.rows})
-  // }
-
-  // useEffect(() => {
-  //   getAllPlaylists(db)
-  //     .then(data => console.log(data))
-  // }, [playlists]);

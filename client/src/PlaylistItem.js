@@ -16,6 +16,7 @@ export default function PlaylistItem({ name, key, admin, spotifyPlaylistID }) {
           <p>{name}</p>
           <div className="playlist-info">
             <p> {spotifyPlaylistID}</p>
+            <p> key: {key}</p>
             <p> Songs: 100</p>
             <p> Voters: 5</p>
           </div>
