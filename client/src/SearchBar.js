@@ -12,19 +12,18 @@ import {
   FormLabel,
   Input,
   Button,
-  ChakraProvider
-} from '@chakra-ui/react';
+  ChakraProvider,
+} from "@chakra-ui/react";
 import TrackSearchResult from "./TrackSearchResult";
 import Player from "./Player";
 const spotifyWebApi = require("spotify-web-api-node");
-
 const spotifyApi = new spotifyWebApi({
   redirectUri: process.env.REDIRECT_URI,
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
 });
 
-export default function SearchBar({setOpenSearchBar}) {
+export default function SearchBar({ setOpenSearchBar }) {
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -34,9 +33,8 @@ export default function SearchBar({setOpenSearchBar}) {
 
   function chooseTrack(track) {
     setPlayingTrack(track);
-    setSearch('');
+    setSearch("");
   }
-
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -78,12 +76,14 @@ export default function SearchBar({setOpenSearchBar}) {
         finalFocusRef={finalRef}
         isOpen={true}
         onClose={onClose}
-        className="create-playlistform"
+       id="create-playlistform"
       >
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
-          <ModalHeader color="#ee5d88" fontWeight='bold'>Search for a song</ModalHeader>
-          <ModalCloseButton onClick={() => setOpenSearchBar( false )}/>
+          <ModalHeader color="#ee5d88" fontWeight="bold"  >
+            Search for a song
+          </ModalHeader>
+          <ModalCloseButton onClick={() => setOpenSearchBar(false)} />
           <ModalBody pb={6}>
             <FormControl>
               <Input
@@ -95,18 +95,19 @@ export default function SearchBar({setOpenSearchBar}) {
             </FormControl>
             <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
               {searchResults.map((track) => (
-                <TrackSearchResult
-                  track={track}
-                  key={track.uri}
-                  chooseTrack={chooseTrack}
-                />
+                <section>
+                  <TrackSearchResult
+                    track={track}
+                    key={track.uri}
+                    chooseTrack={chooseTrack}
+                  />
+                 
+                  <hr />
+                </section>
               ))}
             </div>
-
-
           </ModalBody>
-          <ModalFooter>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </ChakraProvider>
