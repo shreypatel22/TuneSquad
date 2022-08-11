@@ -7,11 +7,8 @@ export default function PlaylistContainer({
   playlists,
   setOpenPlaylist,
   setSpotifyPlaylistID,
-  setPlaylistID
+  setPlaylistID,
 }) {
-  console.log("playlistsCon", playlists);
-  // console.log('playlistID', playlists[0].id)
-
   let playlistItems;
 
   if (playlists) {
@@ -30,7 +27,6 @@ export default function PlaylistContainer({
           key={playlist.spotify_playlist_id}
           name={playlist.name}
           spotifyPlaylistID={playlist.spotify_playlist_id}
-          playlistID={playlist.id}
           setOpenPlaylist={setOpenPlaylist}
           playlistID={playlistID}
           setPlaylistID={setPlaylistID}

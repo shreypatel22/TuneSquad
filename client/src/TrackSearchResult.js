@@ -16,7 +16,7 @@ export default function TrackSearchResult({ track, chooseTrack, playlistID }) {
   //     setPlaylists((prev) => [...prev, data.newPlaylist])
   //     setOpenModal(false)
   //     console.log('playlists', playlists)
-  //     // window.location.href = "/" 
+  
   //   })
   //   .catch(function (error) {
   //     console.log(error);

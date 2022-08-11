@@ -16,7 +16,6 @@ module.exports = () => {
     spotifyApi.authorizationCodeGrant(code).then((authData) => {
       spotifyApi.setAccessToken(authData.body.access_token);
       spotifyApi.getMe().then((userData) => {
-        // console.log(userData);
         res
           .json({
             name: userData.body.display_name,
@@ -24,8 +23,8 @@ module.exports = () => {
             refreshToken: authData.body.refresh_token,
             expiresIn: authData.body.expires_in,
             userID: userData.body.id
-          })
-        })
+          });
+      })
         .catch((err) => {
           res.sendStatus(400);
         });
@@ -33,3 +32,4 @@ module.exports = () => {
   });
   return router;
 };
+

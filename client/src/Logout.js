@@ -12,7 +12,6 @@ export default function Logout({code, accessToken, setAccessToken}) {
     .then(function (response) {
       setAccessToken("")
       code = null;
-      console.log(response);
       window.location.href = "/"    
     })
     .catch(function (error) {

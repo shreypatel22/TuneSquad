@@ -12,13 +12,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function Playlist({
-  setOpenPlaylistType,
-  playlistID,
-  spotifyPlaylistID,
-}) {
+export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-
+  
   return (
     <>
       <Box>
@@ -30,11 +26,9 @@ export default function Playlist({
               alt="Playlist"
             />
             <div className="playlist-text">
-              <section className="playlist-name">
-                <p> Playlist 1</p>
+            <section className="playlist-name">
+               <p> {playlistInfo.name}</p>
               </section>
-              <p> HERE {playlistID} OR </p>
-              <p>{spotifyPlaylistID}</p>
               <div className="playlist-info">
                 <p> Admin: "NAME", "NAME", etc</p>
                 <p> Collaborators: "NAME", "NAME", etc</p>
