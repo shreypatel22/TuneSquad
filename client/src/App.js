@@ -30,9 +30,7 @@ export default function App() {
         console.log('res', res.data.playlists)        
       }) 
       .catch((err) => console.log(err))
-  }, []);
-
-  // console.log('playlists', playlists)
+  }, []); 
 
 
   const [openPlaylist, setOpenPlaylist] = useState(false)

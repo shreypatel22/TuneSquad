@@ -6,10 +6,10 @@ import { Box } from "@chakra-ui/react";
 
 export default function PlaylistItem({
   name,
-  key,
   admin,
   spotifyPlaylistID,
   setOpenPlaylist,
+  playlistID
 }) {
   return (
     <div>
@@ -21,9 +21,8 @@ export default function PlaylistItem({
           />
 
           <p>{name}</p>
-          <div className="playlist-info">
-            {/* <p> {spotifyPlaylistID}</p> */}
-            <p> key: {key}</p>
+          <div className="playlist-info">            
+            <p> PlaylistID: {playlistID}</p>            
             <p> Songs: 100</p>
             <p> Voters: 5</p>
           </div>
