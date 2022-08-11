@@ -57,10 +57,11 @@ export default function PlaylistModal({setOpenModal}) {
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
           <ModalHeader color="#ee5d88" fontWeight='bold'>Create Your Playlist</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton onClick={() => setOpenModal(false)}/>
           <ModalBody pb={6}>
 
             <FormControl>
+              
               <FormLabel>Playlist Name</FormLabel>
               <Input ref={initialRef} placeholder='Playlist Name' onChange={(event) => setPlaylistName(event.target.value)} />
             </FormControl>
@@ -80,7 +81,7 @@ export default function PlaylistModal({setOpenModal}) {
             <Button backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3} onClick={savePlaylist}>
               Save
             </Button>
-            <Button onClick={onClose} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
+            <Button onClick={() => setOpenModal(false)} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
               Cancel
             </Button>
           </ModalFooter>
