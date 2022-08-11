@@ -9,7 +9,9 @@ export default function useAuth(code) {
   const [userID, setUserID] = useState();
 
   useEffect(() => {
-    axios
+
+    if(code) {
+      axios
       .post("http://localhost:3001/login", {
         code,
       })
@@ -29,6 +31,8 @@ export default function useAuth(code) {
       .catch(() => {
         window.location = "/";
       });
+    }
+
   }, [code]);
 
   useEffect(() => {
