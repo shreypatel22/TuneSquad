@@ -5,9 +5,9 @@ import { EditIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 
-export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID }) {
+export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-
+  
   return (
     <>
       <Box>
@@ -16,8 +16,7 @@ export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlayl
           src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
           alt="Playlist"
         />
-        <p> HERE {playlistID} OR  </p>
-        <p>{spotifyPlaylistID}</p>
+        <p> {playlistInfo.name}</p>
         <div className="playlist-info">
           <p> Songs: 100</p>
           <p> Voters: 5</p>
