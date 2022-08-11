@@ -16,7 +16,6 @@ $Montserrat: Montserrat;
   &:hover {
     background-color: #50536b;
     cursor: pointer;
-
   }
 }
 
@@ -25,7 +24,7 @@ $Montserrat: Montserrat;
   width: 200px;
   height: 40px;
   margin-bottom: 20px;
-  background: #3A406D;
+  background: #3a406d;
   border-radius: 50px;
   color: #ee5d88;
   font-family: $Montserrat;
@@ -35,17 +34,14 @@ $Montserrat: Montserrat;
   &:hover {
     background-color: #50536b;
     cursor: pointer;
-
   }
 }
-
 
 .searchbar-track {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   margin: 10px;
-  
 }
 
 Button.searchbar-track {
@@ -61,14 +57,12 @@ Button.searchbar-track {
   max-width: 60vw;
 }
 
-
-
-.playlist-search  {
+.playlist-search {
   text-align: center;
   width: 200px;
   height: 40px;
   margin-bottom: 20px;
-  background: #3A406D;
+  background: #3a406d;
   border-radius: 50px;
   color: #ee5d88;
   font-family: $Montserrat;
@@ -78,12 +72,72 @@ Button.searchbar-track {
   &:hover {
     background-color: #50536b;
     cursor: pointer;
-
   }
 }
 
-.divider {
-  border-color: #3A406D;
+hr.divider {
+  border: 1px solid #3a406d;
+  margin-top: 20px;
 }
 
+.playlist-info-section {
+  background: rgb(30, 179, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(30, 179, 255, 1) 0%,
+    rgba(206, 42, 214, 1) 50%,
+    rgba(238, 93, 136, 1) 100%
+  );
+  border: solid #3a406d;
+  border-radius: 12px;
+  margin: 20px;
+}
 
+.playlist-cover-image {
+  height: 25%;
+  width: 20%;
+  margin: 25px;
+  border-radius: 30px;
+}
+
+.playlist-name {
+  font-size: xx-large;
+  font-style: italic;
+  font-family: $Montserrat;
+}
+.play-spotify-section {
+  display: flex;
+  justify-content: center;
+}
+
+.playlist-text {
+  font-family: $Montserrat;
+}
+
+.play-spotify {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  background: #494e75;
+  border-radius: 50px;
+  color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+  }
+}
+
+.playerBar {
+  position: fixed;
+  float: right;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

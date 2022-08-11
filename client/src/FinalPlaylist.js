@@ -1,28 +1,35 @@
 import React, { useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
+import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
 export default function Playlist({ setOpenPlaylistType }) {
-
   return (
     <>
       <Box>
-        <img
-          className="playlist-cover-image"
-          src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
-          alt="Playlist"
-        />
-        <p> Playlist 1</p>
-        <div className="playlist-info">
-          <p> Songs: 100</p>
-          <p> Voters: 5</p>
-        </div>
+        <section className="playlist-info-section">
+          <div className="playlist-info">
+            <img
+              className="playlist-cover-image"
+              src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+              alt="Playlist"
+            />
+            <div className="playlist-text">
+              <section className="playlist-name">
+                <p> Playlist 1</p>
+              </section>
+              <p> Admin: "NAME", "NAME", etc</p>
+              <p> Collaborators: "NAME", "NAME", etc</p>
+              <p> Songs: 100</p>
+            </div>
+          </div>
+        </section>
       </Box>
       <Button
         className="playlist-type-off"
         onClick={() => setOpenPlaylistType(false)}
       >
-        voting
+        Voting
       </Button>
       <Button
         className="playlist-type-on"
@@ -30,6 +37,12 @@ export default function Playlist({ setOpenPlaylistType }) {
       >
         Final
       </Button>
+      <hr className="divider" />
+      <section className="play-spotify-section">
+        <Button className="play-spotify">
+          <AudiotrackIcon /> Play in Spotify
+        </Button>
+      </section>
     </>
   );
 }

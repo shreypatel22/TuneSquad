@@ -16,7 +16,12 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 
-export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
+// useContext (since this isnt a parent/child relation)
+// axios
+// that will sotre info in context and the db
+// then the PlaylistContainer will access this context and dynamic render components
+
+export default function PlaylistModal({setOpenModal}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   const finalRef = React.useRef(null)
@@ -25,20 +30,12 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
   const [coverURL, setCoverURL] = useState()
   const [description, setDescription] = useState()
   const accessToken = JSON.parse(localStorage.getItem('access_token'));
-  const username = JSON.parse(localStorage.getItem('username'));
-  const userID = JSON.parse(localStorage.getItem('userID'));
  
-// get playlists from props
-// using ... and setplaylist update the state
-  // setPlaylist((prev) => [...prev, newPlaylist])
-
   const savePlaylist = () => {
-    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken, userID})
-    .then(function ({data}) {      
-      console.log('---', data.newPlaylist);
-      setPlaylists((prev) => [...prev, data.newPlaylist])
+    axios.post('http://localhost:3001/newPlaylist', {playlistName, coverURL, description, accessToken})
+    .then(function (response) {      
+      console.log(response);      
       setOpenModal(false)
-      console.log('playlists', playlists)
       // window.location.href = "/" 
     })
     .catch(function (error) {
@@ -46,7 +43,7 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
     });
   }
 
-  
+
   return (
     <>     
       <ChakraProvider>
@@ -60,7 +57,7 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
           <ModalHeader color="#ee5d88" fontWeight='bold'>Create Your Playlist</ModalHeader>
-          <ModalCloseButton onClick={() => setOpenModal(false)}/>
+          <ModalCloseButton />
           <ModalBody pb={6}>
 
             <FormControl>
@@ -83,7 +80,7 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
             <Button backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3} onClick={savePlaylist}>
               Save
             </Button>
-            <Button onClick={() => setOpenModal(false)} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
+            <Button onClick={onClose} backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" mr={3}>
               Cancel
             </Button>
           </ModalFooter>
@@ -92,4 +89,4 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
       </ChakraProvider>
     </>
   )
-}
+} 
