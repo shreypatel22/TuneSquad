@@ -1,4 +1,8 @@
 import React from "react"
+import './style/Playlist.scss'
+import {
+ Button
+} from "@chakra-ui/react";
 
 export default function TrackSearchResult({ track, chooseTrack }) {
   function handlePlay() {
@@ -7,15 +11,16 @@ export default function TrackSearchResult({ track, chooseTrack }) {
 
   return (
     <div
-      className="d-flex m-2 align-items-center"
+      className="searchbar-track"
       style={{ cursor: "pointer" }}
       onClick={handlePlay}
     >
       <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} />
-      <div className="ml-3">
+      <div className="track-info" >
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
+      <Button> Add song </Button>
     </div>
   )
 }
