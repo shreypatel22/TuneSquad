@@ -4,17 +4,20 @@ import { Box, Button, Container } from "@chakra-ui/react";
 import { EditIcon, Search2Icon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
-export default function Playlist({ setOpenPlaylistType }) {
+export default function Playlist({
+  setOpenPlaylistType,
+  playlistID,
+  spotifyPlaylistID,
+}) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-
 
   return (
     <>
@@ -30,9 +33,14 @@ export default function Playlist({ setOpenPlaylistType }) {
               <section className="playlist-name">
                 <p> Playlist 1</p>
               </section>
-              <p> Admin: "NAME", "NAME", etc</p>
-              <p> Collaborators: "NAME", "NAME", etc</p>
-              <p> Songs: 100</p>
+              <p> HERE {playlistID} OR </p>
+              <p>{spotifyPlaylistID}</p>
+              <div className="playlist-info">
+                <p> Admin: "NAME", "NAME", etc</p>
+                <p> Collaborators: "NAME", "NAME", etc</p>
+                <p> Songs: 100</p>
+                <p> Voters: 5</p>
+              </div>
             </div>
           </div>
         </section>

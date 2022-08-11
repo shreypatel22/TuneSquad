@@ -5,15 +5,22 @@ import "./style/PlaylistItem.scss";
 import { Box } from "@chakra-ui/react";
 
 export default function PlaylistItem({
+
   name,
-  key,
   admin,
   spotifyPlaylistID,
   setOpenPlaylist,
+  playlistID,
+  setPlaylistID,
+  setSpotifyPlaylistID
+
 }) {
   return (
     <div>
-        <Box className="playlistItem-container">
+        <Box className="playlistItem-container" onClick={() => {
+          setSpotifyPlaylistID(spotifyPlaylistID);
+          setPlaylistID(playlistID);
+        }}>
           <img
             className="playlist-item-image"
             src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
@@ -21,9 +28,8 @@ export default function PlaylistItem({
           />
 
           <p>{name}</p>
-          <div className="playlist-info">
-            {/* <p> {spotifyPlaylistID}</p> */}
-            <p> key: {key}</p>
+          <div className="playlist-info">            
+            <p> PlaylistID: {playlistID}</p>            
             <p> Songs: 100</p>
             <p> Voters: 5</p>
           </div>
@@ -101,16 +107,4 @@ export default function PlaylistItem({
           </div>
         </Box>
         <Box className="playlistItem-container">
-<<<<<<< HEAD
-        <img
-          className="playlist-item-image"
-          src="https://external-preview.redd.it/WjUQwmgfF4wJplrvy5DNatmg8rOt_PIpQNgUjtN7dxM.jpg?auto=webp&s=c8b329a0e81dbcd33e5811c3d68c80837883f6d6"
-          alt="Playlist"
-        />
-        <p> Playlist 6</p>
-        <div className="playlist-info">
-          <p> Songs: 35</p>
-          <p> Voters: 3</p>
-        </div>
-        </Box> */
 }
