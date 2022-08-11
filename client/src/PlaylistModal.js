@@ -37,7 +37,7 @@ export default function PlaylistModal({ setOpenModal, playlists, setPlaylists })
       .then(function({ data }) {
         setPlaylists((prev) => [...prev, data.newPlaylist]);
         setOpenModal(false);
-        // window.location.href = "/" 
+  
       })
       .catch(function(error) {
         console.log(error);
