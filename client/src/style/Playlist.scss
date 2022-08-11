@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+$Montserrat: Montserrat;
+
+.playlist-type-off {
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  background: #494e75;
+  border-radius: 50px;
+  color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+
+  }
+}
+
+.playlist-type-on {
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  background: #3A406D;
+  border-radius: 50px;
+  color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+
+  }
+}
+
+
+.searchbar-track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin: 10px;
+  
+}
+
+Button.searchbar-track {
+  float: right;
+}
+
+.track-info {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#chakra-modal-create-playlistform {
+  max-width: 60vw;
+}
+
+
+
+.playlist-search  {
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  background: #3A406D;
+  border-radius: 50px;
+  color: #ee5d88;
+  font-family: $Montserrat;
+  font-size: 18px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+
+  }
+}
+
+.divider {
+  border-color: #3A406D;
+}
+
+

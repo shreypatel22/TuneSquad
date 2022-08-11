@@ -1,8 +1,8 @@
 import { React } from "react";
 import useAuth from "./useAuth";
 import Logout from "./Logout";
-import "./Login.scss";
-import "./Logout.scss"
+import "./style/Login.scss";
+import "./style/Logout.scss"
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 

@@ -14,7 +14,6 @@ import {
   Button,
   ChakraProvider
 } from '@chakra-ui/react'
-import './PlaylistModal.scss'
 import axios from 'axios'
 
 export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {

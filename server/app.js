@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const spotifyWebApi = require('spotify-web-api-node');
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./configs/db.config');
@@ -14,7 +14,11 @@ const loginRouter = require('./routes/login');
 const refreshRouter = require('./routes/refresh');
 const logoutRouter = require('./routes/logout');
 const newPlaylistRouter = require('./routes/newPlaylist');
+
 const playlists = require('./routes/playlists');
+
+
+
 
 
 const app = express();
@@ -35,6 +39,7 @@ app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
 app.use('/newPlaylist', newPlaylistRouter(db));
 app.use('/playlists', playlists(db));
+
 
 
 

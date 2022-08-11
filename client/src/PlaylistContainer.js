@@ -1,8 +1,12 @@
 /////////// HOMEPAGE VIEW OF ALL PLAYLISTS //////////////
 import PlaylistItem from "./PlaylistItem";
+import { SimpleGrid } from "@chakra-ui/react";
 
-
-export default function PlaylistContainer({ code, playlists }) {
+export default function PlaylistContainer({
+  code,
+  playlists,
+  setOpenPlaylist,
+}) {
   console.log("playlistsCon", playlists);
   // console.log('playlistID', playlists[0].id)
 
@@ -16,6 +20,7 @@ export default function PlaylistContainer({ code, playlists }) {
           key={playlist.spotify_playlist_id}
           name={playlist.name}
           spotifyPlaylistID={playlist.spotify_playlist_id}
+          setOpenPlaylist={setOpenPlaylist}
         />
       );
     });
@@ -24,7 +29,9 @@ export default function PlaylistContainer({ code, playlists }) {
   return (
     <div>
       {/* <PlaylistItem code={code} /> */}
-      {playlistItems}
+      <SimpleGrid minChildWidth="320px" onClick={() => setOpenPlaylist(true)}>
+        {playlistItems}
+      </SimpleGrid>
     </div>
   );
 }

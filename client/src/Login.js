@@ -1,5 +1,5 @@
 import React from "react"
-import './Login.scss'
+import './style/Login.scss'
 
 
 const AUTH_URL =
