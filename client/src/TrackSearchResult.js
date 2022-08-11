@@ -20,7 +20,7 @@ export default function TrackSearchResult({ track, chooseTrack }) {
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-      <Button> Add song </Button>
+      <Button  backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} > Add song </Button>
     </div>
   )
 }
