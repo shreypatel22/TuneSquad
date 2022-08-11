@@ -47,6 +47,8 @@ export default function PlaylistModal({setOpenModal, playlists, setPlaylists}) {
   }
 
   
+
+  
   return (
     <>     
       <ChakraProvider>

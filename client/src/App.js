@@ -3,22 +3,21 @@ import "./style/PlaylistItem.scss";
 import SideNav from "./SideNav";
 import Login from "./Login";
 import PlaylistContainer from "./PlaylistContainer";
-
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import Playlist from './Playlist';
-import SearchBar from "./SearchBar";
-
 
 
 // need state for code then useEffect then move the useAuth here
 const code = new URLSearchParams(window.location.search).get("code");
 
 export default function App() {
-
-  const [playlists, setPlaylists] = useState([])
   const userID = JSON.parse(localStorage.getItem('userID'));
+  
+  const [openPlaylist, setOpenPlaylist] = useState(false)
+  const [playlists, setPlaylists] = useState([])
+  const [playlistID, setPlaylistID] = useState(null)
+  const [spotifyPlaylistID, setSpotifyPlaylistID] = useState(null)
 
 
   useEffect(() => {
@@ -32,10 +31,8 @@ export default function App() {
       .catch((err) => console.log(err))
   }, []);
 
-  // console.log('playlists', playlists)
 
 
-  const [openPlaylist, setOpenPlaylist] = useState(false)
 
   if (code) {
     return (
@@ -54,9 +51,13 @@ export default function App() {
         <section className="content-display">          
 
           {openPlaylist ?
-         <Playlist setOpenPlaylist={setOpenPlaylist} />
+         <Playlist 
+            setOpenPlaylist={setOpenPlaylist} 
+            playlistID={playlistID} 
+            spotifyPlaylistID={spotifyPlaylistID}
+            />
             :
-          <PlaylistContainer code={code} setOpenPlaylist={setOpenPlaylist} playlists={playlists}/>}
+          <PlaylistContainer code={code} setOpenPlaylist={setOpenPlaylist} playlists={playlists} setSpotifyPlaylistID={setSpotifyPlaylistID} setPlaylistID={setPlaylistID}/>}
 
         </section>
       </main>

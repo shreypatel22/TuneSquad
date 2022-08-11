@@ -5,15 +5,19 @@ import "./style/PlaylistItem.scss";
 import { Box } from "@chakra-ui/react";
 
 export default function PlaylistItem({
-  name,
   key,
-  admin,
+  name,
   spotifyPlaylistID,
-  setOpenPlaylist,
+  playlistID,
+  setPlaylistID,
+  setSpotifyPlaylistID
 }) {
   return (
     <div>
-        <Box className="playlistItem-container">
+        <Box className="playlistItem-container" onClick={() => {
+          setSpotifyPlaylistID(spotifyPlaylistID);
+          setPlaylistID(playlistID);
+        }}>
           <img
             className="playlist-item-image"
             src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
