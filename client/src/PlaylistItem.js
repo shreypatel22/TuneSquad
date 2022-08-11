@@ -1,16 +1,32 @@
 ////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
 import React from "react";
-import './PlaylistItem.scss';
-import { Container, SimpleGrid, Box } from '@chakra-ui/react';
+import "./PlaylistItem.scss";
+import { Container, SimpleGrid, Box } from "@chakra-ui/react";
 
-
-
-
-export default function PlaylistItem() {
+export default function PlaylistItem({ name, key, admin, spotifyPlaylistID }) {
   return (
     <div>
-      <SimpleGrid minChildWidth='320px' >
+      <SimpleGrid minChildWidth="320px">
         <Box className="playlistItem-container">
+          <img
+            className="playlist-item-image"
+            src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+            alt="Playlist"
+          />
+          <p>{name}</p>
+          <div className="playlist-info">
+            <p> {spotifyPlaylistID}</p>
+            <p> Songs: 100</p>
+            <p> Voters: 5</p>
+          </div>
+        </Box>   
+      </SimpleGrid>
+    </div>
+  );
+}
+
+
+     {/* <Box className="playlistItem-container">
         <img
           className="playlist-item-image"
           src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
@@ -81,10 +97,4 @@ export default function PlaylistItem() {
           <p> Songs: 35</p>
           <p> Voters: 3</p>
         </div>
-        </Box>
-      </SimpleGrid>
-    </div>
-
-
-  );
-}
+        </Box> */}

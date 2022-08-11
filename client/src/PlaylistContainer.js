@@ -27,14 +27,19 @@ export default function PlaylistContainer({code, playlists}) {
   console.log('playlistsCon', playlists)
 
 
-  const tests = playlists.map(playlist => {
-    return (<p key={playlist.id}>{playlist.name}</p>)
+  const playlistItems = playlists.map(playlist => {
+    return <PlaylistItem 
+              key={playlist.id}
+              name={playlist.name}
+              spotifyPlaylistID={playlist.spotify_playlist_id}    
+            />
+    
   })
 
 
 
 
-
+  // return (<p key={playlist.id}>{playlist.name}</p>)
 
 
 
@@ -42,7 +47,7 @@ export default function PlaylistContainer({code, playlists}) {
 
     <div>
       {/* <PlaylistItem code={code} /> */}
-      {tests}
+      {playlistItems}
     </div>
     
   )
