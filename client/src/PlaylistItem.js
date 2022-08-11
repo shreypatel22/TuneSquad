@@ -1,5 +1,3 @@
-////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
-
 import React from "react";
 import "./style/PlaylistItem.scss";
 import { Box } from "@chakra-ui/react";
@@ -36,5 +34,3 @@ export default function PlaylistItem({
   );
 }
 
-
-  

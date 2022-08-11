@@ -14,7 +14,6 @@ const request = require("request-promise-native");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    // console.log(req.body)
     const { playlistName, coverURL, description, accessToken, userID } = req.body;
 
     const spotifyApi = new spotifyWebApi({
@@ -50,8 +49,7 @@ module.exports = (db) => {
         public: true,
       })
       .then(
-        function (data) {
-          // console.log(data);          
+        function (data) {  
           const uri = data.body.uri;
           const playlistID = uri.slice(17);
 
@@ -59,7 +57,6 @@ module.exports = (db) => {
 
           addPlaylist(db, playlistName, userID, playlistID, createdDate)
             .then(data => {
-              console.log('------', data.rows[0])
               res.json({newPlaylist: data.rows[0]});
             });      
 

@@ -1,5 +1,4 @@
 const addPlaylist = (db, playlistName, username, playlistID, date) => {
-  console.log(playlistName, username, playlistID, date)
   return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status) 
   VALUES ($1, $2, $3, $4, 'open')
   RETURNING *;`, [playlistName, username, playlistID, date])
@@ -39,6 +38,11 @@ const getDate = () => {
 //     .catch((err) =>  console.log(err.message));  
 // };
 
+const getPlaylistInfoByID = (db, playlistID) => {
+  return db.query(`SELECT * FROM playlists WHERE id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+}
+
 
 module.exports = {
   addPlaylist,
@@ -46,5 +50,6 @@ module.exports = {
   getMyVoterPlaylists,
   getAllMyPlaylists,
   getDate,
+  getPlaylistInfoByID
   // addSongVoting
 }
