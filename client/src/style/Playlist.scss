@@ -38,3 +38,24 @@ $Montserrat: Montserrat;
 
   }
 }
+
+.searchbar-track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin: 10px;
+  
+}
+
+Button.searchbar-track {
+  float: right;
+}
+
+.track-info {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+#chakra-modal-create-playlistform {
+  max-width: 60vw;
+}
