@@ -9,8 +9,6 @@ const {
 
 module.exports = (db) => {
   router.get("/:userID", (req, res) => {
-
-    console.log("user", req.params);
     const userID = req.params.userID;
 
     getAllMyPlaylists(db,userID).then(data => {

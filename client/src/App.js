@@ -25,8 +25,7 @@ export default function App() {
     axios
       .get(`http://localhost:3001/playlists/${userID}`)
       .then((res) => {        
-        setPlaylists((prev) => [...prev, ...res.data.playlists])
-        console.log('res', res.data.playlists)        
+        setPlaylists((prev) => [...prev, ...res.data.playlists])       
       }) 
       .catch((err) => console.log(err))
   }, []);

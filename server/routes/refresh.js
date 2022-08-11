@@ -9,7 +9,6 @@ const bodyParser = require("body-parser")
 module.exports = () => {
   router.post("/", (req, res) => {
     const refreshToken = req.body.refreshToken;
-    console.log("worked", refreshToken)
     const spotifyApi = new spotifyWebApi({
       redirectUri: process.env.REDIRECT_URI,
       clientId: process.env.CLIENT_ID,
@@ -20,7 +19,6 @@ module.exports = () => {
     spotifyApi
       .refreshAccessToken()
       .then(data => {
-        console.log(data.body)
         res.json({
           accessToken: data.body.access_token,
           expiresIn: data.body.expires_in,

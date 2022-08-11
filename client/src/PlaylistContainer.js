@@ -7,18 +7,13 @@ export default function PlaylistContainer({
   playlists,
   setOpenPlaylist,
   setSpotifyPlaylistID,
-  setPlaylistID
+  setPlaylistID,
 }) {
-  console.log("playlistsCon", playlists);
-  // console.log('playlistID', playlists[0].id)
-
   let playlistItems;
 
   if (playlists) {
-    // console.log('playlistID', playlists[0].id)
     playlistItems = playlists.map((playlist) => {
-      
-      console.log(playlist.spotify_playlist_id)
+      console.log(playlist.spotify_playlist_id);
       return (
         <PlaylistItem
           key={playlist.spotify_playlist_id}
