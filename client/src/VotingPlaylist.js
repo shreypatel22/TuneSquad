@@ -1,25 +1,11 @@
-////////////// INDIVIDUAL PLAYLIST FEATURES //////////
-
-import React, { useState } from 'react';
-import {
-  Box,
-  Button
-} from '@chakra-ui/react';
-import './PlaylistModal.scss';
-import axios from 'axios';
-import PlaylistItem from './PlaylistItem';
-import SearchBar from './SearchBar';
-
-// useContext (since this isnt a parent/child relation)
-// axios
-// that will sotre info in context and the db
-// then the PlaylistContainer will access this context and dynamic render components
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import React, { useState } from "react";
+import { Box, Button } from "@chakra-ui/react";
+import SearchBar from "./SearchBar";
+import "./style/Playlist.scss";
 
 export default function Playlist({ setOpenPlaylistType }) {
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
-  const accessToken = JSON.parse(localStorage.getItem('access_token'));
-  const [openSearchBar, setOpenSearchBar] = useState(false)
+  const [openSearchBar, setOpenSearchBar] = useState(false);
 
   return (
     <>
@@ -35,20 +21,23 @@ export default function Playlist({ setOpenPlaylistType }) {
           <p> Voters: 5</p>
         </div>
       </Box>
-      {openSearchBar && <SearchBar setOpenSearchBar={setOpenPlaylistType} />}
-      <Button onClick={() => setOpenPlaylistType(true)}>
-        Search for a song
-      </Button>
-      <Button background='blue' onClick={() => setOpenPlaylistType(false)}>
+      <div>
+        <PersonAddIcon />
+      </div>
+      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} />}
+      <Button onClick={() => setOpenSearchBar(true)}>Search for a song</Button>
+      <Button
+        className="playlist-type-on"
+        onClick={() => setOpenPlaylistType(false)}
+      >
         voting
       </Button>
-      <Button onClick={() => setOpenPlaylistType(true)}>
+      <Button
+        className="playlist-type-off"
+        onClick={() => setOpenPlaylistType(true)}
+      >
         Final
       </Button>
-
-
-
     </>
-
   );
-}; 
+}

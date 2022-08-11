@@ -1,5 +1,5 @@
 import React from "react"
-import './PlaylistSidebar.scss'
+import './style/PlaylistSidebar.scss'
 
 
 

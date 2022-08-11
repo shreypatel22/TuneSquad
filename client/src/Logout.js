@@ -1,6 +1,6 @@
 import axios from "axios"
 import React from "react"
-import './Logout.scss'
+import './style/Logout.scss'
 
 
 
