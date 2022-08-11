@@ -1,6 +1,7 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState } from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Divider } from "@chakra-ui/react";
+import { EditIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 
@@ -21,11 +22,14 @@ export default function Playlist({ setOpenPlaylistType }) {
           <p> Voters: 5</p>
         </div>
       </Box>
+      <section>
+        <EditIcon float={'right'} w={20} h={20}/>
+      </section>
+      
       <div>
         <PersonAddIcon />
       </div>
-      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} />}
-      <Button onClick={() => setOpenSearchBar(true)}>Search for a song</Button>
+
       <Button
         className="playlist-type-on"
         onClick={() => setOpenPlaylistType(false)}
@@ -37,6 +41,14 @@ export default function Playlist({ setOpenPlaylistType }) {
         onClick={() => setOpenPlaylistType(true)}
       >
         Final
+      </Button>
+      <hr className="divider"/>
+      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} />}
+      <Button
+        className="playlist-search"
+        onClick={() => setOpenSearchBar(true)}
+      >
+        Search for a song
       </Button>
     </>
   );
