@@ -3,7 +3,6 @@ import "./style/PlaylistItem.scss";
 import { Box } from "@chakra-ui/react";
 
 export default function PlaylistItem({
-
   name,
   admin,
   spotifyPlaylistID,
@@ -11,8 +10,7 @@ export default function PlaylistItem({
   playlistID,
   setPlaylistID,
   setSpotifyPlaylistID
-
-}) {
+}) { 
   return (
     <div>
         <Box className="playlistItem-container" onClick={() => {
@@ -35,3 +33,4 @@ export default function PlaylistItem({
     </div>
   );
 }
+
