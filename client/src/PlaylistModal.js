@@ -14,7 +14,6 @@ import {
   Button,
   ChakraProvider
 } from '@chakra-ui/react'
-import './style/PlaylistModal.scss'
 import axios from 'axios'
 
 // useContext (since this isnt a parent/child relation)
