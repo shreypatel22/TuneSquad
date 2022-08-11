@@ -20,7 +20,9 @@ export default function App() {
   const [playlists, setPlaylists] = useState([])
   const userID = JSON.parse(localStorage.getItem('userID'));
 
+
   useEffect(() => {
+    if(!userID) return
     axios
       .get(`http://localhost:3001/playlists/${userID}`)
       .then((res) => {        
