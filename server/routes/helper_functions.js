@@ -38,6 +38,11 @@ const getDate = () => {
 //     .catch((err) =>  console.log(err.message));  
 // };
 
+const getPlaylistInfoByID = (db, playlistID) => {
+  return db.query(`SELECT * FROM playlists WHERE id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+}
+
 
 module.exports = {
   addPlaylist,
@@ -45,5 +50,6 @@ module.exports = {
   getMyVoterPlaylists,
   getAllMyPlaylists,
   getDate,
+  getPlaylistInfoByID
   // addSongVoting
 }
