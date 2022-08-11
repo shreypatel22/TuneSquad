@@ -1,26 +1,56 @@
 ////////////////////// EACH INDIVIDUAL PLAYLIST ///////////
-import { React } from "react";
-import './style/PlaylistItem.scss';
-import { SimpleGrid, Box } from '@chakra-ui/react';
 
+import React from "react";
+import "./style/PlaylistItem.scss";
+import { Box } from "@chakra-ui/react";
 
-
-
-export default function PlaylistItem({ setOpenPlaylist }) {
+export default function PlaylistItem({
+  name,
+  key,
+  admin,
+  spotifyPlaylistID,
+  setOpenPlaylist,
+}) {
   return (
     <div>
-      <SimpleGrid minChildWidth='320px' onClick={() => setOpenPlaylist(true)}>
         <Box className="playlistItem-container">
           <img
             className="playlist-item-image"
             src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
             alt="Playlist"
           />
+
+          <p>{name}</p>
+          <div className="playlist-info">
+            {/* <p> {spotifyPlaylistID}</p> */}
+            <p> key: {key}</p>
+            <p> Songs: 100</p>
+            <p> Voters: 5</p>
+          </div>
+        </Box>
+    </div>
+  );
+}
+
+{
+  /* <Box className="playlistItem-container">
+        <img
+          className="playlist-item-image"
+          src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+          alt="Playlist"
+        />
+        <p> Playlist 1</p>
+        <div className="playlist-info">
+          <p> Songs: 100</p>
+          <p> Voters: 5</p>
+        </div>
+
           <p> Playlist 1</p>
           <div className="playlist-info">
             <p> Songs: 100</p>
             <p> Voters: 5</p>
           </div>
+
         </Box>
         <Box className="playlistItem-container">
           <img
@@ -71,20 +101,16 @@ export default function PlaylistItem({ setOpenPlaylist }) {
           </div>
         </Box>
         <Box className="playlistItem-container">
-          <img
-            className="playlist-item-image"
-            src="https://external-preview.redd.it/WjUQwmgfF4wJplrvy5DNatmg8rOt_PIpQNgUjtN7dxM.jpg?auto=webp&s=c8b329a0e81dbcd33e5811c3d68c80837883f6d6"
-            alt="Playlist"
-          />
-          <p> Playlist 6</p>
-          <div className="playlist-info">
-            <p> Songs: 35</p>
-            <p> Voters: 3</p>
-          </div>
-        </Box>
-      </SimpleGrid>
-    </div>
-
-
-  );
+<<<<<<< HEAD
+        <img
+          className="playlist-item-image"
+          src="https://external-preview.redd.it/WjUQwmgfF4wJplrvy5DNatmg8rOt_PIpQNgUjtN7dxM.jpg?auto=webp&s=c8b329a0e81dbcd33e5811c3d68c80837883f6d6"
+          alt="Playlist"
+        />
+        <p> Playlist 6</p>
+        <div className="playlist-info">
+          <p> Songs: 35</p>
+          <p> Voters: 3</p>
+        </div>
+        </Box> */
 }

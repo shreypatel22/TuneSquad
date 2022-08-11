@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS  voter_playlist CASCADE;
+DROP TABLE IF EXISTS  voter_playlists CASCADE;
 
-CREATE TABLE voter_playlist (
+CREATE TABLE voter_playlists (
 id SERIAL PRIMARY KEY NOT NULL,
 user_id VARCHAR(255) NOT NULL,
-playlist_id INTEGER REFERENCES playlist(id) ON DELETE CASCADE
+playlist_id INTEGER REFERENCES playlists(id) ON DELETE CASCADE
 );
 
