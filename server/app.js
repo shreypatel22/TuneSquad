@@ -33,12 +33,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.use('/', indexRouter);
+app.use('/', indexRouter(db));
 app.use('/refresh', refreshRouter())
 app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
 app.use('/newPlaylist', newPlaylistRouter(db));
-app.use('/playlists', playlists(db));
+// app.use('/playlists', playlists(db));
 
 
 

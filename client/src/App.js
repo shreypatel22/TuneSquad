@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     if(!userID) return
     axios
-      .get(`http://localhost:3001/playlists/${userID}`)
+      .get(`http://localhost:3001/${userID}`)
       .then((res) => {        
         setPlaylists((prev) => [...prev, ...res.data.playlists])       
       }) 
