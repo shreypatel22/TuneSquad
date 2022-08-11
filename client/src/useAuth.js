@@ -27,7 +27,6 @@ export default function useAuth(code) {
           window.history.pushState({}, null, "/");
         })
         .catch(() => {
-          window.location = "/";
         });
     }
 
@@ -47,7 +46,6 @@ export default function useAuth(code) {
         })
         .catch((err) => {
           console.log(err);
-          window.location = "/";
         });
     }, (expiresIn - 60) * 1000);
 
