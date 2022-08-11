@@ -16,12 +16,14 @@ module.exports = () => {
     spotifyApi.authorizationCodeGrant(code).then((authData) => {
       spotifyApi.setAccessToken(authData.body.access_token);
       spotifyApi.getMe().then((userData) => {
+        // console.log(userData);
         res
           .json({
             name: userData.body.display_name,
             accessToken: authData.body.access_token,
             refreshToken: authData.body.refresh_token,
             expiresIn: authData.body.expires_in,
+            userID: userData.body.id
           })
         })
         .catch((err) => {

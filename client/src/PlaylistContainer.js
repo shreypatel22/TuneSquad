@@ -1,23 +1,37 @@
 /////////// HOMEPAGE VIEW OF ALL PLAYLISTS //////////////
-import { propNames } from "@chakra-ui/react";
-import PlaylistItem from "./PlaylistItem"
+import PlaylistItem from "./PlaylistItem";
+import { SimpleGrid } from "@chakra-ui/react";
 
+export default function PlaylistContainer({
+  code,
+  playlists,
+  setOpenPlaylist,
+}) {
+  console.log("playlistsCon", playlists);
+  // console.log('playlistID', playlists[0].id)
 
-// 1. get the data (db)
-// 2. mantain states ()
-  // useState chagnes based on how many items are in the database
-// use hooks and api calls
+  let playlistItems;
 
-// const [playlists, setPlaylists] = useState()
+  if (playlists) {
+    // console.log('playlistID', playlists[0].id)
+    playlistItems = playlists.map((playlist) => {
+      return (
+        <PlaylistItem
+          key={playlist.spotify_playlist_id}
+          name={playlist.name}
+          spotifyPlaylistID={playlist.spotify_playlist_id}
+          setOpenPlaylist={setOpenPlaylist}
+        />
+      );
+    });
+  }
 
-
-
-// react router setup
-
-
-export default function PlaylistContainer(props) {
-  
-  return(
-    <PlaylistItem code={props.code} setOpenPlaylist={props.setOpenPlaylist}/>
-  )
+  return (
+    <div>
+      {/* <PlaylistItem code={code} /> */}
+      <SimpleGrid minChildWidth="320px" onClick={() => setOpenPlaylist(true)}>
+        {playlistItems}
+      </SimpleGrid>
+    </div>
+  );
 }
