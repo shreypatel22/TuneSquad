@@ -31,10 +31,20 @@ const getDate = () => {
   return date;
 };
 
+// const addSongVoting = (db, playlistName, username, playlistID, date) => {
+//   console.log(playlistName, username, playlistID, date)
+//   return db.query(`INSERT INTO track_playlist (playlist_id, spotify_track_id) 
+//   VALUES ($1, $2, 'open')
+//   RETURNING *;`, [playlistName, username, playlistID, date])
+//     .catch((err) =>  console.log(err.message));  
+// };
+
+
 module.exports = {
   addPlaylist,
   getMyCreatedPlaylists,
   getMyVoterPlaylists,
   getAllMyPlaylists,
-  getDate
+  getDate,
+  // addSongVoting
 }

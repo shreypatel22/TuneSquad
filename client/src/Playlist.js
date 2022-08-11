@@ -10,7 +10,7 @@ import Player from './Player';
 // that will sotre info in context and the db
 // then the PlaylistContainer will access this context and dynamic render components
 
-export default function Playlist() {
+export default function Playlist({playlistID, spotifyPlaylistID}) {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const accessToken = JSON.parse(localStorage.getItem('access_token'));
@@ -22,9 +22,9 @@ export default function Playlist() {
 
     <div>
       {openPlaylistType ?
-        <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack}/>
+        <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID}/>
         :
-        <VotingPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack}/>}
+        <VotingPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack}playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID}/>}
       <section className="playerBar">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>
