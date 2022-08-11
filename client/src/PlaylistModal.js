@@ -28,24 +28,17 @@ export default function PlaylistModal({ setOpenModal, playlists, setPlaylists })
   const username = JSON.parse(localStorage.getItem('username'));
   const userID = JSON.parse(localStorage.getItem('userID'));
 
-  // get playlists from props
-  // using ... and setplaylist update the state
-  // setPlaylist((prev) => [...prev, newPlaylist])
-
   const savePlaylist = () => {
     axios.post('http://localhost:3001/newPlaylist', { playlistName, coverURL, description, accessToken, userID })
       .then(function({ data }) {
         setPlaylists((prev) => [...prev, data.newPlaylist]);
         setOpenModal(false);
-  
+
       })
       .catch(function(error) {
         console.log(error);
       });
   };
-
-
-
 
   return (
     <>
