@@ -8,8 +8,6 @@ module.exports = (db) => {
     const playlistID = req.params.playlistID
 
     getPlaylistInfoByID(db, playlistID).then(data => {
-      console.log("DATTAAAAA FROM PLAYLIST ROUTES: ", data);
-
       const playlistInfo = {...data}
       res.json({playlist: playlistInfo})
     

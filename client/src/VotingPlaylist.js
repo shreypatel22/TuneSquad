@@ -69,7 +69,7 @@ export default function Playlist({
         Final
       </Button>
       <hr className="divider" />
-      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} />}
+      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
       <Button
         className="playlist-search"
         onClick={() => setOpenSearchBar(true)}

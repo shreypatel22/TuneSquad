@@ -30,13 +30,12 @@ const getDate = () => {
   return date;
 };
 
-// const addSongVoting = (db, playlistName, username, playlistID, date) => {
-//   console.log(playlistName, username, playlistID, date)
-//   return db.query(`INSERT INTO track_playlist (playlist_id, spotify_track_id) 
-//   VALUES ($1, $2, 'open')
-//   RETURNING *;`, [playlistName, username, playlistID, date])
-//     .catch((err) =>  console.log(err.message));  
-// };
+const addSongToVoting = (db, playlistID, spotifyTrackID) => {
+  return db.query(`INSERT INTO track_playlists (playlist_id, spotify_track_id) 
+  VALUES ($1, $2)
+  RETURNING *;`, [playlistID, spotifyTrackID])
+    .catch((err) =>  console.log(err.message));  
+};
 
 const getPlaylistInfoByID = (db, playlistID) => {
   return db.query(`SELECT * FROM playlists WHERE id = $1;`, [playlistID])
@@ -50,6 +49,6 @@ module.exports = {
   getMyVoterPlaylists,
   getAllMyPlaylists,
   getDate,
-  getPlaylistInfoByID
-  // addSongVoting
+  getPlaylistInfoByID,
+  addSongToVoting
 }

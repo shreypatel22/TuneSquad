@@ -23,11 +23,12 @@ const spotifyApi = new spotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET,
 });
 
-export default function SearchBar({ setOpenSearchBar }) {
+export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlistID, }) {
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
+  const [ spotifyTrackID, setSpotifyTrackID] = useState("")
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
@@ -47,6 +48,7 @@ export default function SearchBar({ setOpenSearchBar }) {
       if (cancel) return;
       setSearchResults(
         res.body.tracks.items.map((track) => {
+          console.log("iNFO IS  HERE LOOK", track.id)
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
               if (image.height < smallest.height) return image;
@@ -60,6 +62,7 @@ export default function SearchBar({ setOpenSearchBar }) {
             title: track.name,
             uri: track.uri,
             albumUrl: smallestAlbumImage.url,
+            spotifyTrackID: track.id
           };
         })
       );
@@ -100,6 +103,10 @@ export default function SearchBar({ setOpenSearchBar }) {
                     track={track}
                     key={track.uri}
                     chooseTrack={chooseTrack}
+                    playlistID={playlistID}
+                    spotifyPlaylistID={spotifyPlaylistID}
+                    setSpotifyTrackID={setSpotifyTrackID}
+                    spotifyTrackID={track.spotifyTrackID}
                   />
                  
                   <hr />
