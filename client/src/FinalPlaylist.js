@@ -3,7 +3,7 @@ import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 
-export default function Playlist({ setOpenPlaylistType }) {
+export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
   return (
     <>
       <Box>
@@ -16,9 +16,9 @@ export default function Playlist({ setOpenPlaylistType }) {
             />
             <div className="playlist-text">
               <section className="playlist-name">
-                <p> Playlist 1</p>
+              <p> {playlistInfo.name}</p>
               </section>
-              <p> Admin: "NAME", "NAME", etc</p>
+              <p> Admin: "NAME"</p>
               <p> Collaborators: "NAME", "NAME", etc</p>
               <p> Songs: 100</p>
             </div>
