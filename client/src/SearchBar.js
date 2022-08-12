@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,13 +9,12 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
   Input,
-  Button,
   ChakraProvider,
 } from "@chakra-ui/react";
 import TrackSearchResult from "./TrackSearchResult";
-import Player from "./Player";
+import { playlistContext } from "./provider/PlaylistProvider";
+
 const spotifyWebApi = require("spotify-web-api-node");
 const spotifyApi = new spotifyWebApi({
   redirectUri: process.env.REDIRECT_URI,
@@ -23,13 +22,11 @@ const spotifyApi = new spotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET,
 });
 
-export default function SearchBar({ setOpenSearchBar }) {
+export default function SearchBar() {
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [playingTrack, setPlayingTrack] = useState();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+  const { setSearchResults, setSearch, search, setOpenSearchBar, searchResults, setPlayingTrack } = useContext(playlistContext)
 
   function chooseTrack(track) {
     setPlayingTrack(track);
@@ -37,6 +34,7 @@ export default function SearchBar({ setOpenSearchBar }) {
   }
 
   useEffect(() => {
+    
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
 

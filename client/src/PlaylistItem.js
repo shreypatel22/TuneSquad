@@ -1,16 +1,10 @@
-import React from "react";
+import { useContext, React } from "react";
 import "./style/PlaylistItem.scss";
 import { Box } from "@chakra-ui/react";
+import playlistContext from './provider/PlaylistProvider'
 
-export default function PlaylistItem({
-  name,
-  admin,
-  spotifyPlaylistID,
-  setOpenPlaylist,
-  playlistID,
-  setPlaylistID,
-  setSpotifyPlaylistID
-}) { 
+export default function PlaylistItem({ key, name }) { 
+  const { setPlaylistID, setSpotifyPlaylistID, playlistID, spotifyPlaylistID} = useContext(playlistContext)
   return (
     <div>
         <Box className="playlistItem-container" onClick={() => {

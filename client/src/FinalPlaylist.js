@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import { playlistContext } from "./provider/PlaylistProvider";
 
-export default function Playlist({ setOpenPlaylistType }) {
+export default function Playlist() {
+  const { setOpenPlaylistType } = useContext(playlistContext)
+
   return (
     <>
       <Box>

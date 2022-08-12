@@ -1,20 +1,13 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button, Container } from "@chakra-ui/react";
 import { EditIcon, Search2Icon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { playlistContext } from "./provider/PlaylistProvider";
 
-export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
-  const [openSearchBar, setOpenSearchBar] = useState(false);
-  
+export default function Playlist() {
+  const { setOpenPlaylistType, setOpenSearchBar, playlistInfo, openSearchBar } = useContext(playlistContext)
   return (
     <>
       <Box>

@@ -3,16 +3,16 @@ import PlaylistSidebar from './PlaylistSidebar';
 import UserProfile from './UserProfile';
 import { AddIcon } from '@chakra-ui/icons'
 import PlaylistModal from './PlaylistModal';
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
+import { playlistContext } from './provider/PlaylistProvider';
 
 
 export default function SideNav({ code, playlists, setPlaylists }) {
-const [openModal, setOpenModal] = useState(false)
+const { setOpenModal, openModal } = useContext(playlistContext)
 
   return (
     <section className='sidebar-component'>
-      {openModal && <PlaylistModal setOpenModal={setOpenModal} playlists={playlists} setPlaylists={setPlaylists}/>}
+      {openModal && <PlaylistModal playlists={playlists} setPlaylists={setPlaylists} setOpenModal={setOpenModal}/>}
       <UserProfile code={code} />
       <button className='new-playlist-button' onClick={() => setOpenModal(true)}>
         <AddIcon className='icon-button' w={18} h={18} />

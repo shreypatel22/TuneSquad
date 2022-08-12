@@ -1,18 +1,16 @@
 /////////// HOMEPAGE VIEW OF ALL PLAYLISTS //////////////
 import PlaylistItem from "./PlaylistItem";
 import { SimpleGrid } from "@chakra-ui/react";
+import playlistContext from "./provider/PlaylistProvider"
+import { useContext } from "react";
 
-export default function PlaylistContainer({
-  code,
-  playlists,
-  setOpenPlaylist,
-  setSpotifyPlaylistID,
-  setPlaylistID,
-}) {
+export default function PlaylistContainer({ code, playlists}) {
+  const {setOpenPlaylist} = useContext(playlistContext)
+
   let playlistItems;
 
   if (playlists) {
-    // console.log('playlistID', playlists[0].id)    
+  
     playlistItems = playlists.map((playlist) => {
     
       let playlistID;
@@ -27,10 +25,6 @@ export default function PlaylistContainer({
           key={playlist.spotify_playlist_id}
           name={playlist.name}
           spotifyPlaylistID={playlist.spotify_playlist_id}
-          setOpenPlaylist={setOpenPlaylist}
-          playlistID={playlistID}
-          setPlaylistID={setPlaylistID}
-          setSpotifyPlaylistID={setSpotifyPlaylistID}
         />
       );
     });
