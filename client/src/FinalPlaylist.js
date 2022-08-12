@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
@@ -13,9 +13,20 @@ import {
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import axios from 'axios';
 
-export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
+export default function Playlist({ setOpenPlaylistType, playlistInfo, playlistID, spotifyPlaylistID }) {
   const [value, setValue] = React.useState(2);
+  const accessToken = JSON.parse(localStorage.getItem('access_token'));
+
+  useEffect(() => {
+    axios
+     .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {params: {spotifyPlaylistID, accessToken}})
+     .then((res) => {   
+       console.log("-----", res)  
+     }) 
+     .catch((err) => console.log(err))
+ }, []);
 
   return (
     <>
