@@ -6,15 +6,15 @@ $Montserrat: Montserrat;
   width: 200px;
   height: 40px;
   margin-bottom: 20px;
-  background: #6c74ab;
+  background: #44454c;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #5a6b73;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
 
   &:hover {
-    background-color: #50536b;
+    background-color: #474a62;
     cursor: pointer;
   }
 }
@@ -26,7 +26,7 @@ $Montserrat: Montserrat;
   margin-bottom: 20px;
   background: #3a406d;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #1eb3ff;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
@@ -64,7 +64,7 @@ Button.searchbar-track {
   margin-bottom: 20px;
   background: #3a406d;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #1eb3ff;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
@@ -81,17 +81,16 @@ hr.divider {
 }
 
 .playlist-info-section {
-  background: #03082A;
+  background: #03082a;
   color: white;
   border: solid #3a406d;
   border-radius: 12px;
   margin: 20px;
-  
+
   &:hover {
-    background-color: #202542;;
+    background-color: #202542;
     cursor: pointer;
   }
-
 }
 
 .playlist-cover-image {
@@ -148,7 +147,7 @@ hr.divider {
   height: 40px;
   margin-bottom: 20px;
   margin-right: 20px;
-  background: #3A406D;
+  background: #3a406d;
   border: 1px solid #000000;
   border-radius: 15px;
   color: #1eb3ff;
@@ -159,7 +158,6 @@ hr.divider {
   &:hover {
     background-color: #50536b;
     cursor: pointer;
-
   }
 }
 
@@ -167,8 +165,8 @@ hr.divider {
   width: 40px;
   height: 40px;
   margin-bottom: 20px;
-  margin-right: 20px;
-  background: #3A406D;
+  margin-left: 20px;
+  background: #3a406d;
   border: 1px solid #000000;
   border-radius: 15px;
   color: #1eb3ff;
@@ -178,6 +176,24 @@ hr.divider {
   &:hover {
     background-color: #50536b;
     cursor: pointer;
-
   }
+}
+
+.chakra-table__container {
+  display: grid;
+  font-family: $Montserrat;
+  color: white;
+  text-align: justify;
+}
+
+.rating-dropdown {
+  font-family: $Montserrat;
+  color: white;
+  background-color: #3a406d;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.chakra-select__icon-wrapper {
+ color: transparent;
 }

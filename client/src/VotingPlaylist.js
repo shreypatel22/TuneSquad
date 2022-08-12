@@ -1,14 +1,41 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon } from "@chakra-ui/icons";
+import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
-import Songs from "./Songs"
+import Songs from "./Songs";
+import AddVoterModal from "./AddVoterModal";
 
-export default function Playlist({song, setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from "@chakra-ui/react";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+
+
+
+export default function Playlist({
+  song,
+  setOpenPlaylistType,
+  playlistID,
+  spotifyPlaylistID,
+  playlistInfo,
+}) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
+
+  const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
+
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
+
+  const [value, setValue] = React.useState();
+
 
   return (
     <>
@@ -21,26 +48,28 @@ export default function Playlist({song, setOpenPlaylistType, playlistID, spotify
               alt="Playlist"
             />
             <div className="playlist-text">
-            <section className="playlist-name">
-               <p> {playlistInfo.name}</p>
+              <section className="playlist-name">
+                <p> {playlistInfo.name}</p>
               </section>
-                <p> Admin: "NAME"</p>
-                <p> Collaborators: "NAME", "NAME", etc</p>
-                <p> Songs: 100</p>
-                <p> Voters: 5</p>
+              <p> Admin: "NAME"</p>
+              <p> Collaborators: "NAME", "NAME", etc</p>
+              <p> Songs: 100</p>
+              <p> Voters: 5</p>
             </div>
           </div>
         </section>
       </Box>
       <Button className="edit-button">
-        <EditIcon  />
+        <EditIcon />
       </Button>
 
       <div>
-      <Button className="add-user-button">
-        <PersonAddIcon />
-      </Button>
+        <Button className="add-user-button" onClick={() => setOpenAddVoterModal(true)}>
+          <PersonAddIcon />
+        </Button>
       </div>
+
+      {openAddVoterModal && <AddVoterModal setOpenAddVoterModal={setOpenAddVoterModal} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
 
       <Button
         className="playlist-type-on"
@@ -55,16 +84,53 @@ export default function Playlist({song, setOpenPlaylistType, playlistID, spotify
         Final
       </Button>
       <hr className="divider" />
-      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
+      {openSearchBar && (
+        <SearchBar
+          setOpenSearchBar={setOpenSearchBar}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+        />
+      )}
       <Button
         className="playlist-search"
         onClick={() => setOpenSearchBar(true)}
       >
         <Search2Icon pr={6} />
         Search for a song
-      </Button>
+      </Button>;
 
-      <Songs song={song}/>
+      <Songs song={song} />
+      <TableContainer display={"grid"}>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>#</Th>
+              <Th>Title</Th>
+              <Th>Added By</Th>
+              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Rating</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>1</Td>
+              <Td>Song Title - Artist</Td>
+              <Td>Username</Td>
+              <Td isNumeric>12/08/22</Td>
+              <Td>
+                <Typography component="legend"></Typography>
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
