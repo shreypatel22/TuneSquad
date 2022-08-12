@@ -1,28 +1,28 @@
-import React from "react"
-import './style/Playlist.scss'
+import React from "react";
+import './style/Playlist.scss';
 import {
- Button
+  Button
 } from "@chakra-ui/react";
-import axios from "axios"
+import axios from "axios";
 
 export default function TrackSearchResult({ track, spotifyTrackID, playlistID, setSpotifyTrackID }) {
   // function handlePlay() {
-    //   chooseTrack(track)
-    // onClick={handlePlay}
+  //   chooseTrack(track)
+  // onClick={handlePlay}
   // }
 
   const saveSongToVoting = () => {
-    console.log("1-----a-sdf--sa-f-sdf", spotifyTrackID)
-    axios.post('http://localhost:3001/addSongVoting', {playlistID, spotifyTrackID})
-    .then(function ({data}) {
-       console.log("THIS IS THE FRONT END: ", data)
-     
-  
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+    console.log("1-----a-sdf--sa-f-sdf", spotifyTrackID);
+    axios.post('http://localhost:3001/addSongVoting', { playlistID, spotifyTrackID })
+      .then(function({ data }) {
+        console.log("THIS IS THE FRONT END: ", data);
+
+
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div
@@ -35,10 +35,8 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-      {/* <p> {playlistID}</p> */}
-      <Button  backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} mb={'10px'} onClick={() => 
-        {setSpotifyTrackID(spotifyTrackID); saveSongToVoting(playlistID, spotifyTrackID)}}> Add song </Button>
-   
+      <Button backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} mb={'10px'} onClick={() => { setSpotifyTrackID(spotifyTrackID); saveSongToVoting(playlistID, spotifyTrackID); }}> Add song </Button>
+
     </div>
-  )
+  );
 }
