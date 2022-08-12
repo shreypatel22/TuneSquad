@@ -4,10 +4,12 @@ import { Box, Button } from "@chakra-ui/react";
 import { EditIcon, Search2Icon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
+import Songs from "./Songs"
 
-export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
+export default function Playlist({song, setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-  
+  const accessToken = JSON.parse(localStorage.getItem("access_token"));
+
   return (
     <>
       <Box>
@@ -61,6 +63,8 @@ export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlayl
         <Search2Icon pr={6} />
         Search for a song
       </Button>
+
+      <Songs song={song}/>
     </>
   );
 }
