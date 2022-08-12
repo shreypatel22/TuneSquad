@@ -35,7 +35,6 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-      {/* <p> {playlistID}</p> */}
       <Button  backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} mb={'10px'} onClick={() => 
         {setSpotifyTrackID(spotifyTrackID); saveSongToVoting(playlistID, spotifyTrackID)}}> Add song </Button>
    
