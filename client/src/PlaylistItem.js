@@ -6,7 +6,6 @@ export default function PlaylistItem({
   name,
   admin,
   spotifyPlaylistID,
-  setOpenPlaylist,
   playlistID,
   setPlaylistID,
   setSpotifyPlaylistID
