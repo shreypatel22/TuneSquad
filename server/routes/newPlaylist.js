@@ -3,12 +3,7 @@ const express = require("express");
 const router = express.Router();
 const spotifyWebApi = require("spotify-web-api-node");
 const bodyParser = require("body-parser");
-
-const {
-  addPlaylist, 
-  getDate
-} = require('./helper_functions');
-
+const { addPlaylist, getDate } = require('./helper_functions');
 const request = require("request-promise-native");
 
 
