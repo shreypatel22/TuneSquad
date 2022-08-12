@@ -14,8 +14,8 @@ const loginRouter = require('./routes/login');
 const refreshRouter = require('./routes/refresh');
 const logoutRouter = require('./routes/logout');
 const newPlaylistRouter = require('./routes/newPlaylist');
-
 const playlist = require('./routes/playlist');
+const addSongVotingRouter = require('./routes/addSongVoting')
 
 
 
@@ -39,6 +39,7 @@ app.use('/login', loginRouter());
 app.use('/logout', logoutRouter());
 app.use('/newPlaylist', newPlaylistRouter(db));
 app.use('/playlist', playlist(db));
+app.use('/addSongVoting', addSongVotingRouter(db))
 
 
 
