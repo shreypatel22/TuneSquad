@@ -10,6 +10,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Switch from '@mui/material/Switch';
+import AddVoterModal from "./AddVoterModal";
 
 export default function Playlist({
   setOpenPlaylistType,
@@ -18,6 +19,7 @@ export default function Playlist({
   playlistInfo,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
 
 
   return (
@@ -44,17 +46,15 @@ export default function Playlist({
       </Box>
       <Button className="edit-button">
         <EditIcon />
-      </Button>
-
-  
-
-
+      </Button>  
 
       <div>
-        <Button className="add-user-button">
+        <Button className="add-user-button" onClick={() => setOpenAddVoterModal(true)}>
           <PersonAddIcon />
         </Button>
       </div>
+
+      {openAddVoterModal && <AddVoterModal setOpenAddVoterModal={setOpenAddVoterModal} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
 
       <Button
         className="playlist-type-on"
