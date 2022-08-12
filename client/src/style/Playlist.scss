@@ -81,16 +81,17 @@ hr.divider {
 }
 
 .playlist-info-section {
-  background: rgb(30, 179, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(30, 179, 255, 1) 0%,
-    rgba(206, 42, 214, 1) 50%,
-    rgba(238, 93, 136, 1) 100%
-  );
+  background: #03082A;
+  color: white;
   border: solid #3a406d;
   border-radius: 12px;
   margin: 20px;
+  
+  &:hover {
+    background-color: #202542;;
+    cursor: pointer;
+  }
+
 }
 
 .playlist-cover-image {
@@ -140,4 +141,43 @@ hr.divider {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+.edit-button {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background: #3A406D;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  color: #1eb3ff;
+  font-family: $Montserrat;
+  font-size: 25px;
+  float: right;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+
+  }
+}
+
+.add-user-button {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background: #3A406D;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  color: #1eb3ff;
+  font-family: $Montserrat;
+  font-size: 25px;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+
+  }
 }
