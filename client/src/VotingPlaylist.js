@@ -4,6 +4,8 @@ import { Box, Button } from "@chakra-ui/react";
 import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
+import AddVoterModal from "./AddVoterModal";
+
 import {
   Table,
   Thead,
@@ -16,6 +18,7 @@ import {
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
+
 export default function Playlist({
   setOpenPlaylistType,
   playlistID,
@@ -23,7 +26,12 @@ export default function Playlist({
   playlistInfo,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
+
+  const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
+
+
   const [value, setValue] = React.useState();
+
 
   return (
     <>
@@ -49,13 +57,15 @@ export default function Playlist({
       </Box>
       <Button className="edit-button">
         <EditIcon />
-      </Button>
+      </Button>  
 
       <div>
-        <Button className="add-user-button">
+        <Button className="add-user-button" onClick={() => setOpenAddVoterModal(true)}>
           <PersonAddIcon />
         </Button>
       </div>
+
+      {openAddVoterModal && <AddVoterModal setOpenAddVoterModal={setOpenAddVoterModal} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
 
       <Button
         className="playlist-type-on"
