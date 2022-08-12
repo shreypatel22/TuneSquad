@@ -48,7 +48,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
       if (cancel) return;
       setSearchResults(
         res.body.tracks.items.map((track) => {
-          console.log("iNFO IS  HERE LOOK", track)
+          console.log("iNFO IS  HERE LOOK", track.id)
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
               if (image.height < smallest.height) return image;
@@ -62,6 +62,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
             title: track.name,
             uri: track.uri,
             albumUrl: smallestAlbumImage.url,
+            spotifyTrackID: track.id
           };
         })
       );
@@ -105,7 +106,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
                     playlistID={playlistID}
                     spotifyPlaylistID={spotifyPlaylistID}
                     setSpotifyTrackID={setSpotifyTrackID}
-                    spotifyTrackID={track.id}
+                    spotifyTrackID={track.spotifyTrackID}
                   />
                  
                   <hr />

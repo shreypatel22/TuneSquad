@@ -20,8 +20,7 @@ module.exports = (db) => {
 
     addSongToVoting(db, playlistID, spotifyTrackID)
     .then((data) => {
-        console.log("-----------------", data);
-        // res.json({ newSong: data.rows[0] });
+        res.json({ songAdded: data.rows[0] });
       }
     );
 
