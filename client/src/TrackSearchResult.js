@@ -12,6 +12,7 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
   // }
 
   const saveSongToVoting = () => {
+    console.log("1-----a-sdf--sa-f-sdf", spotifyTrackID)
     axios.post('http://localhost:3001/addSongVoting', {playlistID, spotifyTrackID})
     .then(function ({data}) {
        console.log("THIS IS THE FRONT END: ", data)
@@ -34,7 +35,8 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>
       </div>
-      <Button  backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} onClick={() => 
+      {/* <p> {playlistID}</p> */}
+      <Button  backgroundColor='#3A406D' _hover={{ bg: '#50536b' }} color="#ee5d88" ml={'auto'} mb={'10px'} onClick={() => 
         {setSpotifyTrackID(spotifyTrackID); saveSongToVoting(playlistID, spotifyTrackID)}}> Add song </Button>
    
     </div>
