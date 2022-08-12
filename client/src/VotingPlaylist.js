@@ -4,12 +4,17 @@ import { Box, Button } from "@chakra-ui/react";
 import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import Switch from '@mui/material/Switch';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from "@chakra-ui/react";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 export default function Playlist({
   setOpenPlaylistType,
@@ -18,7 +23,7 @@ export default function Playlist({
   playlistInfo,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-
+  const [value, setValue] = React.useState();
 
   return (
     <>
@@ -46,10 +51,6 @@ export default function Playlist({
         <EditIcon />
       </Button>
 
-  
-
-
-
       <div>
         <Button className="add-user-button">
           <PersonAddIcon />
@@ -69,7 +70,13 @@ export default function Playlist({
         Final
       </Button>
       <hr className="divider" />
-      {openSearchBar && <SearchBar setOpenSearchBar={setOpenSearchBar} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
+      {openSearchBar && (
+        <SearchBar
+          setOpenSearchBar={setOpenSearchBar}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+        />
+      )}
       <Button
         className="playlist-search"
         onClick={() => setOpenSearchBar(true)}
@@ -77,6 +84,38 @@ export default function Playlist({
         <Search2Icon pr={6} />
         Search for a song
       </Button>
+
+      <TableContainer display={"grid"}>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>#</Th>
+              <Th>Title</Th>
+              <Th>Added By</Th>
+              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Rating</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>1</Td>
+              <Td>Song Title - Artist</Td>
+              <Td>Username</Td>
+              <Td isNumeric>12/08/22</Td>
+              <Td>
+                <Typography component="legend"></Typography>
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 }

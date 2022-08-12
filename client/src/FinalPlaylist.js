@@ -2,8 +2,21 @@ import React, { useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from "@chakra-ui/react";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
+  const [value, setValue] = React.useState(2);
+
   return (
     <>
       <Box>
@@ -16,7 +29,7 @@ export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
             />
             <div className="playlist-text">
               <section className="playlist-name">
-              <p> {playlistInfo.name}</p>
+                <p> {playlistInfo.name}</p>
               </section>
               <p> Admin: "NAME"</p>
               <p> Collaborators: "NAME", "NAME", etc</p>
@@ -43,6 +56,32 @@ export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
           <AudiotrackIcon /> Play in Spotify
         </Button>
       </section>
+      <TableContainer display={"grid"}>
+        <Table>
+          <Thead>
+            <Tr>
+              <Th>#</Th>
+              <Th>Title</Th>
+              <Th>Added By</Th>
+              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Rating</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>1</Td>
+              <Td>Song Title - Artist</Td>
+              <Td>Username</Td>
+              <Td isNumeric>12/08/22</Td>
+              <Td>
+                {" "}
+                <Typography component="legend"></Typography>
+                <Rating name="read-only" value={value} readOnly />
+              </Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
