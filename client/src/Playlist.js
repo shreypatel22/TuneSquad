@@ -29,7 +29,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       axios
        .get(`http://localhost:3001/getSongsVoting}`)
        .then((res) => {   
-         console.log("___________ GET SONG VOTING", res.data)     
+         console.log("___________ GET SONG", res.data)     
          setSongList(res.data)
 
        }) 
