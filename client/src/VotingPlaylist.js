@@ -29,18 +29,16 @@ export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlayl
             <section className="playlist-name">
                <p> {playlistInfo.name}</p>
               </section>
-              <div className="playlist-info">
-                <p> Admin: "NAME", "NAME", etc</p>
+                <p> Admin: "NAME"</p>
                 <p> Collaborators: "NAME", "NAME", etc</p>
                 <p> Songs: 100</p>
                 <p> Voters: 5</p>
-              </div>
             </div>
           </div>
         </section>
       </Box>
       <section>
-        <EditIcon float={"right"} w={20} h={20} mr={10} />
+        <EditIcon float={"right"} w={20} h={20} mr={10}/>
       </section>
 
       <div>
