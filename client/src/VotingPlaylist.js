@@ -1,13 +1,25 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon } from "@chakra-ui/icons";
+import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Switch from '@mui/material/Switch';
 
-export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlaylistID, playlistInfo }) {
+export default function Playlist({
+  setOpenPlaylistType,
+  playlistID,
+  spotifyPlaylistID,
+  playlistInfo,
+}) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-  
+
+
   return (
     <>
       <Box>
@@ -19,25 +31,29 @@ export default function Playlist({ setOpenPlaylistType, playlistID, spotifyPlayl
               alt="Playlist"
             />
             <div className="playlist-text">
-            <section className="playlist-name">
-               <p> {playlistInfo.name}</p>
+              <section className="playlist-name">
+                <p> {playlistInfo.name}</p>
               </section>
-                <p> Admin: "NAME"</p>
-                <p> Collaborators: "NAME", "NAME", etc</p>
-                <p> Songs: 100</p>
-                <p> Voters: 5</p>
+              <p> Admin: "NAME"</p>
+              <p> Collaborators: "NAME", "NAME", etc</p>
+              <p> Songs: 100</p>
+              <p> Voters: 5</p>
             </div>
           </div>
         </section>
       </Box>
       <Button className="edit-button">
-        <EditIcon  />
+        <EditIcon />
       </Button>
 
+  
+
+
+
       <div>
-      <Button className="add-user-button">
-        <PersonAddIcon />
-      </Button>
+        <Button className="add-user-button">
+          <PersonAddIcon />
+        </Button>
       </div>
 
       <Button
