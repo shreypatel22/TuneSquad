@@ -6,15 +6,15 @@ $Montserrat: Montserrat;
   width: 200px;
   height: 40px;
   margin-bottom: 20px;
-  background: #6c74ab;
+  background: #44454c;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #5a6b73;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
 
   &:hover {
-    background-color: #50536b;
+    background-color: #474a62;
     cursor: pointer;
   }
 }
@@ -26,7 +26,7 @@ $Montserrat: Montserrat;
   margin-bottom: 20px;
   background: #3a406d;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #1eb3ff;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
@@ -64,7 +64,7 @@ Button.searchbar-track {
   margin-bottom: 20px;
   background: #3a406d;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #1eb3ff;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: bold;
@@ -167,7 +167,7 @@ hr.divider {
   width: 40px;
   height: 40px;
   margin-bottom: 20px;
-  margin-right: 20px;
+  margin-left: 20px;
   background: #3A406D;
   border: 1px solid #000000;
   border-radius: 15px;
