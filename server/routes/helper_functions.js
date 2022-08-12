@@ -42,6 +42,10 @@ const getPlaylistInfoByID = (db, playlistID) => {
   .then(data => {return data.rows})
 }
 
+const getVotingPlaylistSongs = (db, playlistID) => {
+  return db.query(`SELECT * FROM track_playlists where id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+}
 
 module.exports = {
   addPlaylist,
@@ -50,5 +54,6 @@ module.exports = {
   getAllMyPlaylists,
   getDate,
   getPlaylistInfoByID,
-  addSongToVoting
+  addSongToVoting,
+  getVotingPlaylistSongs
 }
