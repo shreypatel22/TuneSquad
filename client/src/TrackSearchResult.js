@@ -11,9 +11,11 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
     // onClick={handlePlay}
   // }
 
+  const username = JSON.parse(localStorage.getItem('username'));
+
   const saveSongToVoting = () => {
     console.log("1-----a-sdf--sa-f-sdf", spotifyTrackID)
-    axios.post('http://localhost:3001/addSongVoting', {playlistID, spotifyTrackID})
+    axios.post('http://localhost:3001/addSongVoting', {playlistID, spotifyTrackID, username})
     .then(function ({data}) {
        console.log("THIS IS THE FRONT END: ", data)
      
