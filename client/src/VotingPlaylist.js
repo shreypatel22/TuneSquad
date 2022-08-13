@@ -1,10 +1,9 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
-import Songs from "./Songs";
 import AddVoterModal from "./AddVoterModal";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
@@ -18,21 +17,80 @@ import {
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import axios from 'axios';
 
-export default function Playlist({
-  song,
+export default function VotingPlaylist({
   setOpenPlaylistType,
   playlistID,
   spotifyPlaylistID,
   playlistInfo,
+  spotifyTrackIDs,
   track,
   chooseTrack,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
-
   const [value, setValue] = React.useState();
+  const [songsInfo, setSongsInfo] = useState();
+
+
+  const getTrackFromSpotify = async (spotifyTrackIDs) => {
+
+    const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      params: {
+        ids: spotifyTrackIDs
+      }
+    });
+
+ 
+    setSongsInfo(data.tracks);
+  };
+
+  const getTrack = (spotifyTrackIDs) => {
+    getTrackFromSpotify(spotifyTrackIDs);
+  };
+
+
+  useEffect(() => {
+    if (spotifyTrackIDs.length > 0) {
+      getTrack(spotifyTrackIDs);
+    }
+  }, [spotifyTrackIDs]);
+
+  let songs;
+  if(songsInfo) {
+    songs = songsInfo.map((song, index) =>{
+      console.log("SONG BITCHES", song.name)
+      return (
+        <Tr key={song.id}>
+        <Td>
+          {" "}
+          {/* <Button
+            className="play-button"
+            onClick={() => handlePlay(track.trackURI)}
+          > */}
+            {/* <PlayArrowIcon />
+          </Button>{" "} */}
+        </Td>
+        <Td>{index + 1}</Td>
+        <Td>{song.name}</Td>
+        <Td>{song.artists[0].name}</Td>
+        <Td>Username</Td>
+        <Td> date added </Td>
+        <Td>
+          {" "}
+          <Typography component="legend"></Typography>
+          <Rating name="read-only" value={value} readOnly />
+        </Td>
+      </Tr>
+      )
+    })
+  }
+
 
   ////// FOR PLAYER
   function handlePlay() {
@@ -41,7 +99,7 @@ export default function Playlist({
   return (
     <>
       <Box>
-        <section className="playlist-info-section">
+        <section className="playlist-info-section" >
           <div className="playlist-info">
             <img
               className="playlist-cover-image"
@@ -109,7 +167,6 @@ export default function Playlist({
         Search for a song
       </Button>
 
-      <Songs song={song} />
       <TableContainer display={"grid"}>
         <Table>
           <Thead>
@@ -124,12 +181,7 @@ export default function Playlist({
           <Tbody>
             <Tr>
               <Td>
-              <Button className="play-button" onClick={handlePlay}>1<PlayArrowIcon /></Button>
-              </Td>
-              <Td>Song Title - Artist</Td>
-              <Td>Username</Td>
-              <Td isNumeric>12/08/22</Td>
-              <Td>
+              {songs}
                 <Typography component="legend"></Typography>
                 <Rating
                   name="simple-controlled"

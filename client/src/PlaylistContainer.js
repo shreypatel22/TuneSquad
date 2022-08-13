@@ -12,7 +12,6 @@ export default function PlaylistContainer({
   let playlistItems;
 
   if (playlists) {
-    // console.log('playlistID', playlists[0].id)    
     playlistItems = playlists.map((playlist) => {
     
       let playlistID;

@@ -22,7 +22,6 @@ export default function FinalPlaylist({
   playlistID,
   spotifyPlaylistID,
   setPlayingTrack,
-
 }) {
   const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
