@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import Songs from "./Songs";
 import AddVoterModal from "./AddVoterModal";
-
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
   Table,
   Thead,
@@ -19,24 +19,25 @@ import {
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
-
-
 export default function Playlist({
   song,
   setOpenPlaylistType,
   playlistID,
   spotifyPlaylistID,
   playlistInfo,
+  track,
+  chooseTrack,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
-
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
-
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
 
   const [value, setValue] = React.useState();
 
-
+  ////// FOR PLAYER
+  function handlePlay() {
+    chooseTrack(track);
+  }
   return (
     <>
       <Box>
@@ -64,12 +65,21 @@ export default function Playlist({
       </Button>
 
       <div>
-        <Button className="add-user-button" onClick={() => setOpenAddVoterModal(true)}>
+        <Button
+          className="add-user-button"
+          onClick={() => setOpenAddVoterModal(true)}
+        >
           <PersonAddIcon />
         </Button>
       </div>
 
-      {openAddVoterModal && <AddVoterModal setOpenAddVoterModal={setOpenAddVoterModal} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
+      {openAddVoterModal && (
+        <AddVoterModal
+          setOpenAddVoterModal={setOpenAddVoterModal}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+        />
+      )}
 
       <Button
         className="playlist-type-on"
@@ -107,13 +117,15 @@ export default function Playlist({
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Added By</Th>
-              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>
           <Tbody>
             <Tr>
-              <Td>1</Td>
+              <Td>
+              <Button className="play-button" onClick={handlePlay}>1<PlayArrowIcon /></Button>
+              </Td>
               <Td>Song Title - Artist</Td>
               <Td>Username</Td>
               <Td isNumeric>12/08/22</Td>

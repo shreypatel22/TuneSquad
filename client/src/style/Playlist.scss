@@ -134,12 +134,18 @@ hr.divider {
   }
 }
 
+
 .playerBar {
   position: fixed;
   float: right;
   left: 0;
   bottom: 0;
   width: 100%;
+  font-family: $Montserrat;
+}
+
+p {
+  color: white;
 }
 
 .edit-button {
@@ -196,4 +202,10 @@ hr.divider {
 
 .chakra-select__icon-wrapper {
  color: transparent;
+}
+
+.play-button {
+  background-color: transparent;
+  border: none;
+  color: white;
 }

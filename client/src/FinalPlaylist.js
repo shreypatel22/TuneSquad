@@ -22,6 +22,7 @@ export default function FinalPlaylist({
   playlistID,
   spotifyPlaylistID,
   setPlayingTrack,
+
 }) {
   const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
@@ -110,7 +111,7 @@ export default function FinalPlaylist({
       <hr className="divider" />
       <section className="play-spotify-section">
         <Button className="play-spotify">
-          <AudiotrackIcon /> Play in Spotify
+          <AudiotrackIcon /> Listen in Spotify
         </Button>
       </section>
       <TableContainer display={"grid"}>
@@ -122,13 +123,11 @@ export default function FinalPlaylist({
               <Th>Title</Th>
               <Th>Artist</Th>
               <Th>Added By</Th>
-              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>
-          <Tbody>         
-            {tracks}
-          </Tbody>
+          <Tbody>{tracks}</Tbody>
         </Table>
       </TableContainer>
     </>

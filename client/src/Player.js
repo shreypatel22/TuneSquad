@@ -11,7 +11,6 @@ export default function Player({ accessToken, trackUri }) {
       token={accessToken}
       showSaveIcon
       callback={state => {
-
         if (!state.isPlaying) setPlay(false);
       }}
       play={play}
@@ -20,6 +19,8 @@ export default function Player({ accessToken, trackUri }) {
       styles={{
         bgColor: ' #494e75',
         color: '#ee5d88',
+        trackNameColor: 'white',
+        trackArtistColor: 'white',
         }}
 
     />
