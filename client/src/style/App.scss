@@ -72,11 +72,46 @@ body {
   align-items: center;
   
   background: rgb(206,42,214);
-  background: linear-gradient(0deg, rgba(206,42,214,1) 0%, rgba(20,25,37,1) 26%);
+  background: linear-gradient(0deg, #ce2ad6 0%, rgba(20,25,37,1) 26%);
 }
 
+.neonText {
+  position: absolute;
+  margin-bottom: 500px;
+  color: white;
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #ce2ad6,
+      0 0 82px #ce2ad6,
+      0 0 92px #ce2ad6,
+      0 0 102px #ce2ad6,
+      0 0 151px #ce2ad6;
+}
 
+/* Additional styling */
+  
+body {
+  font-size: 18px;
+  font-family: $Montserrat;
+}  
 
+h1, h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  margin: 0px;
+}
+  
+h1 {
+    font-size: 6.2rem;
+}
+
+.overlay {
+  margin-right: 800px;
+  padding-left: 100px;
+}
 
 // body {
   // background: linear-gradient(180deg, #03082A, #1eb3ff, #03082A, #ce2ad6, #03082A, #ee5d88);
