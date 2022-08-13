@@ -23,9 +23,18 @@ module.exports = (db) => {
       .then(
         function (data) {
           console.log("The playlist contains these tracks", data.body);
+          let allTracksInfo = []          
           for (const trackInfo of data.body.items) {
-            console.log(trackInfo.track)
-          }          
+            let indiviualTrackInfo = {}
+            indiviualTrackInfo["trackID"] = trackInfo.track.id;
+            indiviualTrackInfo["trackName"] = trackInfo.track.name;
+            indiviualTrackInfo["trackArtist"] = trackInfo.track.artists[0].name;
+            indiviualTrackInfo["dateAdded"] = trackInfo.added_at;            
+            allTracksInfo.push(indiviualTrackInfo);
+          }
+          console.log(allTracksInfo)
+          res.json({allTracksInfo})
+     
         },
         function (err) {
           console.log("Something went wrong!", err);

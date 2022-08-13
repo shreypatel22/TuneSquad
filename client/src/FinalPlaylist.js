@@ -13,20 +13,54 @@ import {
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import axios from 'axios';
+import axios from "axios";
 
-export default function Playlist({ setOpenPlaylistType, playlistInfo, playlistID, spotifyPlaylistID }) {
+export default function Playlist({
+  setOpenPlaylistType,
+  playlistInfo,
+  playlistID,
+  spotifyPlaylistID,
+}) {
   const [value, setValue] = React.useState(2);
-  const accessToken = JSON.parse(localStorage.getItem('access_token'));
+  const [allTracksInfo, setAllTrackInfo] = useState([]);
+  const accessToken = JSON.parse(localStorage.getItem("access_token"));
 
   useEffect(() => {
     axios
-     .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {params: {spotifyPlaylistID, accessToken}})
-     .then((res) => {   
-       console.log("-----", res)  
-     }) 
-     .catch((err) => console.log(err))
- }, []);
+      .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
+        params: { spotifyPlaylistID, accessToken },
+      })
+      .then((res) => {
+        setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
+        console.log("-----", res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // console.log(allTracksInfo);
+  // console.log(allTracksInfo[0]);
+
+  let tracks;
+
+  if (allTracksInfo[0]) {
+    tracks = allTracksInfo[0].map((track) => {      
+      return (
+        <Tr key={track.trackID}>
+          <Td>1</Td>
+          <Td>{track.trackName}</Td>
+          <Td>{track.trackArtist}</Td>
+          <Td>Username</Td>
+          <Td isNumeric>{track.dateAdded}</Td>
+          {tracks}
+          <Td>
+            {" "}
+            <Typography component="legend"></Typography>
+            <Rating name="read-only" value={value} readOnly />
+          </Td>
+        </Tr>
+      );
+    });
+  }
 
   return (
     <>
@@ -73,23 +107,26 @@ export default function Playlist({ setOpenPlaylistType, playlistInfo, playlistID
             <Tr>
               <Th>#</Th>
               <Th>Title</Th>
+              <Th>Artist</Th>
               <Th>Added By</Th>
               <Th isNumeric>Data Added</Th>
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
+            {/* <Tr>
               <Td>1</Td>
-              <Td>Song Title - Artist</Td>
+              <Td>Song Title</Td>
+              <Td>Artist</Td>
               <Td>Username</Td>
-              <Td isNumeric>12/08/22</Td>
+              <Td isNumeric>12/08/22</Td>            
               <Td>
                 {" "}
                 <Typography component="legend"></Typography>
                 <Rating name="read-only" value={value} readOnly />
               </Td>
-            </Tr>
+            </Tr> */}
+            {tracks}
           </Tbody>
         </Table>
       </TableContainer>
