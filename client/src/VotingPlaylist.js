@@ -107,7 +107,7 @@ export default function Playlist({
       >
         <Search2Icon pr={6} />
         Search for a song
-      </Button>;
+      </Button>
 
       <Songs song={song} />
       <TableContainer display={"grid"}>
