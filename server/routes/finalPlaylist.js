@@ -29,10 +29,11 @@ module.exports = (db) => {
             indiviualTrackInfo["trackID"] = trackInfo.track.id;
             indiviualTrackInfo["trackName"] = trackInfo.track.name;
             indiviualTrackInfo["trackArtist"] = trackInfo.track.artists[0].name;
-            indiviualTrackInfo["dateAdded"] = trackInfo.added_at;            
+            indiviualTrackInfo["dateAdded"] = trackInfo.added_at.slice(0, 10);
+            indiviualTrackInfo["trackURI"] = `spotify:track:${trackInfo.track.id}`   
             allTracksInfo.push(indiviualTrackInfo);
           }
-          console.log(allTracksInfo)
+          // console.log(allTracksInfo)
           res.json({allTracksInfo})
      
         },

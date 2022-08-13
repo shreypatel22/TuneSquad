@@ -14,16 +14,23 @@ import {
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
-export default function Playlist({
+export default function FinalPlaylist({
   setOpenPlaylistType,
   playlistInfo,
   playlistID,
   spotifyPlaylistID,
+  setPlayingTrack,
 }) {
   const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
+
+  function handlePlay(trackURI) {
+    let uriObj = { uri: trackURI };
+    setPlayingTrack(uriObj);
+  }
 
   useEffect(() => {
     axios
@@ -37,20 +44,26 @@ export default function Playlist({
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log(allTracksInfo);
-  // console.log(allTracksInfo[0]);
-
   let tracks;
 
   if (allTracksInfo[0]) {
-    tracks = allTracksInfo[0].map((track, index) => {      
+    tracks = allTracksInfo[0].map((track, index) => {
       return (
         <Tr key={track.trackID}>
+          <Td>
+            {" "}
+            <Button
+              className="play-button"
+              onClick={() => handlePlay(track.trackURI)}
+            >
+              <PlayArrowIcon />
+            </Button>{" "}
+          </Td>
           <Td>{index + 1}</Td>
           <Td>{track.trackName}</Td>
           <Td>{track.trackArtist}</Td>
           <Td>Username</Td>
-          <Td isNumeric>{track.dateAdded}</Td>          
+          <Td isNumeric>{track.dateAdded}</Td>
           <Td>
             {" "}
             <Typography component="legend"></Typography>
@@ -104,6 +117,7 @@ export default function Playlist({
         <Table>
           <Thead>
             <Tr>
+              <Th>Play</Th>
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Artist</Th>
@@ -112,19 +126,7 @@ export default function Playlist({
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>
-          <Tbody>
-            {/* <Tr>
-              <Td>1</Td>
-              <Td>Song Title</Td>
-              <Td>Artist</Td>
-              <Td>Username</Td>
-              <Td isNumeric>12/08/22</Td>            
-              <Td>
-                {" "}
-                <Typography component="legend"></Typography>
-                <Rating name="read-only" value={value} readOnly />
-              </Td>
-            </Tr> */}
+          <Tbody>         
             {tracks}
           </Tbody>
         </Table>
