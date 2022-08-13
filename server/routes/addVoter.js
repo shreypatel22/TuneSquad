@@ -5,9 +5,9 @@ const { addVoter } = require("./helper_functions");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    const { voterID, playlistID } = req.body;
+    const { voterID, playlistID, voterUsername } = req.body;
 
-    addVoter(db, voterID, playlistID).then((data) => {     
+    addVoter(db, voterID, playlistID, voterUsername).then((data) => {     
       // console.log("Backend Voter Added")
       res.json({ });
     });

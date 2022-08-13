@@ -1,16 +1,23 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const { getPlaylistInfoByID, getVotingPlaylistSongs } = require("./helper_functions");
+
+const { getPlaylistInfoByID, getVotingPlaylistSongs, getCollaborators } = require("./helper_functions");
+
 
 module.exports = (db) => {
   router.get("/:playlistID", (req, res) => {
     const playlistID = req.params.playlistID;
 
-    getPlaylistInfoByID(db, playlistID).then(data => {
-      const playlistInfo = { ...data };
-      res.json({ playlist: playlistInfo });
-
+    getCollaborators(db, playlistID).then((collabData) => {
+      let collabArray = [];
+      for (const collab of collabData) {
+        collabArray.push(collab.username);
+      }
+      getPlaylistInfoByID(db, playlistID).then((data) => {
+        const playlistInfo = { ...data };
+        res.json({ playlist: playlistInfo, collaborators: collabArray });
+      });
     });
 
     router.get("/:playlistID/getSongsVoting", (req, res) => {

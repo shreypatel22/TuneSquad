@@ -16,17 +16,20 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 
-export default function AddVoterModal({ setOpenAddVoterModal, playlistID }) {
+export default function AddVoterModal({ setOpenAddVoterModal, playlistID, setCollaborators }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
   const [voterID, setVoterID] = useState();
+  const [voterUsername, setVoterUsername] = useState();
  
 
 
   const addVoter = () => {
-    axios.post('http://localhost:3001/addVoter', { voterID, playlistID })
+    console.log(voterUsername)
+    setCollaborators((prev) => [...prev, ...voterUsername])
+    axios.post('http://localhost:3001/addVoter', { voterID, playlistID, voterUsername })
       .then(function({ data }) {        
         setOpenAddVoterModal(false);
       })
@@ -34,6 +37,7 @@ export default function AddVoterModal({ setOpenAddVoterModal, playlistID }) {
         console.log(error);
       });
   };
+
 
   return (
     <>
@@ -54,6 +58,11 @@ export default function AddVoterModal({ setOpenAddVoterModal, playlistID }) {
               <FormControl mt={4}>
                 <FormLabel>Spotify UserID</FormLabel>
                 <Input placeholder='Spotify UserID' onChange={(event) => setVoterID(event.target.value)} />
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel>Spotify Username</FormLabel>
+                <Input placeholder='Spotify Username' name="spotify_username" onChange={(event) => setVoterUsername(event.target.value) } />
               </FormControl>
 
             </ModalBody>

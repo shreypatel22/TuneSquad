@@ -1,7 +1,7 @@
-const addPlaylist = (db, playlistName, username, playlistID, date) => {
-  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status) 
-  VALUES ($1, $2, $3, $4, 'open')
-  RETURNING *;`, [playlistName, username, playlistID, date])
+const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
+  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
+  VALUES ($1, $2, $3, $4, 'open', $5)
+  RETURNING *;`, [playlistName, userID, playlistID, date, username])
     .catch((err) =>  console.log(err.message));  
 };
 
@@ -46,10 +46,15 @@ const getVotingPlaylistSongs = (db, playlistID) => {
   return db.query(`SELECT * FROM track_playlists WHERE playlist_id = $1;`, [playlistID])
   .then(data => {return data.rows})
 }
-const addVoter = (db, voterID, playlistID) => {
-  return db.query(`INSERT INTO voter_playlists (user_id, playlist_id) 
-  VALUES ($1, $2);`, [voterID, playlistID])
+const addVoter = (db, voterID, playlistID, voterUsername) => {
+  return db.query(`INSERT INTO voter_playlists (user_id, playlist_id, username) 
+  VALUES ($1, $2, $3);`, [voterID, playlistID, voterUsername])
     .catch((err) =>  console.log(err.message));
+};
+
+const getCollaborators = (db, playlistID) => {
+  return db.query(`SELECT * FROM voter_playlists WHERE playlist_id = $1;`, [playlistID])
+  .then(data => {return data.rows})
 };
 
 
@@ -62,5 +67,6 @@ module.exports = {
   getPlaylistInfoByID,
   addSongToVoting,
   getVotingPlaylistSongs,
-  addVoter
+  addVoter,
+  getCollaborators
 }
