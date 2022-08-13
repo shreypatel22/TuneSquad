@@ -4,10 +4,9 @@ import { Box, Button } from "@chakra-ui/react";
 import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
+import Songs from "./Songs";
 import AddVoterModal from "./AddVoterModal";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-
-
 import {
   Table,
   Thead,
@@ -21,6 +20,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
 export default function Playlist({
+  song,
   setOpenPlaylistType,
   playlistID,
   spotifyPlaylistID,
@@ -30,8 +30,8 @@ export default function Playlist({
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
+  const accessToken = JSON.parse(localStorage.getItem("access_token"));
 
-  ////// FOR RATINGS
   const [value, setValue] = React.useState();
 
   ////// FOR PLAYER
@@ -107,8 +107,9 @@ export default function Playlist({
       >
         <Search2Icon pr={6} />
         Search for a song
-      </Button>
+      </Button>;
 
+      <Songs song={song} />
       <TableContainer display={"grid"}>
         <Table>
           <Thead>
