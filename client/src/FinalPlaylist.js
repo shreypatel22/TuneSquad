@@ -14,7 +14,7 @@ import {
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
-export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
+export default function FinalPlaylist({ setOpenPlaylistType, playlistInfo }) {
   const [value, setValue] = React.useState(2);
 
   return (
