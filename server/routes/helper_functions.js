@@ -52,6 +52,11 @@ const addVoter = (db, voterID, playlistID) => {
     .catch((err) =>  console.log(err.message));
 };
 
+const getCollaborators = (db, playlistID) => {
+  return db.query(`SELECT * FROM voter_playlists WHERE playlist_id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+};
+
 
 module.exports = {
   addPlaylist,
@@ -62,5 +67,6 @@ module.exports = {
   getPlaylistInfoByID,
   addSongToVoting,
   getVotingPlaylistSongs,
-  addVoter
+  addVoter,
+  getCollaborators
 }

@@ -11,13 +11,15 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [playlistInfo, setPlaylistInfo] = useState([]);
   const [song, setSong] = useState([]);
   const [songList, setSongList] = useState([]);
+  const [collaborators, setCollababorators] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/playlist/${playlistID}`)
-      .then((res) => {
+      .then((res) => {        
         console.log("HEREEE!!asdffff", res.data.playlist[0]);
         setPlaylistInfo(res.data.playlist[0]);
+        setCollababorators((prev) => [...prev, ...res.data.collaborators])
       })
       .catch((err) => console.log(err));
   }, []);
@@ -47,6 +49,8 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
     setSong(data);
   };
 
+  console.log(playlistInfo)
+
   return (
     <div onLoad={getTrack}>
       {openPlaylistType ? (
@@ -56,6 +60,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           playlistID={playlistID}
           spotifyPlaylistID={spotifyPlaylistID}
           playlistInfo={playlistInfo}
+          collaborators={collaborators}
         />
       ) : (
         <VotingPlaylist
@@ -64,6 +69,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           playlistID={playlistID}
           spotifyPlaylistID={spotifyPlaylistID}
           playlistInfo={playlistInfo}
+          collaborators={collaborators}
         />
       )}
       <section className="playerBar">

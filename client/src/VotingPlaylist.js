@@ -27,6 +27,7 @@ export default function Playlist({
   playlistInfo,
   track,
   chooseTrack,
+  collaborators
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -38,6 +39,9 @@ export default function Playlist({
   function handlePlay() {
     chooseTrack(track);
   }
+
+  let collaboratorsNames = collaborators.join(", ");
+
   return (
     <>
       <Box>
@@ -52,10 +56,10 @@ export default function Playlist({
               <section className="playlist-name">
                 <p> {playlistInfo.name}</p>
               </section>
-              <p> Admin: "NAME"</p>
-              <p> Collaborators: "NAME", "NAME", etc</p>
+              <p> {playlistInfo.admin_id}</p>
+              <p> Collaborators: {collaboratorsNames}</p>              
               <p> Songs: 100</p>
-              <p> Voters: 5</p>
+              <p> Voters: {collaborators.length}</p>
             </div>
           </div>
         </section>
