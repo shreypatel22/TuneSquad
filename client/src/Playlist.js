@@ -9,15 +9,14 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [openPlaylistType, setOpenPlaylistType] = useState(false);
   const [playingTrack, setPlayingTrack] = useState();
   const [playlistInfo, setPlaylistInfo] = useState([]);
-  const [song, setSong] = useState([]);
+  const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
   const [songList, setSongList] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/playlist/${playlistID}`)
-      .then((res) => {        
-        console.log("HEREEE!!asdffff", res.data.playlist[0]);
+      .then((res) => {
         setPlaylistInfo(res.data.playlist[0]);
         setCollaborators((prev) => [...prev, ...res.data.collaborators])
       })
@@ -26,32 +25,15 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/getSongsVoting}`)
+      .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
       .then((res) => {
-        console.log("___________ GET SONG", res.data);
-        setSongList(res.data);
+        setspotifyTrackIDs(res.data.spotifyTrackIDs);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const getTrack = async (e) => {
-    e.preventDefault();
-    console.log("it works");
-
-    const { data } = await axios.get(
-      `https://api.spotify.com/v1/tracks/3U4isOIWM3VvDubwSI3y7a`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    setSong(data);
-  };
-  
-
   return (
-    <div onLoad={getTrack}>
+    <div>
       {openPlaylistType ? (
         <FinalPlaylist
           setOpenPlaylistType={setOpenPlaylistType}
@@ -64,6 +46,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
         />
       ) : (
         <VotingPlaylist
+          spotifyTrackIDs={spotifyTrackIDs}
           setOpenPlaylistType={setOpenPlaylistType}
           setPlayingTrack={setPlayingTrack}
           playlistID={playlistID}

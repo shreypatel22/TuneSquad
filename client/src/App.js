@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Playlist from "./Playlist";
 
+import BongoCat from "./BongoCat";
+
+
 // need state for code then useEffect then move the useAuth here
 const code = new URLSearchParams(window.location.search).get("code");
 
@@ -79,8 +82,9 @@ export default function App() {
             <Login />
           </nav>
         </section>
-        <section className="content-display">
-        </section>
+        <section className="content-display-bongo">
+        <BongoCat />   
+         </section>
       </main>
     );
   }

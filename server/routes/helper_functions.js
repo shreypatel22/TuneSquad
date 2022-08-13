@@ -43,7 +43,7 @@ const getPlaylistInfoByID = (db, playlistID) => {
 }
 
 const getVotingPlaylistSongs = (db, playlistID) => {
-  return db.query(`SELECT * FROM track_playlists where id = $1;`, [playlistID])
+  return db.query(`SELECT * FROM track_playlists WHERE playlist_id = $1;`, [playlistID])
   .then(data => {return data.rows})
 }
 const addVoter = (db, voterID, playlistID, voterUsername) => {
