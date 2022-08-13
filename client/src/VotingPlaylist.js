@@ -5,6 +5,7 @@ import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
   Table,
   Thead,
@@ -24,6 +25,8 @@ export default function VotingPlaylist({
   spotifyPlaylistID,
   playlistInfo,
   spotifyTrackIDs,
+  track,
+  chooseTrack,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -89,7 +92,10 @@ export default function VotingPlaylist({
   }
 
 
-
+  ////// FOR PLAYER
+  function handlePlay() {
+    chooseTrack(track);
+  }
   return (
     <>
       <Box>
@@ -117,12 +123,21 @@ export default function VotingPlaylist({
       </Button>
 
       <div>
-        <Button className="add-user-button" onClick={() => setOpenAddVoterModal(true)}>
+        <Button
+          className="add-user-button"
+          onClick={() => setOpenAddVoterModal(true)}
+        >
           <PersonAddIcon />
         </Button>
       </div>
 
-      {openAddVoterModal && <AddVoterModal setOpenAddVoterModal={setOpenAddVoterModal} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} />}
+      {openAddVoterModal && (
+        <AddVoterModal
+          setOpenAddVoterModal={setOpenAddVoterModal}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+        />
+      )}
 
       <Button
         className="playlist-type-on"
@@ -149,8 +164,8 @@ export default function VotingPlaylist({
         onClick={() => setOpenSearchBar(true)}
       >
         <Search2Icon pr={6} />
-        Search for a songsInfo
-      </Button>;
+        Search for a song
+      </Button>
 
       <TableContainer display={"grid"}>
         <Table>
@@ -159,7 +174,7 @@ export default function VotingPlaylist({
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Added By</Th>
-              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>

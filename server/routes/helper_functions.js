@@ -30,10 +30,10 @@ const getDate = () => {
   return date;
 };
 
-const addSongToVoting = (db, playlistID, spotifyTrackID) => {
-  return db.query(`INSERT INTO track_playlists (playlist_id, spotify_track_id) 
-  VALUES ($1, $2)
-  RETURNING *;`, [playlistID, spotifyTrackID])
+const addSongToVoting = (db, playlistID, spotifyTrackID, username) => {
+  return db.query(`INSERT INTO track_playlists (playlist_id, spotify_track_id, username) 
+  VALUES ($1, $2, $3)
+  RETURNING *;`, [playlistID, spotifyTrackID, username])
     .catch((err) =>  console.log(err.message));  
 };
 

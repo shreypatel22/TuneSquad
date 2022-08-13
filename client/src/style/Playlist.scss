@@ -3,15 +3,16 @@ $Montserrat: Montserrat;
 
 .playlist-type-off {
   text-align: center;
-  width: 200px;
+  width: 150px;
   height: 40px;
-  margin-bottom: 20px;
   background: #44454c;
   border-radius: 50px;
+  border: none;
   color: #5a6b73;
   font-family: $Montserrat;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
+  margin: 0px 20px 20px ;
 
   &:hover {
     background-color: #474a62;
@@ -21,15 +22,18 @@ $Montserrat: Montserrat;
 
 .playlist-type-on {
   text-align: center;
-  width: 200px;
+  width: 150px;
   height: 40px;
   margin-bottom: 20px;
   background: #3a406d;
+  border: none;
   border-radius: 50px;
   color: #1eb3ff;
   font-family: $Montserrat;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
+  margin: 0px 20px 20px ;
+
 
   &:hover {
     background-color: #50536b;
@@ -42,6 +46,7 @@ $Montserrat: Montserrat;
   flex-direction: row;
   align-items: flex-end;
   margin: 10px;
+  
 }
 
 Button.searchbar-track {
@@ -62,12 +67,14 @@ Button.searchbar-track {
   width: 200px;
   height: 40px;
   margin-bottom: 20px;
+  margin-left: 20px;
   background: #3a406d;
+  border: none;
   border-radius: 50px;
   color: #1eb3ff;
   font-family: $Montserrat;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 14.5px;
+  font-weight: 600;
 
   &:hover {
     background-color: #50536b;
@@ -118,15 +125,16 @@ hr.divider {
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 200px;
+  width: 220px;
   height: 40px;
   margin-bottom: 20px;
   background: #494e75;
   border-radius: 50px;
-  color: #ee5d88;
+  color: #1eb3ff;
   font-family: $Montserrat;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: none;
 
   &:hover {
     background-color: #50536b;
@@ -134,12 +142,18 @@ hr.divider {
   }
 }
 
+
 .playerBar {
   position: fixed;
   float: right;
   left: 0;
   bottom: 0;
   width: 100%;
+  font-family: $Montserrat;
+}
+
+p {
+  color: white;
 }
 
 .edit-button {
@@ -182,8 +196,13 @@ hr.divider {
 .chakra-table__container {
   display: grid;
   font-family: $Montserrat;
+  font-weight: 200;
   color: white;
   text-align: justify;
+}
+
+.css-0 {
+  padding-bottom: 8px;
 }
 
 .rating-dropdown {
@@ -196,4 +215,10 @@ hr.divider {
 
 .chakra-select__icon-wrapper {
  color: transparent;
+}
+
+.play-button {
+  background-color: transparent;
+  border: none;
+  color: white;
 }
