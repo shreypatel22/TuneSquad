@@ -5,13 +5,13 @@ const { getPlaylistInfoByID } = require("./helper_functions");
 
 module.exports = (db) => {
   router.get("/:playlistID", (req, res) => {
-    const playlistID = req.params.playlistID
+    const playlistID = req.params.playlistID;
 
     getPlaylistInfoByID(db, playlistID).then(data => {
-      const playlistInfo = {...data}
-      res.json({playlist: playlistInfo})
-    
+      const playlistInfo = { ...data };
+      res.json({ playlist: playlistInfo });
+
+    });
   });
-});
-return router;
-}
+  return router;
+};

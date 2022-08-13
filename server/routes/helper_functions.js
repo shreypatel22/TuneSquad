@@ -42,6 +42,10 @@ const getPlaylistInfoByID = (db, playlistID) => {
   .then(data => {return data.rows})
 }
 
+const getVotingPlaylistSongs = (db, playlistID) => {
+  return db.query(`SELECT * FROM track_playlists where id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+}
 const addVoter = (db, voterID, playlistID) => {
   return db.query(`INSERT INTO voter_playlists (user_id, playlist_id) 
   VALUES ($1, $2);`, [voterID, playlistID])
@@ -57,5 +61,6 @@ module.exports = {
   getDate,
   getPlaylistInfoByID,
   addSongToVoting,
+  getVotingPlaylistSongs,
   addVoter
 }
