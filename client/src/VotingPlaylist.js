@@ -27,7 +27,8 @@ export default function Playlist({
   playlistInfo,
   track,
   chooseTrack,
-  collaborators
+  collaborators,
+  setCollaborators
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -82,6 +83,7 @@ export default function Playlist({
           setOpenAddVoterModal={setOpenAddVoterModal}
           playlistID={playlistID}
           spotifyPlaylistID={spotifyPlaylistID}
+          setCollaborators={setCollaborators}
         />
       )}
 
