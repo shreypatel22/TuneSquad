@@ -7,7 +7,7 @@ export default function Songs({song}) {
 
   return (
    <>
-   <p>{song.name}</p>
+   {/* <p>{song.name}</p> */}
    </>
   );
 }

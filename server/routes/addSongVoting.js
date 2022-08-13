@@ -10,7 +10,7 @@ const { addSongToVoting } = require("./helper_functions");
 module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log("REQ BODY", req.body)
-    const { spotifyTrackID, playlistID } = req.body;
+    const { spotifyTrackID, playlistID, username } = req.body;
 
     const spotifyApi = new spotifyWebApi({
       redirectUri: process.env.REDIRECT_URI,
@@ -18,7 +18,7 @@ module.exports = (db) => {
       clientSecret: process.env.CLIENT_SECRET,
     });
 
-    addSongToVoting(db, playlistID, spotifyTrackID)
+    addSongToVoting(db, playlistID, spotifyTrackID, username)
     .then((data) => {
         res.json({ songAdded: data.rows[0] });
       }
