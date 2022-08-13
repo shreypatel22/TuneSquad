@@ -13,10 +13,15 @@ import {
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
-export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
+export default function Playlist({ setOpenPlaylistType, playlistInfo, track, chooseTrack }) {
   const [value, setValue] = React.useState(2);
 
+    ////// FOR PLAYER
+  function handlePlay() {
+    chooseTrack(track);
+  }
   return (
     <>
       <Box>
@@ -53,7 +58,7 @@ export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
       <hr className="divider" />
       <section className="play-spotify-section">
         <Button className="play-spotify">
-          <AudiotrackIcon /> Play in Spotify
+          <AudiotrackIcon /> Listen in Spotify
         </Button>
       </section>
       <TableContainer display={"grid"}>
@@ -63,13 +68,15 @@ export default function Playlist({ setOpenPlaylistType, playlistInfo }) {
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Added By</Th>
-              <Th isNumeric>Data Added</Th>
+              <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
             </Tr>
           </Thead>
           <Tbody>
             <Tr>
-              <Td>1</Td>
+              <Td>
+              <Button className="play-button" onClick={handlePlay}>1<PlayArrowIcon /></Button>
+              </Td>
               <Td>Song Title - Artist</Td>
               <Td>Username</Td>
               <Td isNumeric>12/08/22</Td>

@@ -10,6 +10,10 @@ export default function Playlist({playlistID, spotifyPlaylistID}) {
   const [openPlaylistType, setOpenPlaylistType] = useState(false);
   const [playingTrack, setPlayingTrack] = useState();
   const [playlistInfo, setPlaylistInfo] = useState([]);
+  
+  function chooseTrack(track) {
+    setPlayingTrack(track);
+  }
 
   useEffect(() => {
      axios
@@ -26,11 +30,11 @@ console.log("INFOOOOOOO", playlistInfo)
 
     <div>
       {openPlaylistType ?
-        <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo}/>
+        <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} chooseTrack={chooseTrack}/>
         :
-        <VotingPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack}playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo}/>}
+        <VotingPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack}playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} chooseTrack={chooseTrack}/>}
       <section className="playerBar">
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+        <Player  accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>
     </div>
 
