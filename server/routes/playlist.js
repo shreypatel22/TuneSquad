@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const { getPlaylistInfoByID } = require("./helper_functions");
+const { getPlaylistInfoByID, getVotingPlaylistSongs } = require("./helper_functions");
 
 module.exports = (db) => {
   router.get("/:playlistID", (req, res) => {
@@ -12,6 +12,21 @@ module.exports = (db) => {
       res.json({ playlist: playlistInfo });
 
     });
+
+    router.get("/:playlistID/getSongsVoting", (req, res) => {
+
+      getVotingPlaylistSongs(db, playlistID)
+      .then((data) => {
+          let spotifyTrackIDs = []
+          for (const song of data) {
+            spotifyTrackIDs.push(song.spotify_track_id) 
+          }
+         
+          res.json({ spotifyTrackIDs: spotifyTrackIDs.join(",")});
+
+        });
+    });
+
   });
   return router;
 };
