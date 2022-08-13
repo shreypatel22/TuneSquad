@@ -32,7 +32,7 @@ export default function Playlist({
       })
       .then((res) => {
         setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
-        console.log("-----", res);
+        // console.log("-----", res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -43,15 +43,14 @@ export default function Playlist({
   let tracks;
 
   if (allTracksInfo[0]) {
-    tracks = allTracksInfo[0].map((track) => {      
+    tracks = allTracksInfo[0].map((track, index) => {      
       return (
         <Tr key={track.trackID}>
-          <Td>1</Td>
+          <Td>{index + 1}</Td>
           <Td>{track.trackName}</Td>
           <Td>{track.trackArtist}</Td>
           <Td>Username</Td>
-          <Td isNumeric>{track.dateAdded}</Td>
-          {tracks}
+          <Td isNumeric>{track.dateAdded}</Td>          
           <Td>
             {" "}
             <Typography component="legend"></Typography>
