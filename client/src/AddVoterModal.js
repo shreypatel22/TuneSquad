@@ -22,11 +22,12 @@ export default function AddVoterModal({ setOpenAddVoterModal, playlistID }) {
   const finalRef = React.useRef(null);
 
   const [voterID, setVoterID] = useState();
+  const [voterUsername, setVoterUsername] = useState();
  
 
 
   const addVoter = () => {
-    axios.post('http://localhost:3001/addVoter', { voterID, playlistID })
+    axios.post('http://localhost:3001/addVoter', { voterID, playlistID, voterUsername })
       .then(function({ data }) {        
         setOpenAddVoterModal(false);
       })
@@ -54,6 +55,11 @@ export default function AddVoterModal({ setOpenAddVoterModal, playlistID }) {
               <FormControl mt={4}>
                 <FormLabel>Spotify UserID</FormLabel>
                 <Input placeholder='Spotify UserID' onChange={(event) => setVoterID(event.target.value)} />
+              </FormControl>
+
+              <FormControl mt={4}>
+                <FormLabel>Spotify Username</FormLabel>
+                <Input placeholder='Spotify Username' onChange={(event) => setVoterUsername(event.target.value)} />
               </FormControl>
 
             </ModalBody>

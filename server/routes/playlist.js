@@ -10,7 +10,7 @@ module.exports = (db) => {
     getCollaborators(db, playlistID).then((collabData) => {
       let collabArray = [];
       for (const collab of collabData) {
-        collabArray.push(collab.user_id);
+        collabArray.push(collab.username);
       }
       getPlaylistInfoByID(db, playlistID).then((data) => {
         const playlistInfo = { ...data };
