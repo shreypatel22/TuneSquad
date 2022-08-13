@@ -10,7 +10,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [openPlaylistType, setOpenPlaylistType] = useState(false);
   const [playingTrack, setPlayingTrack] = useState();
   const [playlistInfo, setPlaylistInfo] = useState([]);
-  const [songList, setSongList] = useState([]);
+  const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
 
   useEffect(() => {
     axios
@@ -23,28 +23,25 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   }, []);
 
 
-    useEffect(() => {
-      axios
+  useEffect(() => {
+    axios
       .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
-       .then((res) => {   
-         console.log("___________ GET SONG", res.data)     
-         setSongList(res.data)
+      .then((res) => {
+        setspotifyTrackIDs(res.data.spotifyTrackIDs);
 
-       }) 
-       .catch((err) => console.log(err))
-   }, []);
-
-
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
 
     <div>
-    {openPlaylistType ?
-      <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} />
-      :
-      <VotingPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} />}
+      {openPlaylistType ?
+        <FinalPlaylist setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} />
+        :
+        <VotingPlaylist spotifyTrackIDs={spotifyTrackIDs} setOpenPlaylistType={setOpenPlaylistType} setPlayingTrack={setPlayingTrack} playlistID={playlistID} spotifyPlaylistID={spotifyPlaylistID} playlistInfo={playlistInfo} />}
       <section className="playerBar">
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri}/>
+        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>
     </div>
 
