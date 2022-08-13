@@ -9,7 +9,7 @@ const request = require("request-promise-native");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    const { playlistName, coverURL, description, accessToken, userID } = req.body;
+    const { playlistName, coverURL, description, accessToken, userID, username } = req.body;
 
     const spotifyApi = new spotifyWebApi({
       redirectUri: process.env.REDIRECT_URI,
@@ -50,7 +50,7 @@ module.exports = (db) => {
 
           const createdDate = getDate();
 
-          addPlaylist(db, playlistName, userID, playlistID, createdDate)
+          addPlaylist(db, playlistName, userID, playlistID, createdDate, username)
             .then(data => {
               res.json({newPlaylist: data.rows[0]});
             });      

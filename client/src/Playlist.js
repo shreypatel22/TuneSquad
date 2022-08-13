@@ -48,8 +48,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
     );
     setSong(data);
   };
-
-  console.log(playlistInfo)
+  
 
   return (
     <div onLoad={getTrack}>

@@ -1,7 +1,7 @@
-const addPlaylist = (db, playlistName, username, playlistID, date) => {
-  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status) 
-  VALUES ($1, $2, $3, $4, 'open')
-  RETURNING *;`, [playlistName, username, playlistID, date])
+const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
+  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
+  VALUES ($1, $2, $3, $4, 'open', $5)
+  RETURNING *;`, [playlistName, userID, playlistID, date, username])
     .catch((err) =>  console.log(err.message));  
 };
 

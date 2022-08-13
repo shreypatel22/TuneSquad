@@ -56,8 +56,8 @@ export default function Playlist({
               <section className="playlist-name">
                 <p> {playlistInfo.name}</p>
               </section>
-              <p> {playlistInfo.admin_id}</p>
-              <p> Collaborators: {collaboratorsNames}</p>              
+              <p> Admin: {playlistInfo.admin_username}</p>
+              <p> Collaborators: {collaboratorsNames}</p>
               <p> Songs: 100</p>
               <p> Voters: {collaborators.length}</p>
             </div>
