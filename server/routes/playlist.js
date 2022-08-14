@@ -7,15 +7,23 @@ const {
   addRating,
   getTrackPlaylistsID,
   hasRatedTrack,
+  getCollaborators,
+  updatePlaylistStatus,
 } = require("./helper_functions");
 
 module.exports = (db) => {
   router.get("/:playlistID", (req, res) => {
     const playlistID = req.params.playlistID;
 
-    getPlaylistInfoByID(db, playlistID).then((data) => {
-      const playlistInfo = { ...data };
-      res.json({ playlist: playlistInfo });
+    getCollaborators(db, playlistID).then((collabData) => {
+      let collabArray = [];
+      for (const collab of collabData) {
+        collabArray.push(collab.username);
+      }
+      getPlaylistInfoByID(db, playlistID).then((data) => {
+        const playlistInfo = { ...data };
+        res.json({ playlist: playlistInfo, collaborators: collabArray });
+      });
     });
 
     router.get("/:playlistID/getSongsVoting", (req, res) => {
@@ -43,6 +51,15 @@ module.exports = (db) => {
           });
         }
       );
+    });
+
+    router.post("/status/:playlistID", (req, res) => {
+      const playlistStatus = req.body.myValue;
+      const playlistID = req.params.playlistID;
+
+      updatePlaylistStatus(db, playlistStatus, playlistID).then((data) => {
+        res.json({ data });
+      });
     });
   });
   return router;

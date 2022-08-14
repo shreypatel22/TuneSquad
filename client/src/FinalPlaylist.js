@@ -22,6 +22,7 @@ export default function FinalPlaylist({
   playlistID,
   spotifyPlaylistID,
   setPlayingTrack,
+  collaborators
 }) {
   const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
@@ -74,6 +75,8 @@ export default function FinalPlaylist({
     });
   }
 
+  let collaboratorsNames = collaborators.join(", ");
+
   return (
     <>
       <Box>
@@ -88,8 +91,8 @@ export default function FinalPlaylist({
               <section className="playlist-name">
                 <p> {playlistInfo.name}</p>
               </section>
-              <p> Admin: "NAME"</p>
-              <p> Collaborators: "NAME", "NAME", etc</p>
+              <p> Admin: {playlistInfo.admin_username}</p>
+              <p> Collaborators: {collaboratorsNames}</p>
               <p> Songs: 100</p>
             </div>
           </div>

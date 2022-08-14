@@ -1,8 +1,8 @@
-const addPlaylist = (db, playlistName, username, playlistID, date) => {
-  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status) 
-  VALUES ($1, $2, $3, $4, 'open')
-  RETURNING *;`, [playlistName, username, playlistID, date])
-    .catch((err) => console.log(err.message));
+const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
+  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
+  VALUES ($1, $2, $3, $4, 'open', $5)
+  RETURNING *;`, [playlistName, userID, playlistID, date, username])
+    .catch((err) =>  console.log(err.message));  
 };
 
 const getMyCreatedPlaylists = (db, userID) => {
@@ -46,11 +46,7 @@ const getVotingPlaylistSongs = (db, playlistID) => {
   return db.query(`SELECT * FROM track_playlists WHERE playlist_id = $1;`, [playlistID])
     .then(data => { return data.rows; });
 };
-const addVoter = (db, voterID, playlistID) => {
-  return db.query(`INSERT INTO voter_playlists (user_id, playlist_id) 
-  VALUES ($1, $2);`, [voterID, playlistID])
-    .catch((err) => console.log(err.message));
-};
+
 
 const getTrackPlaylistsID = (db, spotifyTrackID, playlistID) => {
   return db.query(`SELECT id FROM track_playlists WHERE spotify_track_id = $1 AND playlist_id = $2;`, [spotifyTrackID, playlistID])
@@ -78,6 +74,22 @@ const addRating = (db, userID, trackPlaylistsID, newValue) => {
 };
 
 
+const addVoter = (db, voterID, playlistID, voterUsername) => {
+  return db.query(`INSERT INTO voter_playlists (user_id, playlist_id, username) 
+  VALUES ($1, $2, $3);`, [voterID, playlistID, voterUsername])
+    .catch((err) =>  console.log(err.message));
+};
+
+const getCollaborators = (db, playlistID) => {
+  return db.query(`SELECT * FROM voter_playlists WHERE playlist_id = $1;`, [playlistID])
+  .then(data => {return data.rows})
+};
+
+const updatePlaylistStatus = (db, status, playlistID) => {
+  return db.query(`Update playlists SET status = $1 WHERE id = $2 RETURNING *;`, [status, playlistID])
+    .catch((err) => console.log(err.message));
+}
+
 
 module.exports = {
   addPlaylist,
@@ -91,5 +103,7 @@ module.exports = {
   addVoter,
   addRating,
   getTrackPlaylistsID,
-  hasRatedTrack
-};
+  hasRatedTrack,
+  getCollaborators,
+  updatePlaylistStatus
+}

@@ -23,7 +23,7 @@ export default function UserProfile({ code }) {
         {username}
       </MenuButton>
       <MenuList >
-        <MenuItem className="logout-menu">
+        <MenuItem className="logout-menu" >
           <Logout
             code={code}
             accessToken={accessToken}

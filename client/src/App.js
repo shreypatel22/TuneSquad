@@ -6,9 +6,7 @@ import PlaylistContainer from "./PlaylistContainer";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Playlist from "./Playlist";
-
 import BongoCat from "./BongoCat";
-
 
 // need state for code then useEffect then move the useAuth here
 const code = new URLSearchParams(window.location.search).get("code");
@@ -26,10 +24,14 @@ export default function App() {
     axios
       .get(`http://localhost:3001/${userID}`)
       .then((res) => {
+        console.log(res);
         setPlaylists((prev) => [...prev, ...res.data.playlists]);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const EasterEgg = require("react-easter");
+  const konamiCode = ["arrowup", "arrowup", "arrowdown", "arrowdown"];
 
   if (code) {
     return (
@@ -81,9 +83,24 @@ export default function App() {
             <Login />
           </nav>
         </section>
+
         <section className="content-display-bongo">
-        <BongoCat />   
-         </section>
+          <h1 class="neonText">Welcome</h1>
+          <BongoCat />
+          <EasterEgg keys={konamiCode} timeout={15500}>
+            <div class="overlay">
+              <iframe
+                class="video-pop"
+                src="https://www.youtube.com/embed/eCOdMdWbP_4?autoplay=1"
+                frameborder="0"
+                allowfullscreen
+                width={1000}
+                height={400}
+                loading="eager"
+              />
+            </div>
+          </EasterEgg>
+        </section>
       </main>
     );
   }

@@ -18,7 +18,7 @@ const [openModal, setOpenModal] = useState(false)
         <AddIcon className='icon-button' w={18} h={18} />
         New Playlist
       </button>
-      <PlaylistSidebar />
+      <PlaylistSidebar playlists={playlists}/>
     </section>
   );
 }
