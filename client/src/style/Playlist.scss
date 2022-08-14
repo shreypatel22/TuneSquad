@@ -222,3 +222,37 @@ p {
   border: none;
   color: white;
 }
+
+.playlist-status-button {
+  text-align: center;
+  margin-bottom: 50px;
+  margin-right: 20px;
+  width: 200px;
+  height: 40px;
+  background: #3A406D;
+  border: none;
+  border-radius: 50px;
+  color: #1eb3ff;
+  font-family: $Montserrat;
+  font-size: 15px;
+  font-weight: 500;
+  float: right;
+
+  &:hover {
+    background-color: #50536b;
+    cursor: pointer;
+  }
+}
+
+.dropdown-menu{
+  background: #3A406D;
+  margin-right: 120px;
+  border: none;
+  border-radius: 850px;
+  color: #1eb3ff;
+  font-family: $Montserrat;
+}
+
+.options-menu {
+  color: #1eb3ff;
+}

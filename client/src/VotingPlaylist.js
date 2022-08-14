@@ -39,7 +39,7 @@ export default function VotingPlaylist({
   const [value, setValue] = React.useState();
   const [songsInfo, setSongsInfo] = useState();
 
-  const userID = JSON.parse(localStorage.getItem('userID'));
+  const userID = JSON.parse(localStorage.getItem("userID"));
 
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
@@ -99,10 +99,10 @@ export default function VotingPlaylist({
   const changePlaylistStatus = (event) => {
     if (userID !== playlistInfo.admin_id) {
       alert("Only the admin can change playlist status!");
-      return
+      return;
     }
-    
-    console.log("ran")
+
+    console.log("ran");
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
 
@@ -154,15 +154,24 @@ export default function VotingPlaylist({
       </div>
 
       <Menu>
-        <MenuButton as={Button} rightIcon={<TriangleDownIcon />}>
+        <MenuButton
+          className="playlist-status-button"
+          as={Button}
+          rightIcon={<TriangleDownIcon w={10} h={10} />}
+        >
           Playlist Status
         </MenuButton>
         <MenuList>
-          <MenuItem data-my-value={"open"} onClick={changePlaylistStatus}>
+          <MenuItem className="dropdown-menu" data-my-value={"open"} onClick={changePlaylistStatus}>
+            <div className="options-menu">
             Open
+
+            </div>
           </MenuItem>
-          <MenuItem data-my-value={"closed"} onClick={changePlaylistStatus}>
-            Close
+          <MenuItem className="dropdown-menu" data-my-value={"closed"} onClick={changePlaylistStatus}>
+            <div className="options-menu">
+            Closed
+              </div>
           </MenuItem>
         </MenuList>
       </Menu>
