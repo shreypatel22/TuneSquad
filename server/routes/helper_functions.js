@@ -52,25 +52,31 @@ const addVoter = (db, voterID, playlistID) => {
     .catch((err) => console.log(err.message));
 };
 
+const getTrackPlaylistsID = (db, spotifyTrackID, playlistID) => {
+  return db.query(`SELECT id FROM track_playlists WHERE spotify_track_id = $1 AND playlist_id = $2;`, [spotifyTrackID, playlistID])
+    .then(data => {
+      return data.rows[0].id
+    })
+};
 
+const hasRatedTrack = (db, userID, trackPlaylistsID) => {
+  return db.query(`SELECT * FROM ratings WHERE user_id = $1 AND track_playlist_id = $2;`, [userID, trackPlaylistsID])
+    .then(data => {
+      console.log("HAS RATED DATA QUERY", data)
+      if (data.rows.length > 0) {
+        return true;
+      }
+      return false;
+    });
+};
 
-const addRating = (db, userID, rating, spotifyTrackID, playlistID) => {
-  getTrackPlaylistID = (db, spotifyTrackID, playlistID) => {
-    return db.query(`SELECT * FROM track_playlists WHERE spotify_track_id = $1 AND WHERE playlist_id = $2;`, [spotifyTrackID, playlistID])
-      .then(data => { return data.rows; }); // return track playlist id use inside the has rated to see if they match us it to add rating
-  };
-  hasRatedTrack = (db, user_id, spotifyTrackID) => {
-    return db.query(`SELECT * FROM ratings JOIN track_playlists ON track_playlist_id = track_playlists.id WHERE user_id = $1 AND WHERE spotify_track_id = $2;`, [user_id, spotifyTrackID])
-      .then(data => {
-        if (data) {
-          return true;
-        }
-        return false;
-      });
-  };
-  return db.query(`INSERT INTO ratings (user_id, track_playlist_id, rating_number) VALUES ($1, $2)`, [userID, rating])
+const addRating = (db, userID, trackPlaylistsID, newValue) => {
+  return db.query(`INSERT INTO ratings (user_id, track_playlist_id, rating_number) VALUES ($1, $2, $3) RETURNING *;`, [userID, trackPlaylistsID, newValue])
+  .then(data => {
+  })
     .catch((err) => console.error(err));
 };
+
 
 
 module.exports = {
@@ -83,5 +89,7 @@ module.exports = {
   addSongToVoting,
   getVotingPlaylistSongs,
   addVoter,
-  addRating
+  addRating,
+  getTrackPlaylistsID,
+  hasRatedTrack
 };
