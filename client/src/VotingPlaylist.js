@@ -5,7 +5,7 @@ import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import {
   Table,
   Thead,
@@ -17,7 +17,8 @@ import {
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import axios from 'axios';
+import axios from "axios";
+
 
 export default function VotingPlaylist({
   setOpenPlaylistType,
@@ -27,26 +28,30 @@ export default function VotingPlaylist({
   spotifyTrackIDs,
   track,
   chooseTrack,
+  setPlayingTrack,
+
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
-  const [value, setValue] = React.useState();
   const [songsInfo, setSongsInfo] = useState();
+  const userID = JSON.parse(localStorage.getItem("userID"));
 
+  function handlePlay(trackURI) {
+    let uriObj = { uri: trackURI };
+    setPlayingTrack(uriObj);
+  }
 
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
-
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        ids: spotifyTrackIDs
-      }
+        ids: spotifyTrackIDs,
+      },
     });
 
- 
     setSongsInfo(data.tracks);
   };
 
@@ -54,147 +59,144 @@ export default function VotingPlaylist({
     getTrackFromSpotify(spotifyTrackIDs);
   };
 
-
   useEffect(() => {
     if (spotifyTrackIDs.length > 0) {
       getTrack(spotifyTrackIDs);
     }
   }, [spotifyTrackIDs]);
 
-  let songs;
-  if(songsInfo) {
-    songs = songsInfo.map((song, index) =>{
-      console.log("SONG BITCHES", song.name)
-      return (
-        <Tr key={song.id}>
+
+
+  const setUserTrackRating = (userID, newValue, spotifyTrackID, playlistID) => {
+    axios.post(`http://localhost:3001/playlist/${playlistID}/addTrackRating`, { userID, newValue, spotifyTrackID })
+      .then(function({ data }) {
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
+let songs;
+
+if (songsInfo) {
+  songs = songsInfo.map((song, index) => {
+    return (
+      <Tr key={song.id}>
         <Td>
           {" "}
-          {/* <Button
+          <Button
             className="play-button"
-            onClick={() => handlePlay(track.trackURI)}
-          > */}
-            {/* <PlayArrowIcon />
-          </Button>{" "} */}
+            onClick={() => handlePlay(song.uri)}
+          >
+            <PlayArrowIcon />
+          </Button>{" "}
         </Td>
         <Td>{index + 1}</Td>
         <Td>{song.name}</Td>
         <Td>{song.artists[0].name}</Td>
         <Td>Username</Td>
-        <Td> date added </Td>
+        <Td> dateAdded </Td>
         <Td>
           {" "}
           <Typography component="legend"></Typography>
-          <Rating name="read-only" value={value} readOnly />
+          <Rating name="half-rating" defaultValue={2.5} precision={0.5}
+            // value={value}
+            onChange={(event, newValue) => { setUserTrackRating(userID, newValue, song.id); }}
+          />
         </Td>
       </Tr>
-      )
-    })
-  }
+    );
+  })
+}
 
 
-  ////// FOR PLAYER
-  function handlePlay() {
-    chooseTrack(track);
-  }
-  return (
-    <>
-      <Box>
-        <section className="playlist-info-section" >
-          <div className="playlist-info">
-            <img
-              className="playlist-cover-image"
-              src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
-              alt="Playlist"
-            />
-            <div className="playlist-text">
-              <section className="playlist-name">
-                <p> {playlistInfo.name}</p>
-              </section>
-              <p> Admin: "NAME"</p>
-              <p> Collaborators: "NAME", "NAME", etc</p>
-              <p> Songs: 100</p>
-              <p> Voters: 5</p>
-            </div>
+return (
+  <>
+    <Box>
+      <section className="playlist-info-section">
+        <div className="playlist-info">
+          <img
+            className="playlist-cover-image"
+            src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+            alt="Playlist"
+          />
+          <div className="playlist-text">
+            <section className="playlist-name">
+              <p> {playlistInfo.name}</p>
+            </section>
+            <p> Admin: "NAME"</p>
+            <p> Collaborators: "NAME", "NAME", etc</p>
+            <p> Songs: 100</p>
+            <p> Voters: 5</p>
           </div>
-        </section>
-      </Box>
-      <Button className="edit-button">
-        <EditIcon />
-      </Button>
+        </div>
+      </section>
+    </Box>
+    <Button className="edit-button">
+      <EditIcon />
+    </Button>
 
-      <div>
-        <Button
-          className="add-user-button"
-          onClick={() => setOpenAddVoterModal(true)}
-        >
-          <PersonAddIcon />
-        </Button>
-      </div>
-
-      {openAddVoterModal && (
-        <AddVoterModal
-          setOpenAddVoterModal={setOpenAddVoterModal}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
-        />
-      )}
-
+    <div>
       <Button
-        className="playlist-type-on"
-        onClick={() => setOpenPlaylistType(false)}
+        className="add-user-button"
+        onClick={() => setOpenAddVoterModal(true)}
       >
-        Voting
+        <PersonAddIcon />
       </Button>
-      <Button
-        className="playlist-type-off"
-        onClick={() => setOpenPlaylistType(true)}
-      >
-        Final
-      </Button>
-      <hr className="divider" />
-      {openSearchBar && (
-        <SearchBar
-          setOpenSearchBar={setOpenSearchBar}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
-        />
-      )}
-      <Button
-        className="playlist-search"
-        onClick={() => setOpenSearchBar(true)}
-      >
-        <Search2Icon pr={6} />
-        Search for a song
-      </Button>
+    </div>
 
-      <TableContainer display={"grid"}>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>#</Th>
-              <Th>Title</Th>
-              <Th>Added By</Th>
-              <Th isNumeric>Date Added</Th>
-              <Th isNumeric>Rating</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>
-              {songs}
-                <Typography component="legend"></Typography>
-                <Rating
-                  name="simple-controlled"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                />
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </>
-  );
+    {openAddVoterModal && (
+      <AddVoterModal
+        setOpenAddVoterModal={setOpenAddVoterModal}
+        playlistID={playlistID}
+        spotifyPlaylistID={spotifyPlaylistID}
+      />
+    )}
+
+    <Button
+      className="playlist-type-on"
+      onClick={() => setOpenPlaylistType(false)}
+    >
+      Voting
+    </Button>
+    <Button
+      className="playlist-type-off"
+      onClick={() => setOpenPlaylistType(true)}
+    >
+      Final
+    </Button>
+    <hr className="divider" />
+    {openSearchBar && (
+      <SearchBar
+        setOpenSearchBar={setOpenSearchBar}
+        playlistID={playlistID}
+        spotifyPlaylistID={spotifyPlaylistID}
+      />
+    )}
+    <Button
+      className="playlist-search"
+      onClick={() => setOpenSearchBar(true)}
+    >
+      <Search2Icon pr={6} />
+      Search for a song
+    </Button>
+
+    <TableContainer display={"grid"}>
+      <Table>
+        <Thead>
+          <Tr>
+            <Tr> Play </Tr>
+            <Th>#</Th>
+            <Th>Title</Th>
+            <Th>Artist</Th>
+            <Th>Added By</Th>
+            <Th isNumeric>Date Added</Th>
+            <Th isNumeric>Rating</Th>
+          </Tr>
+        </Thead>
+        <Tbody>{songs}</Tbody>
+      </Table>
+    </TableContainer>
+  </>
+);
 }
