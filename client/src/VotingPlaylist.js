@@ -35,7 +35,8 @@ export default function VotingPlaylist({
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [songsInfo, setSongsInfo] = useState();
-  const userID = JSON.parse(localStorage.getItem("userID"));
+  const [value, setValue] = useState(null);
+  const userID = JSON.parse(localStorage.getItem('userID'));
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
@@ -66,9 +67,8 @@ export default function VotingPlaylist({
   }, [spotifyTrackIDs]);
 
 
-
   const setUserTrackRating = (userID, newValue, spotifyTrackID, playlistID) => {
-    axios.post(`http://localhost:3001/playlist/${playlistID}/addTrackRating`, { userID, newValue, spotifyTrackID })
+    axios.post(`http://localhost:3001/playlist/${playlistID}/addTrackRating`, { userID, newValue, spotifyTrackID, playlistID })
       .then(function({ data }) {
       })
       .catch(function(error) {
@@ -99,9 +99,9 @@ if (songsInfo) {
         <Td>
           {" "}
           <Typography component="legend"></Typography>
-          <Rating name="half-rating" defaultValue={2.5} precision={0.5}
-            // value={value}
-            onChange={(event, newValue) => { setUserTrackRating(userID, newValue, song.id); }}
+          <Rating name="half-rating" precision={0.5}
+            value={value}
+            onChange={(event, newValue) => { setValue(newValue); setUserTrackRating(userID, newValue, song.id, playlistID); }}
           />
         </Td>
       </Tr>
