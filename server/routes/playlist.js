@@ -5,6 +5,8 @@ const {
   getPlaylistInfoByID,
   getVotingPlaylistSongs,
   addRating,
+  getTrackPlaylistsID,
+  hasRatedTrack,
 } = require("./helper_functions");
 
 module.exports = (db) => {
@@ -28,10 +30,19 @@ module.exports = (db) => {
     });
 
     router.post("/:playlistID/addTrackRating", (req, res) => {
-      console.log("BACKEND IS GETTING CALLEd");
-      const { userID, value, spotifyTrackID } = req.body;
-      console.log(req.body, "THESE ARE pARASM");
-      addRating(db, userID, value, spotifyTrackID).then((data) => {});
+      const { userID, newValue, spotifyTrackID, playlistID } = req.body;
+
+      getTrackPlaylistsID(db, spotifyTrackID, playlistID).then(
+        (trackPlaylistData) => {
+          const trackPlaylistsID = trackPlaylistData;
+          hasRatedTrack(db, userID, trackPlaylistsID).then((hasRatedData) => {
+            const userHasRated = hasRatedData;
+            addRating(db, userID, trackPlaylistsID, newValue).then(
+              (data) => {}
+            );
+          });
+        }
+      );
     });
   });
   return router;
