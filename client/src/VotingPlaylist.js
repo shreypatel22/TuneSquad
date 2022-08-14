@@ -39,6 +39,8 @@ export default function VotingPlaylist({
   const [value, setValue] = React.useState();
   const [songsInfo, setSongsInfo] = useState();
 
+  const userID = JSON.parse(localStorage.getItem('userID'));
+
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
       headers: {
@@ -95,20 +97,26 @@ export default function VotingPlaylist({
   let collaboratorsNames = collaborators.join(", ");
 
   const changePlaylistStatus = (event) => {
+    if (userID !== playlistInfo.admin_id) {
+      alert("Only the admin can change playlist status!");
+      return
+    }
+    
+    console.log("ran")
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
 
     axios
       .post(`http://localhost:3001/playlist/status/${playlistID}`, { myValue })
       .then((data) => {
-        console.log("status changed", data);
+        // console.log("status changed", data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  console.log(playlistStatus);
+  // console.log(playlistInfo.admin_id);
 
   return (
     <>
