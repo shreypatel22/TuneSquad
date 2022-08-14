@@ -8,7 +8,8 @@ export default function PlaylistItem({
   spotifyPlaylistID,
   playlistID,
   setPlaylistID,
-  setSpotifyPlaylistID
+  setSpotifyPlaylistID,
+  coverImage
 }) { 
   return (
     <div>
@@ -18,15 +19,12 @@ export default function PlaylistItem({
         }}>
           <img
             className="playlist-item-image"
-            src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+            src={coverImage}
             alt="Playlist"
           />
 
           <p>{name}</p>
-          <div className="playlist-info">            
-            <p> PlaylistID: {playlistID}</p>            
-            <p> Songs: 100</p>
-            <p> Voters: 5</p>
+          <div className="playlist-info">                     
           </div>
         </Box>
     </div>
