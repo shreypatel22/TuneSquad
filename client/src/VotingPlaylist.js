@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Table,
   Thead,
@@ -89,7 +90,7 @@ export default function VotingPlaylist({
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
       return (
-        <Tr key={song.id}>
+        <Tr >
           <Td>
             {" "}
             <Button
@@ -117,6 +118,7 @@ export default function VotingPlaylist({
               }}
             />
           </Td>
+          <Td><DeleteIcon className="delete-icon"/></Td>
         </Tr>
       );
     });
@@ -250,6 +252,7 @@ export default function VotingPlaylist({
               <Th>Added By</Th>
               <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
+              <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody>{songs}</Tbody>
