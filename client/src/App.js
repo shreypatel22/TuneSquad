@@ -33,11 +33,9 @@ export default function App() {
   const EasterEgg = require("react-easter");
   const konamiCode = ["arrowup", "arrowup", "arrowdown", "arrowdown"];
 
-
   if (code) {
     return (
       <main className="layout">
-
         <section className="sidebar">
           <img
             className="sidebar--centered"
@@ -74,7 +72,6 @@ export default function App() {
     );
   } else {
     return (
-      
       <main className="layout">
         <section className="sidebar">
           <img
@@ -86,25 +83,24 @@ export default function App() {
             <Login />
           </nav>
         </section>
-  
+
         <section className="content-display-bongo">
           <h1 class="neonText">Welcome</h1>
           <BongoCat />
           <EasterEgg keys={konamiCode} timeout={15500}>
-  <div class="overlay">
-    <iframe
-      class="video-pop"
-      src="https://www.youtube.com/embed/eCOdMdWbP_4?autoplay=1"
-      frameborder="0"
-      allowfullscreen
-      width={1000}
-      height={400}
-
-    />
-  </div>
-</EasterEgg>
+            <div class="overlay">
+              <iframe
+                class="video-pop"
+                src="https://www.youtube.com/embed/eCOdMdWbP_4?autoplay=1"
+                frameborder="0"
+                allowfullscreen
+                width={1000}
+                height={400}
+                loading="eager"
+              />
+            </div>
+          </EasterEgg>
         </section>
-        
       </main>
     );
   }
