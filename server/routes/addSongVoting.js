@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const spotifyWebApi = require("spotify-web-api-node");
 const bodyParser = require("body-parser");
-const { addSongToVoting } = require("./helper_functions");
+const { addSongToVoting, getDate } = require("./helper_functions");
 
 
 
@@ -18,12 +18,13 @@ module.exports = (db) => {
       clientSecret: process.env.CLIENT_SECRET,
     });
 
-    addSongToVoting(db, playlistID, spotifyTrackID, username)
+    const dateAdded = getDate();
+
+    addSongToVoting(db, playlistID, spotifyTrackID, username, dateAdded)
     .then((data) => {
         res.json({ songAdded: data.rows[0] });
       }
     );
-
   });
   return router;
 };
