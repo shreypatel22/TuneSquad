@@ -12,6 +12,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
   const [songList, setSongList] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
+  const [playlistStatus, setPlaylistStatus] = useState("open");
 
   useEffect(() => {
     axios
@@ -54,6 +55,8 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           playlistInfo={playlistInfo}
           collaborators={collaborators}
           setCollaborators={setCollaborators}
+          playlistStatus={playlistStatus}
+          setPlaylistStatus={setPlaylistStatus}
         />
       )}
       <section className="playerBar">

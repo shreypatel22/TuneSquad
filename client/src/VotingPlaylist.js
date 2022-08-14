@@ -1,11 +1,10 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon, ViewOffIcon } from "@chakra-ui/icons";
+import { EditIcon, Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
   Table,
   Thead,
@@ -14,10 +13,14 @@ import {
   Th,
   Td,
   TableContainer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import axios from 'axios';
+import axios from "axios";
 
 export default function VotingPlaylist({
   setOpenPlaylistType,
@@ -25,10 +28,10 @@ export default function VotingPlaylist({
   spotifyPlaylistID,
   playlistInfo,
   spotifyTrackIDs,
-  track,
-  chooseTrack,
   collaborators,
-  setCollaborators
+  setCollaborators,
+  playlistStatus,
+  setPlaylistStatus,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -36,26 +39,24 @@ export default function VotingPlaylist({
   const [value, setValue] = React.useState();
   const [songsInfo, setSongsInfo] = useState();
 
+  const userID = JSON.parse(localStorage.getItem('userID'));
 
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
-
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        ids: spotifyTrackIDs
-      }
+        ids: spotifyTrackIDs,
+      },
     });
 
- 
     setSongsInfo(data.tracks);
   };
 
   const getTrack = (spotifyTrackIDs) => {
     getTrackFromSpotify(spotifyTrackIDs);
   };
-
 
   useEffect(() => {
     if (spotifyTrackIDs.length > 0) {
@@ -64,47 +65,63 @@ export default function VotingPlaylist({
   }, [spotifyTrackIDs]);
 
   let songs;
-  if(songsInfo) {
-    songs = songsInfo.map((song, index) =>{
-      console.log("SONG BITCHES", song.name)
+  if (songsInfo) {
+    songs = songsInfo.map((song, index) => {
+      console.log("SONG BITCHES", song.name);
       return (
         <Tr key={song.id}>
-        <Td>
-          {" "}
-          {/* <Button
+          <Td>
+            {" "}
+            {/* <Button
             className="play-button"
             onClick={() => handlePlay(track.trackURI)}
           > */}
             {/* <PlayArrowIcon />
           </Button>{" "} */}
-        </Td>
-        <Td>{index + 1}</Td>
-        <Td>{song.name}</Td>
-        <Td>{song.artists[0].name}</Td>
-        <Td>Username</Td>
-        <Td> date added </Td>
-        <Td>
-          {" "}
-          <Typography component="legend"></Typography>
-          <Rating name="read-only" value={value} readOnly />
-        </Td>
-      </Tr>
-      )
-    })
-  }
-
-
-  ////// FOR PLAYER
-  function handlePlay() {
-    chooseTrack(track);
+          </Td>
+          <Td>{index + 1}</Td>
+          <Td>{song.name}</Td>
+          <Td>{song.artists[0].name}</Td>
+          <Td>Username</Td>
+          <Td> date added </Td>
+          <Td>
+            {" "}
+            <Typography component="legend"></Typography>
+            <Rating name="read-only" value={value} readOnly />
+          </Td>
+        </Tr>
+      );
+    });
   }
 
   let collaboratorsNames = collaborators.join(", ");
 
+  const changePlaylistStatus = (event) => {
+    if (userID !== playlistInfo.admin_id) {
+      alert("Only the admin can change playlist status!");
+      return
+    }
+    
+    console.log("ran")
+    const { myValue } = event.currentTarget.dataset;
+    setPlaylistStatus(myValue);
+
+    axios
+      .post(`http://localhost:3001/playlist/status/${playlistID}`, { myValue })
+      .then((data) => {
+        // console.log("status changed", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // console.log(playlistInfo.admin_id);
+
   return (
     <>
       <Box>
-        <section className="playlist-info-section" >
+        <section className="playlist-info-section">
           <div className="playlist-info">
             <img
               className="playlist-cover-image"
@@ -135,6 +152,20 @@ export default function VotingPlaylist({
           <PersonAddIcon />
         </Button>
       </div>
+
+      <Menu>
+        <MenuButton as={Button} rightIcon={<TriangleDownIcon />}>
+          Playlist Status
+        </MenuButton>
+        <MenuList>
+          <MenuItem data-my-value={"open"} onClick={changePlaylistStatus}>
+            Open
+          </MenuItem>
+          <MenuItem data-my-value={"closed"} onClick={changePlaylistStatus}>
+            Close
+          </MenuItem>
+        </MenuList>
+      </Menu>
 
       {openAddVoterModal && (
         <AddVoterModal
@@ -187,7 +218,7 @@ export default function VotingPlaylist({
           <Tbody>
             <Tr>
               <Td>
-              {songs}
+                {songs}
                 <Typography component="legend"></Typography>
                 <Rating
                   name="simple-controlled"
