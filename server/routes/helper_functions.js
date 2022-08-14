@@ -2,7 +2,7 @@ const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
   return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
   VALUES ($1, $2, $3, $4, 'open', $5)
   RETURNING *;`, [playlistName, userID, playlistID, date, username])
-    .catch((err) =>  console.log(err.message));  
+    .catch((err) => console.log(err.message));
 };
 
 const getMyCreatedPlaylists = (db, userID) => {
@@ -51,14 +51,13 @@ const getVotingPlaylistSongs = (db, playlistID) => {
 const getTrackPlaylistsID = (db, spotifyTrackID, playlistID) => {
   return db.query(`SELECT id FROM track_playlists WHERE spotify_track_id = $1 AND playlist_id = $2;`, [spotifyTrackID, playlistID])
     .then(data => {
-      return data.rows[0].id
-    })
+      return data.rows[0].id;
+    });
 };
 
 const hasRatedTrack = (db, userID, trackPlaylistsID) => {
   return db.query(`SELECT * FROM ratings WHERE user_id = $1 AND track_playlist_id = $2;`, [userID, trackPlaylistsID])
     .then(data => {
-      console.log("HAS RATED DATA QUERY", data)
       if (data.rows.length > 0) {
         return true;
       }
@@ -68,8 +67,8 @@ const hasRatedTrack = (db, userID, trackPlaylistsID) => {
 
 const addRating = (db, userID, trackPlaylistsID, newValue) => {
   return db.query(`INSERT INTO ratings (user_id, track_playlist_id, rating_number) VALUES ($1, $2, $3) RETURNING *;`, [userID, trackPlaylistsID, newValue])
-  .then(data => {
-  })
+    .then(data => {
+    })
     .catch((err) => console.error(err));
 };
 
@@ -77,18 +76,18 @@ const addRating = (db, userID, trackPlaylistsID, newValue) => {
 const addVoter = (db, voterID, playlistID, voterUsername) => {
   return db.query(`INSERT INTO voter_playlists (user_id, playlist_id, username) 
   VALUES ($1, $2, $3);`, [voterID, playlistID, voterUsername])
-    .catch((err) =>  console.log(err.message));
+    .catch((err) => console.log(err.message));
 };
 
 const getCollaborators = (db, playlistID) => {
   return db.query(`SELECT * FROM voter_playlists WHERE playlist_id = $1;`, [playlistID])
-  .then(data => {return data.rows})
+    .then(data => { return data.rows; });
 };
 
 const updatePlaylistStatus = (db, status, playlistID) => {
   return db.query(`Update playlists SET status = $1 WHERE id = $2 RETURNING *;`, [status, playlistID])
     .catch((err) => console.log(err.message));
-}
+};
 
 
 module.exports = {
@@ -106,4 +105,4 @@ module.exports = {
   hasRatedTrack,
   getCollaborators,
   updatePlaylistStatus
-}
+};

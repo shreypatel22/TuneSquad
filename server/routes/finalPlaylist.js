@@ -17,25 +17,24 @@ module.exports = (db) => {
 
     spotifyApi
       .getPlaylistTracks(spotifyPlaylistID, {
-        offset: 0,        
+        offset: 0,
         fields: "items",
       })
       .then(
         function (data) {
-          console.log("The playlist contains these tracks", data.body);
-          let allTracksInfo = []          
+          let allTracksInfo = [];
           for (const trackInfo of data.body.items) {
-            let indiviualTrackInfo = {}
+            let indiviualTrackInfo = {};
             indiviualTrackInfo["trackID"] = trackInfo.track.id;
             indiviualTrackInfo["trackName"] = trackInfo.track.name;
             indiviualTrackInfo["trackArtist"] = trackInfo.track.artists[0].name;
             indiviualTrackInfo["dateAdded"] = trackInfo.added_at.slice(0, 10);
-            indiviualTrackInfo["trackURI"] = `spotify:track:${trackInfo.track.id}`   
+            indiviualTrackInfo[
+              "trackURI"
+            ] = `spotify:track:${trackInfo.track.id}`;
             allTracksInfo.push(indiviualTrackInfo);
           }
-          // console.log(allTracksInfo)
-          res.json({allTracksInfo})
-     
+          res.json({ allTracksInfo });
         },
         function (err) {
           console.log("Something went wrong!", err);
