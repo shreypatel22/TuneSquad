@@ -10,6 +10,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [playingTrack, setPlayingTrack] = useState();
   const [playlistInfo, setPlaylistInfo] = useState([]);
   const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
+  const [spotifyTrackIDsArray, setspotifyTrackIDsArray] = useState([]);
   const [songList, setSongList] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
   const [playlistStatus, setPlaylistStatus] = useState("open");
@@ -19,20 +20,31 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       .get(`http://localhost:3001/playlist/${playlistID}`)
       .then((res) => {
         setPlaylistInfo(res.data.playlist[0]);
-        setCollaborators((prev) => [...prev, ...res.data.collaborators])
+        setCollaborators((prev) => [...prev, ...res.data.collaborators]);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    console.log(playlistID)
+    console.log(playlistID);
     axios
       .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
       .then((res) => {
         setspotifyTrackIDs(res.data.spotifyTrackIDs);
+        setspotifyTrackIDsArray(res.data.spotifyTrackIDsArray);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const finalPlaylistTest = () => {        
+    const accessToken = JSON.parse(localStorage.getItem("access_token"));
+    let formattedSpotifyTrackIDsArray = spotifyTrackIDsArray.map(
+      (id) => "spotify:track:" + id
+    );
+    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, formattedSpotifyTrackIDsArray, accessToken})
+      .then(res => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -44,7 +56,6 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           spotifyPlaylistID={spotifyPlaylistID}
           playlistInfo={playlistInfo}
           collaborators={collaborators}
-          
         />
       ) : (
         <VotingPlaylist
@@ -60,6 +71,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           setPlaylistStatus={setPlaylistStatus}
         />
       )}
+      <button onClick={finalPlaylistTest}>Default</button>
       <section className="playerBar">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>

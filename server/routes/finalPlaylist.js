@@ -41,5 +41,29 @@ module.exports = (db) => {
         }
       );
   });
+
+  router.post("/:playlistID", (req, res) => {
+    const { spotifyPlaylistID, formattedSpotifyTrackIDsArray, accessToken } =
+      req.body;
+
+    const spotifyApi = new spotifyWebApi({
+      redirectUri: process.env.REDIRECT_URI,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+    });
+
+    spotifyApi.setAccessToken(accessToken);
+
+    spotifyApi
+      .addTracksToPlaylist(spotifyPlaylistID, formattedSpotifyTrackIDsArray)
+      .then(
+        function (data) {
+          console.log("Added tracks to playlist!", data);
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
+  });
   return router;
 };
