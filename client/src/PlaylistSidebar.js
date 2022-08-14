@@ -3,9 +3,21 @@ import './style/PlaylistSidebar.scss'
 
 
 
-export default function PlaylistSidebar() {
+export default function PlaylistSidebar({playlists}) {  
+
+  let playlistsNames;
+
+  if (playlists) {
+    playlistsNames = playlists.map(playlist => {      
+      return (
+        <p>{playlist.name}</p>
+      )
+    })
+  }
   return (
     
-      <p>Playlist</p> 
+      <div>
+        {playlistsNames}
+      </div>
   )
 }
