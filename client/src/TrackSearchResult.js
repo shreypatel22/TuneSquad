@@ -10,18 +10,14 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
   const username = JSON.parse(localStorage.getItem('username'));
 
   const saveSongToVoting = () => {
+    axios.post('http://localhost:3001/addSongVoting', { playlistID, spotifyTrackID, username })
+      .then(function({ data }) {
 
-    console.log("1-----a-sdf--sa-f-sdf", spotifyTrackID)
-    axios.post('http://localhost:3001/addSongVoting', {playlistID, spotifyTrackID, username})
-    .then(function ({data}) {
-       console.log("THIS IS THE FRONT END: ", data)
-     
-  
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div
