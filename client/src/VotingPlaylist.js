@@ -35,7 +35,7 @@ export default function VotingPlaylist({
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [songsInfo, setSongsInfo] = useState();
-  const [value, setValue] = useState(null);
+  const [value, setValue] = React.useState();
   const userID = JSON.parse(localStorage.getItem('userID'));
 
   function handlePlay(trackURI) {
@@ -99,7 +99,7 @@ if (songsInfo) {
         <Td>
           {" "}
           <Typography component="legend"></Typography>
-          <Rating name="half-rating" precision={0.5}
+          <Rating name={song.uri} precision={0.5}
             value={value}
             onChange={(event, newValue) => { setValue(newValue); setUserTrackRating(userID, newValue, song.id, playlistID); }}
           />
