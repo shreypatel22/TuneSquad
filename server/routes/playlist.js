@@ -27,6 +27,9 @@ module.exports = (db) => {
     });
 
     router.get("/:playlistID/getSongsVoting", (req, res) => {
+      const playlistID = req.params.playlistID;
+
+
       getVotingPlaylistSongs(db, playlistID).then((data) => {
         let spotifyTrackIDs = [];
         for (const song of data) {
@@ -46,7 +49,7 @@ module.exports = (db) => {
           hasRatedTrack(db, userID, trackPlaylistsID).then((hasRatedData) => {
             const userHasRated = hasRatedData;
             addRating(db, userID, trackPlaylistsID, newValue).then(
-              (data) => {}
+              (data) => { }
             );
           });
         }

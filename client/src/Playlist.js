@@ -25,6 +25,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   }, []);
 
   useEffect(() => {
+    console.log(playlistID)
     axios
       .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
       .then((res) => {

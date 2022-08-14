@@ -67,10 +67,8 @@ export default function VotingPlaylist({
   };
 
   useEffect(() => {
-    if (spotifyTrackIDs.length > 0) {
-      getTrack(spotifyTrackIDs);
-    }
-  }, [spotifyTrackIDs]);
+    getTrack(spotifyTrackIDs);
+  });
 
   const setUserTrackRating = (userID, newValue, spotifyTrackID, playlistID) => {
     axios
@@ -131,8 +129,6 @@ export default function VotingPlaylist({
       alert("Only the admin can change playlist status!");
       return;
     }
-
-    console.log("ran");
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
 

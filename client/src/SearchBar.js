@@ -28,27 +28,23 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
-  const [ spotifyTrackID, setSpotifyTrackID] = useState("")
+  const [spotifyTrackID, setSpotifyTrackID] = useState("");
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  // function chooseTrack(track) {
-  //   setPlayingTrack(track);
-  //   setSearch("");
-  // }
-  
+
   useEffect(() => {
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
-    
+
     let cancel = false;
     spotifyApi.setAccessToken(accessToken);
-    
+
     spotifyApi.searchTracks(search).then((res) => {
       if (cancel) return;
       setSearchResults(
         res.body.tracks.items.map((track) => {
-          console.log("iNFO IS  HERE LOOK", track)
+
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
               if (image.height < smallest.height) return image;
@@ -56,7 +52,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
             },
             track.album.images[0]
           );
-          console.log(track)
+
 
           return {
             artist: track.artists[0].name,
@@ -80,7 +76,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
         finalFocusRef={finalRef}
         isOpen={true}
         onClose={onClose}
-       id="create-playlistform"
+        id="create-playlistform"
       >
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
@@ -109,7 +105,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
                     setSpotifyTrackID={setSpotifyTrackID}
                     spotifyTrackID={track.spotifyTrackID}
                   />
-                 
+
                   <hr />
                 </section>
               ))}

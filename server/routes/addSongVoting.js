@@ -5,11 +5,8 @@ const spotifyWebApi = require("spotify-web-api-node");
 const bodyParser = require("body-parser");
 const { addSongToVoting, getDate } = require("./helper_functions");
 
-
-
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    console.log("REQ BODY", req.body)
     const { spotifyTrackID, playlistID, username } = req.body;
 
     const spotifyApi = new spotifyWebApi({
@@ -20,8 +17,8 @@ module.exports = (db) => {
 
     const dateAdded = getDate();
 
-    addSongToVoting(db, playlistID, spotifyTrackID, username, dateAdded)
-    .then((data) => {
+    addSongToVoting(db, playlistID, spotifyTrackID, username, dateAdded).then(
+      (data) => {
         res.json({ songAdded: data.rows[0] });
       }
     );

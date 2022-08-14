@@ -27,7 +27,6 @@ export default function AddVoterModal({ setOpenAddVoterModal, playlistID, setCol
 
 
   const addVoter = () => {
-    console.log(voterUsername)
     setCollaborators((prev) => [...prev, ...voterUsername])
     axios.post('http://localhost:3001/addVoter', { voterID, playlistID, voterUsername })
       .then(function({ data }) {        

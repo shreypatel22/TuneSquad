@@ -40,7 +40,6 @@ export default function FinalPlaylist({
       })
       .then((res) => {
         setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
-        // console.log("-----", res);
       })
       .catch((err) => console.log(err));
   }, []);
