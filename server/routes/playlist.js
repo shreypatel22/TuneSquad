@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 
-const { getPlaylistInfoByID, getVotingPlaylistSongs, getCollaborators } = require("./helper_functions");
+const { getPlaylistInfoByID, getVotingPlaylistSongs, getCollaborators, updatePlaylistStatus } = require("./helper_functions");
 
 
 module.exports = (db) => {
@@ -32,6 +32,16 @@ module.exports = (db) => {
           res.json({ spotifyTrackIDs: spotifyTrackIDs.join(",")});
 
         });
+    });
+
+    router.post("/status/:playlistID", (req, res) => {
+      const playlistStatus = req.body.myValue;
+      const playlistID = req.params.playlistID;
+           
+      updatePlaylistStatus(db, playlistStatus, playlistID)
+        .then((data) => {
+          res.json({data})
+        }); 
     });
 
   });

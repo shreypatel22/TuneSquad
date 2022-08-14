@@ -57,6 +57,11 @@ const getCollaborators = (db, playlistID) => {
   .then(data => {return data.rows})
 };
 
+const updatePlaylistStatus = (db, status, playlistID) => {
+  return db.query(`Update playlists SET status = $1 WHERE id = $2 RETURNING *;`, [status, playlistID])
+    .catch((err) => console.log(err.message));
+}
+
 
 module.exports = {
   addPlaylist,
@@ -68,5 +73,6 @@ module.exports = {
   addSongToVoting,
   getVotingPlaylistSongs,
   addVoter,
-  getCollaborators
+  getCollaborators,
+  updatePlaylistStatus
 }

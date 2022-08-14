@@ -1,11 +1,10 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon, ViewOffIcon, TriangleDownIcon } from "@chakra-ui/icons";
+import { EditIcon, Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import {
   Table,
   Thead,
@@ -16,9 +15,8 @@ import {
   TableContainer,
   Menu,
   MenuButton,
-  ChevronDownIcon,
   MenuList,
-  MenuItem
+  MenuItem,
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
@@ -33,7 +31,7 @@ export default function VotingPlaylist({
   collaborators,
   setCollaborators,
   playlistStatus,
-  setPlaylistStatus
+  setPlaylistStatus,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -96,14 +94,21 @@ export default function VotingPlaylist({
 
   let collaboratorsNames = collaborators.join(", ");
 
-
-
   const changePlaylistStatus = (event) => {
     const { myValue } = event.currentTarget.dataset;
-    setPlaylistStatus(myValue)    
-  }
+    setPlaylistStatus(myValue);
 
-  console.log(playlistStatus)
+    axios
+      .post(`http://localhost:3001/playlist/status/${playlistID}`, { myValue })
+      .then((data) => {
+        console.log("status changed", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  console.log(playlistStatus);
 
   return (
     <>
@@ -145,8 +150,12 @@ export default function VotingPlaylist({
           Playlist Status
         </MenuButton>
         <MenuList>
-          <MenuItem data-my-value={"open"} onClick={changePlaylistStatus}>Open</MenuItem>
-          <MenuItem data-my-value={"closed"} onClick={changePlaylistStatus}>Close</MenuItem>      
+          <MenuItem data-my-value={"open"} onClick={changePlaylistStatus}>
+            Open
+          </MenuItem>
+          <MenuItem data-my-value={"closed"} onClick={changePlaylistStatus}>
+            Close
+          </MenuItem>
         </MenuList>
       </Menu>
 
