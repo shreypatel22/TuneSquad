@@ -10,12 +10,13 @@ export default function Player({ accessToken, trackUri }) {
     <SpotifyPlayer
       token={accessToken}
       showSaveIcon
+      initialVolume={20}
       callback={state => {
         if (!state.isPlaying) setPlay(false);
       }}
       play={play}
       uris={trackUri ? [trackUri] : []}
-
+      
       styles={{
         bgColor: ' #494e75',
         color: '#ee5d88',
