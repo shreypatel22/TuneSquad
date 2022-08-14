@@ -62,6 +62,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       <section className="playerBar">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>
+      <footer className="footer"></footer>
     </div>
   );
 }
