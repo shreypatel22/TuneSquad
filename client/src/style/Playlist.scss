@@ -225,7 +225,6 @@ p {
 
 .playlist-status-button {
   text-align: center;
-  margin-bottom: 50px;
   margin-right: 20px;
   width: 200px;
   height: 40px;
@@ -253,6 +252,11 @@ p {
   font-family: $Montserrat;
 }
 
-.options-menu {
+.open-menu {
+  color: #1eb3ff;
+  // padding-bottom: 10px;
+}
+
+.close-menu {
   color: #1eb3ff;
 }

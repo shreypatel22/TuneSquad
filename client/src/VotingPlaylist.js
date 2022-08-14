@@ -163,13 +163,13 @@ export default function VotingPlaylist({
         </MenuButton>
         <MenuList>
           <MenuItem className="dropdown-menu" data-my-value={"open"} onClick={changePlaylistStatus}>
-            <div className="options-menu">
+            <div className="open-menu">
             Open
 
             </div>
           </MenuItem>
           <MenuItem className="dropdown-menu" data-my-value={"closed"} onClick={changePlaylistStatus}>
-            <div className="options-menu">
+            <div className="close-menu">
             Closed
               </div>
           </MenuItem>
