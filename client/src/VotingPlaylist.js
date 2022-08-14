@@ -90,7 +90,7 @@ export default function VotingPlaylist({
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
       return (
-        <Tr >
+        <Tr key={index + 1}>
           <Td>
             {" "}
             <Button

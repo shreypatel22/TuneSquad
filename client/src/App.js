@@ -84,12 +84,12 @@ export default function App() {
         </section>
 
         <section className="content-display-bongo">
-          <h1 class="neonText">Welcome</h1>
+          <h1 className="neonText">Welcome</h1>
           <BongoCat />
           <EasterEgg keys={konamiCode} timeout={15500}>
             <div class="overlay">
               <iframe
-                class="video-pop"
+                className="video-pop"
                 src="https://www.youtube.com/embed/eCOdMdWbP_4?autoplay=1"
                 frameborder="0"
                 allowfullscreen
