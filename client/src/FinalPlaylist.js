@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Table,
   Thead,
@@ -69,6 +70,7 @@ export default function FinalPlaylist({
             <Typography component="legend"></Typography>
             <Rating name="read-only" value={value} readOnly />
           </Td>
+          <Td><DeleteIcon className="delete-icon"/></Td>
         </Tr>
       );
     });
@@ -126,6 +128,7 @@ export default function FinalPlaylist({
               <Th>Added By</Th>
               <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
+              <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody>{tracks}</Tbody>

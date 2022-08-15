@@ -10,13 +10,13 @@ export default function PlaylistSidebar({playlists}) {
   if (playlists) {
     playlistsNames = playlists.map(playlist => {      
       return (
-        <p>{playlist.name}</p>
+        <p key={playlist.id}> {playlist.name}</p>
       )
     })
   }
   return (
     
-      <div>
+      <div className="side-playlists">
         {playlistsNames}
       </div>
   )

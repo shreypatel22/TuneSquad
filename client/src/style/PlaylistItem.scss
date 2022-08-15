@@ -20,17 +20,19 @@ $Montserrat: Montserrat;
   color: white;
   font-family: $Montserrat;
   border-radius: 30px;
-
   &:hover {
     background-color: #202542;;
     cursor: pointer;
   }
-
+  
 }
 
-.playlist-info {
-  display: flex;
+.playlist-info-items {
+  // display: flex;
   flex-direction: row;
+  text-align: center;
+  word-wrap: break-word;
+  width: 280px;
 }
 .playlist-info p {
   margin-left: 20px;

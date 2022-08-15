@@ -56,6 +56,7 @@ const getTrackPlaylistsID = (db, spotifyTrackID, playlistID) => {
 };
 
 const hasRatedTrack = (db, userID, trackPlaylistsID) => {
+  console.log("HAS RATED", userID)
   return db.query(`SELECT * FROM ratings WHERE user_id = $1 AND track_playlist_id = $2;`, [userID, trackPlaylistsID])
     .then(data => {
       if (data.rows.length > 0) {
@@ -100,6 +101,14 @@ const getPlaylistTracks = (db, playlistID) => {
     });
 };
 
+const updateRating = (db, trackPlaylistsID, newValue) => {
+  return db.query(`UPDATE ratings SET rating_number = $1 WHERE track_playlist_id = $2`, [newValue, trackPlaylistsID])
+    .then(data => {
+    })
+    .catch((err) => console.error(err));
+}
+
+
 module.exports = {
   addPlaylist,
   getMyCreatedPlaylists,
@@ -115,5 +124,7 @@ module.exports = {
   hasRatedTrack,
   getCollaborators,
   updatePlaylistStatus,
-  getPlaylistTracks
+  getPlaylistTracks,
+  updateRating
+
 };

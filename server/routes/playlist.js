@@ -9,6 +9,7 @@ const {
   hasRatedTrack,
   getCollaborators,
   updatePlaylistStatus,
+  updateRating
 } = require("./helper_functions");
 
 module.exports = (db) => {
@@ -48,9 +49,15 @@ module.exports = (db) => {
           const trackPlaylistsID = trackPlaylistData;
           hasRatedTrack(db, userID, trackPlaylistsID).then((hasRatedData) => {
             const userHasRated = hasRatedData;
-            addRating(db, userID, trackPlaylistsID, newValue).then(
-              (data) => { }
-            );
+            if(userHasRated === false) {
+              addRating(db, userID, trackPlaylistsID, newValue).then(
+               
+                (data) => { }
+              );
+            }
+            updateRating(db, trackPlaylistsID, newValue).then(
+              data => {}
+            )
           });
         }
       );
