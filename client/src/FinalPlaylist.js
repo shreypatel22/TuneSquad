@@ -18,7 +18,6 @@ import {
   AlertDialogHeader,
   AlertDialogFooter,
   ChakraProvider,
-  
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
@@ -48,6 +47,10 @@ export default function FinalPlaylist({
   }
 
   const handleDeleteTrack = (trackURI, snapshotID) => {
+    if(userID !== playlistInfo.admin_id) {
+      alert("Only the admin can delete tracks!");
+      return;
+    }
     axios
       .post(`http://localhost:3001/finalPlaylist/${playlistID}/deleteTrack`, {
         trackURI,
@@ -74,6 +77,7 @@ export default function FinalPlaylist({
 
   if (allTracksInfo[0]) {
     tracks = allTracksInfo[0].map((track, index) => {
+      console.log("HEREEEEEE", track)
       return (
         <Tr key={track.trackID}>
           <Td>
@@ -96,45 +100,47 @@ export default function FinalPlaylist({
             <Rating name="read-only" value={value} readOnly />
           </Td>
           <Td>
-
-          <ChakraProvider>
-            <DeleteIcon className="delete-icon" onClick={onOpen} color='#1eb3ff'/>
-            <AlertDialog
-              isOpen={isOpen}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
+            <ChakraProvider>
+              <DeleteIcon
+                className="delete-icon"
+                onClick={onOpen}
+                color="#1eb3ff"
+              />
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
               >
-              <AlertDialogOverlay>
-                <AlertDialogContent>
-                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete Song
-                  </AlertDialogHeader>
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete Song
+                    </AlertDialogHeader>
 
-                  <AlertDialogBody>
-                    Are you sure you want to delete? You can't undo this action afterwards.
-                  </AlertDialogBody>
+                    <AlertDialogBody>
+                      Are you sure you want to delete? You can't undo this
+                      action afterwards.
+                    </AlertDialogBody>
 
-                  <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onClose}>
-                      Cancel
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      onClick={() => {
-                        onClose();
-                        handleDeleteTrack(track.trackURI, snapshotID);
-                      }}
-
-                      
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Cancel
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        onClick={() => {
+                          onClose();
+                          handleDeleteTrack(track.trackURI, snapshotID);
+                        }}
                       >
-                      Delete
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
-          </ChakraProvider>
-                        </Td>
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </ChakraProvider>
+          </Td>
         </Tr>
       );
     });
