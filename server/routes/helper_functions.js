@@ -160,7 +160,7 @@ const getPlaylistTracks = (db, playlistID) => {
 const updateRating = (db, trackPlaylistsID, newValue, userID) => {
   return db
     .query(
-      `UPDATE ratings SET rating_number = $1 WHERE track_playlist_id = $2 AND userID = $3`,
+      `UPDATE ratings SET rating_number = $1 WHERE track_playlist_id = $2 AND user_id = $3`,
       [newValue, trackPlaylistsID, userID]
     )
     .then((data) => {})
