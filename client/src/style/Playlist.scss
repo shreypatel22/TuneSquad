@@ -120,6 +120,8 @@ hr.divider {
 .playlist-text {
   font-family: $Montserrat;
   display: inline-block;
+  font-size: 1.2vw;
+  padding-left: 18%;
 }
 
 .play-spotify {
@@ -157,32 +159,15 @@ p {
   color: white;
 }
 
-.edit-button {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  background: #3a406d;
-  border: 1px solid #000000;
-  border-radius: 15px;
-  color: #1eb3ff;
-  font-family: $Montserrat;
-  font-size: 25px;
-  float: right;
-
-  &:hover {
-    background-color: #50536b;
-    cursor: pointer;
-  }
-}
 
 .add-user-button {
   width: 40px;
   height: 40px;
   margin-bottom: 20px;
-  margin-left: 20px;
+  margin-right: 20px;
+  float: right;
   background: #3a406d;
-  border: 1px solid #000000;
+  border: none;
   border-radius: 15px;
   color: #1eb3ff;
   font-family: $Montserrat;
@@ -270,6 +255,3 @@ p {
   margin-bottom: 40px;
 }
 
-.playlist-text{
-  font-size: 1.2vw;
-}
