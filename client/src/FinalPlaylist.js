@@ -75,7 +75,7 @@ export default function FinalPlaylist({
 
   const followPlaylistOnSpotify = () => {
     console.log("IT IS CALLED")
-    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID })
+    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID, accessToken })
   }
 
   let tracks;

@@ -22,8 +22,6 @@ module.exports = (db) => {
       fields: "items",
     });
 
-   
-
     spotifyApi.getPlaylist(spotifyPlaylistID).then(
       function (data) {
         let allTracksInfo = [];
@@ -42,13 +40,14 @@ module.exports = (db) => {
           for (const trackInfo of allTracksInfo) {
             for (const track of tracks) {
               if (trackInfo.trackID == track.spotify_track_id) {
-                trackInfo["rating"] = (Math.round(track.avg * 2) / 2).toFixed(1)
+                trackInfo["rating"] = (Math.round(track.avg * 2) / 2).toFixed(
+                  1
+                );
               }
             }
           }
           res.json({ allTracksInfo, snapshotID: data.body.snapshot_id });
-        })
-        
+        });
       },
       function (err) {
         console.log("Something went wrong!", err);
@@ -105,20 +104,25 @@ module.exports = (db) => {
           console.log("Something went wrong!", err);
         }
       );
+    });
 
-      router.post("/:playlistID/followOnSpotify", (req, res) => {
-        console.log("==========", req.body)
-        const spotifyPlaylistID = req.body
-        spotifyApi.followPlaylist(spotifyPlaylistID,
-        {
-          'public' : false
-        }).then(function(data) {
-           console.log('Playlist successfully followed privately!');
-        }, function(err) {
-          console.log('Something went wrong!', err);
-        });
-      })
+    router.post("/:playlistID/followOnSpotify", (req, res) => {
+      console.log("==========", req.body);
+      const {spotifyPlaylistID, accessToken} = req.body;
+      spotifyApi.setAccessToken(accessToken);
 
+      spotifyApi
+        .followPlaylist(spotifyPlaylistID, {
+          public: false,
+        })
+        .then(
+          function (data) {
+            console.log("Playlist successfully followed privately!");
+          },
+          function (err) {
+            console.log("Something went wrong!", err);
+          }
+        );
   });
   return router;
 };
