@@ -126,6 +126,13 @@ export default function VotingPlaylist({
 
   let collaboratorsNames = collaborators.join(", ");
 
+  const createFinalPlaylist = () => {        
+    const accessToken = JSON.parse(localStorage.getItem("access_token"));    
+    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, accessToken})
+      .then(res => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   const changePlaylistStatus = (event) => {
     if (userID !== playlistInfo.admin_id) {
       alert("Only the admin can change playlist status!");
@@ -133,6 +140,10 @@ export default function VotingPlaylist({
     }
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
+    
+    if (myValue === "closed") {
+      createFinalPlaylist();
+    }    
 
     axios
       .post(`http://localhost:3001/playlist/status/${playlistID}`, { myValue })
@@ -141,6 +152,8 @@ export default function VotingPlaylist({
         console.log(err);
       });
   };
+
+
 
   return (
     <>

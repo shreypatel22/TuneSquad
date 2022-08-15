@@ -37,7 +37,7 @@ module.exports = (db) => {
           spotifyTrackIDs.push(song.spotify_track_id);
         }
 
-        res.json({ spotifyTrackIDs: spotifyTrackIDs.join(",") });
+        res.json({ spotifyTrackIDs: spotifyTrackIDs.join(","), spotifyTrackIDsArray:spotifyTrackIDs });
       });
     });
 

@@ -22,7 +22,7 @@ export default function PlaylistItem({
             src={coverImage}
             alt="Playlist"
           />
-
+          <div className="playlist-info-items">
           <p>{name}</p>
           <div className="playlist-info">                     
           </div>

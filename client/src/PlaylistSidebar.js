@@ -16,7 +16,7 @@ export default function PlaylistSidebar({playlists}) {
   }
   return (
     
-      <div>
+      <div className="side-playlists">
         {playlistsNames}
       </div>
   )

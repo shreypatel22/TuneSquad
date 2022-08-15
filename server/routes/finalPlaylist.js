@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const spotifyWebApi = require("spotify-web-api-node");
+const { getPlaylistTracks } = require("./helper_functions");
 
 module.exports = (db) => {
   router.get("/:playlistID", (req, res) => {
@@ -40,6 +41,46 @@ module.exports = (db) => {
           console.log("Something went wrong!", err);
         }
       );
+  });
+
+  router.post("/:playlistID", (req, res) => {
+    const { spotifyPlaylistID, accessToken } = req.body;
+
+    const playlistID = req.params.playlistID;
+    console.log(playlistID);
+
+    getPlaylistTracks(db, playlistID).then((tracks) => {
+      console.log(tracks);
+      let passedTracksArray = [];
+      for (const track of tracks) {
+        if (track.rating_number > 3) {
+          passedTracksArray.push(track.spotify_track_id);
+        }
+      }
+      let formattedSpotifyTrackIDsArray = passedTracksArray.map(
+        (id) => "spotify:track:" + id
+      );
+      console.log(formattedSpotifyTrackIDsArray);
+
+      const spotifyApi = new spotifyWebApi({
+        redirectUri: process.env.REDIRECT_URI,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+      });
+
+      spotifyApi.setAccessToken(accessToken);
+
+      spotifyApi
+        .addTracksToPlaylist(spotifyPlaylistID, formattedSpotifyTrackIDsArray)
+        .then(
+          function (data) {
+            console.log("Added tracks to playlist!", data);
+          },
+          function (err) {
+            console.log("Something went wrong!", err);
+          }
+        );
+    });
   });
   return router;
 };
