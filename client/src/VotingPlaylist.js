@@ -1,7 +1,7 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
+import { Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
@@ -176,18 +176,7 @@ export default function VotingPlaylist({
           </div>
         </section>
       </Box>
-      <Button className="edit-button">
-        <EditIcon />
-      </Button>
 
-      <div>
-        <Button
-          className="add-user-button"
-          onClick={() => setOpenAddVoterModal(true)}
-        >
-          <PersonAddIcon />
-        </Button>
-      </div>
 
       <Menu>
         <MenuButton
@@ -217,10 +206,10 @@ export default function VotingPlaylist({
 
       {openAddVoterModal && (
         <AddVoterModal
-          setOpenAddVoterModal={setOpenAddVoterModal}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
-          setCollaborators={setCollaborators}
+        setOpenAddVoterModal={setOpenAddVoterModal}
+        playlistID={playlistID}
+        spotifyPlaylistID={spotifyPlaylistID}
+        setCollaborators={setCollaborators}
         />
       )}
 
@@ -236,12 +225,18 @@ export default function VotingPlaylist({
       >
         Final
       </Button>
+          <Button
+            className="add-user-button"
+            onClick={() => setOpenAddVoterModal(true)}
+          >
+            <PersonAddIcon />
+          </Button>
       <hr className="divider" />
       {openSearchBar && (
         <SearchBar
-          setOpenSearchBar={setOpenSearchBar}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
+        setOpenSearchBar={setOpenSearchBar}
+        playlistID={playlistID}
+        spotifyPlaylistID={spotifyPlaylistID}
         />
       )}
 
