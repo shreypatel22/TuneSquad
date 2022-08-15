@@ -25,7 +25,7 @@ export default function FinalPlaylist({
   setPlayingTrack,
   collaborators,
 }) {
-  const [value, setValue] = React.useState(2);
+  // const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
   const [snapshotID, setSnapshotID] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
@@ -54,7 +54,7 @@ export default function FinalPlaylist({
   }, []);
 
   let tracks;
-
+  console.log(allTracksInfo);
   if (allTracksInfo[0]) {
     tracks = allTracksInfo[0].map((track, index) => {
       return (
@@ -76,7 +76,7 @@ export default function FinalPlaylist({
           <Td>
             {" "}
             <Typography component="legend"></Typography>
-            <Rating name="read-only" value={value} readOnly />
+            <Rating precision={0.5} name="read-only" value={track.rating} readOnly />
           </Td>
           <Td>
             <DeleteIcon

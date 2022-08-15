@@ -13,12 +13,13 @@ module.exports = (db) => {
 
   router.get("/:playlistID", (req, res) => {
     const { spotifyPlaylistID, accessToken } = req.query;
+    const playlistID = req.params.playlistID;
 
-    const spotifyApi = new spotifyWebApi({
-      redirectUri: process.env.REDIRECT_URI,
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-    });
+    // const spotifyApi = new spotifyWebApi({
+    //   redirectUri: process.env.REDIRECT_URI,
+    //   clientId: process.env.CLIENT_ID,
+    //   clientSecret: process.env.CLIENT_SECRET,
+    // });
 
     spotifyApi.setAccessToken(accessToken);
 
@@ -26,6 +27,9 @@ module.exports = (db) => {
       offset: 0,
       fields: "items",
     });
+
+   
+
     spotifyApi.getPlaylist(spotifyPlaylistID).then(
       function (data) {
         let allTracksInfo = [];
@@ -40,7 +44,20 @@ module.exports = (db) => {
           ] = `spotify:track:${trackInfo.track.id}`;
           allTracksInfo.push(indiviualTrackInfo);
         }
-        res.json({ allTracksInfo, snapshotID: data.body.snapshot_id });
+        getPlaylistTracks(db, playlistID).then((tracks) => {
+          // console.log('track', tracks)
+          // console.log('infoooo', allTracksInfo)
+          for (const trackInfo of allTracksInfo) {
+            for (const track of tracks) {
+              if (trackInfo.trackID == track.spotify_track_id) {
+                trackInfo["rating"] = (Math.round(track.avg * 2) / 2).toFixed(1)
+              }
+            }
+          }
+          // console.log('updated', allTracksInfo)
+          res.json({ allTracksInfo, snapshotID: data.body.snapshot_id });
+        })
+        
       },
       function (err) {
         console.log("Something went wrong!", err);

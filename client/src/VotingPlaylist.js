@@ -141,6 +141,8 @@ export default function VotingPlaylist({
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
     
+    console.log("vlaue", myValue)
+
     if (myValue === "closed") {
       createFinalPlaylist();
     }    
