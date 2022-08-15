@@ -11,11 +11,20 @@ import {
   Th,
   Td,
   TableContainer,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  ChakraProvider,
+  
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { useDisclosure } from "@chakra-ui/react";
 
 export default function FinalPlaylist({
   setOpenPlaylistType,
@@ -30,6 +39,8 @@ export default function FinalPlaylist({
   const [snapshotID, setSnapshotID] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const userID = JSON.parse(localStorage.getItem("userID"));
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
@@ -37,8 +48,14 @@ export default function FinalPlaylist({
   }
 
   const handleDeleteTrack = (trackURI, snapshotID) => {
-   axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/deleteTrack`, {trackURI, snapshotID, accessToken, spotifyPlaylistID})
-   .catch((err) => console.log(err));
+    axios
+      .post(`http://localhost:3001/finalPlaylist/${playlistID}/deleteTrack`, {
+        trackURI,
+        snapshotID,
+        accessToken,
+        spotifyPlaylistID,
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -79,13 +96,45 @@ export default function FinalPlaylist({
             <Rating name="read-only" value={value} readOnly />
           </Td>
           <Td>
-            <DeleteIcon
-              className="delete-icon"
-              onClick={() => {
-                handleDeleteTrack(track.trackURI, snapshotID);
-              }}
-            />
-          </Td>
+
+          <ChakraProvider>
+            <DeleteIcon className="delete-icon" onClick={onOpen} color='#1eb3ff'/>
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+              >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete Song
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Are you sure you want to delete? You can't undo this action afterwards.
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => {
+                        onClose();
+                        handleDeleteTrack(track.trackURI, snapshotID);
+                      }}
+
+                      
+                      >
+                      Delete
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
+          </ChakraProvider>
+                        </Td>
         </Tr>
       );
     });
