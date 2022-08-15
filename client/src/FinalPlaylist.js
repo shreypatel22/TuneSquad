@@ -83,7 +83,7 @@ export default function FinalPlaylist({
           <div className="playlist-info">
             <img
               className="playlist-cover-image"
-              src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+              src={playlistInfo.image_url}
               alt="Playlist"
             />
             <div className="playlist-text">
