@@ -80,6 +80,8 @@ module.exports = (db) => {
       removeVotingTrack(db, spotifyTrackID, playlistID);
     });
 
+    
+
   });
   return router;
 };
