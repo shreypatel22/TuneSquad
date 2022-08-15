@@ -5,6 +5,8 @@ import { Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Table,
   Thead,

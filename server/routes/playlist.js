@@ -9,7 +9,8 @@ const {
   hasRatedTrack,
   getCollaborators,
   updatePlaylistStatus,
-  updateRating
+  updateRating,
+  removeVotingTrack,
 } = require("./helper_functions");
 
 module.exports = (db) => {
@@ -30,14 +31,16 @@ module.exports = (db) => {
     router.get("/:playlistID/getSongsVoting", (req, res) => {
       const playlistID = req.params.playlistID;
 
-
       getVotingPlaylistSongs(db, playlistID).then((data) => {
         let spotifyTrackIDs = [];
         for (const song of data) {
           spotifyTrackIDs.push(song.spotify_track_id);
         }
 
-        res.json({ spotifyTrackIDs: spotifyTrackIDs.join(","), spotifyTrackIDsArray:spotifyTrackIDs });
+        res.json({
+          spotifyTrackIDs: spotifyTrackIDs.join(","),
+          spotifyTrackIDsArray: spotifyTrackIDs,
+        });
       });
     });
 
@@ -49,15 +52,14 @@ module.exports = (db) => {
           const trackPlaylistsID = trackPlaylistData;
           hasRatedTrack(db, userID, trackPlaylistsID).then((hasRatedData) => {
             const userHasRated = hasRatedData;
-            if(userHasRated === false) {
+            if (userHasRated === false) {
               addRating(db, userID, trackPlaylistsID, newValue).then(
-               
-                (data) => { }
+                (data) => {}
               );
             }
             updateRating(db, trackPlaylistsID, newValue, userID).then(
-              data => {}
-            )
+              (data) => {}
+            );
           });
         }
       );
@@ -71,6 +73,13 @@ module.exports = (db) => {
         res.json({ data });
       });
     });
+
+    router.post("/:playlistID/deleteTrack", (req, res) => {
+      const playlistID = req.params.playlistID;
+      const spotifyTrackID = req.body.spotifyTrackID;
+      removeVotingTrack(db, spotifyTrackID, playlistID);
+    });
+
   });
   return router;
 };

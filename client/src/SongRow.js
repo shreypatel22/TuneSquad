@@ -9,22 +9,42 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Tr,
   Td,
-
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  ChakraProvider,
 } from "@chakra-ui/react";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useDisclosure } from "@chakra-ui/react";
+
 
 
 
 export default function SongRow({song, index, playlistID, setPlayingTrack }) {
   const [rating, setRating] = React.useState()
   const userID = JSON.parse(localStorage.getItem("userID"));
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
     setPlayingTrack(uriObj);
   }
+
+
+  const handleDeleteTrack = (playlistID, spotifyTrackID) => {
+    axios
+      .post(`http://localhost:3001/playlist/${playlistID}/deleteTrack`, {
+     playlistID,
+     spotifyTrackID
+      })
+      .catch((err) => console.log(err));
+  };
 
   const setUserTrackRating = (userID, newValue, spotifyTrackID, playlistID) => {
     axios
@@ -42,7 +62,7 @@ export default function SongRow({song, index, playlistID, setPlayingTrack }) {
 
   return (
    <>
-    <Tr>
+    <Tr key={index + 1}>
           <Td>
             {" "}
             <Button
@@ -70,7 +90,47 @@ export default function SongRow({song, index, playlistID, setPlayingTrack }) {
               }}
             />
           </Td>
-          <Td><DeleteIcon className="delete-icon"/></Td>
+          <Td>
+            <ChakraProvider>
+              <DeleteIcon
+                className="delete-icon"
+                onClick={onOpen}
+                color="#1eb3ff"
+              />
+              <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+              >
+                <AlertDialogOverlay>
+                  <AlertDialogContent>
+                    <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                      Delete Song
+                    </AlertDialogHeader>
+
+                    <AlertDialogBody>
+                      Are you sure you want to delete? You can't undo this
+                      action afterwards.
+                    </AlertDialogBody>
+
+                    <AlertDialogFooter>
+                      <Button ref={cancelRef} onClick={onClose}>
+                        Cancel
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        onClick={() => {
+                          onClose(); handleDeleteTrack(playlistID, song.id)
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialogOverlay>
+              </AlertDialog>
+            </ChakraProvider>
+          </Td>
         </Tr>
    </>
   );

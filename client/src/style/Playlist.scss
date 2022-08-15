@@ -119,12 +119,12 @@ hr.divider {
   font-family: $Montserrat;
   display: inline-block;
   font-size: 1.2vw;
-  padding-left: 18%;
 }
 
 .playlist-info {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .play-spotify {

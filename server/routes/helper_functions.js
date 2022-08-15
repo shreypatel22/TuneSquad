@@ -168,6 +168,17 @@ const updateRating = (db, trackPlaylistsID, newValue, userID) => {
 };
 
 
+const removeVotingTrack = (db, spotifyTrackID, playlistID) => { 
+  return db
+    .query(
+      `DELETE FROM track_playlists WHERE spotify_track_id = $1 AND playlist_id = $2 `,
+      [spotifyTrackID, playlistID]
+    )
+    .then((data) => {})
+    .catch((err) => console.error(err));
+};
+
+
 module.exports = {
   addPlaylist,
   getMyCreatedPlaylists,
@@ -185,4 +196,5 @@ module.exports = {
   updatePlaylistStatus,
   getPlaylistTracks,
   updateRating,
+  removeVotingTrack
 };
