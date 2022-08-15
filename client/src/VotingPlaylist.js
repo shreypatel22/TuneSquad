@@ -5,21 +5,7 @@ import { Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import DeleteIcon from '@mui/icons-material/Delete';
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import axios from "axios";
 import SongRow from "./SongRow"
 
@@ -82,7 +68,8 @@ export default function VotingPlaylist({
     });
   }
 
-  let collaboratorsNames = collaborators.join(", ");
+  let collaboratorsNames = collaborators.join("");
+ 
 
   const createFinalPlaylist = () => {        
     const accessToken = JSON.parse(localStorage.getItem("access_token"));    
