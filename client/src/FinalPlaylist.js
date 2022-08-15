@@ -73,15 +73,10 @@ export default function FinalPlaylist({
       .catch((err) => console.log(err));
   }, []);
 
-  const followPlaylistOnSpotify = async (spotifyPlaylistID) => {
-   const {data} = await axios.get(`https://api.spotify.com/v1/playlists/${spotifyPlaylistID}/followers/`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      }
-    });
-    console.log("FoLWOGIN", data)
-  };
-
+  const followPlaylistOnSpotify = () => {
+    console.log("IT IS CALLED")
+    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID })
+  }
 
   let tracks;
   console.log(allTracksInfo);
@@ -191,7 +186,7 @@ export default function FinalPlaylist({
       </Button>
       <hr className="divider" />
       <section className="play-spotify-section">
-        <Button className="play-spotify" onClick={() => followPlaylistOnSpotify() }>
+        <Button className="play-spotify" onClick={() => followPlaylistOnSpotify()}>
           <AudiotrackIcon /> Add Playlist to Spotify
         </Button>
       </section>
