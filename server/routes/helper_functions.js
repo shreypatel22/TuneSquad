@@ -90,7 +90,6 @@ const getTrackPlaylistsID = (db, spotifyTrackID, playlistID) => {
 };
 
 const hasRatedTrack = (db, userID, trackPlaylistsID) => {
-  console.log("HAS RATED", userID);
   return db
     .query(
       `SELECT * FROM ratings WHERE user_id = $1 AND track_playlist_id = $2;`,

@@ -12,7 +12,7 @@ $Montserrat: Montserrat;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: 600;
-  margin: 0px 20px 20px ;
+  margin: 0px 20px 20px;
 
   &:hover {
     background-color: #474a62;
@@ -32,8 +32,7 @@ $Montserrat: Montserrat;
   font-family: $Montserrat;
   font-size: 18px;
   font-weight: 600;
-  margin: 0px 20px 20px ;
-
+  margin: 0px 20px 20px;
 
   &:hover {
     background-color: #50536b;
@@ -46,7 +45,6 @@ $Montserrat: Montserrat;
   flex-direction: row;
   align-items: flex-end;
   margin: 10px;
-  
 }
 
 Button.searchbar-track {
@@ -92,7 +90,7 @@ hr.divider {
   color: white;
   border: solid #3a406d;
   border-radius: 12px;
-  margin: 20px;
+  margin: 20px 0px;
 
   &:hover {
     background-color: #202542;
@@ -124,6 +122,11 @@ hr.divider {
   padding-left: 18%;
 }
 
+.playlist-info {
+  display: flex;
+  flex-direction: row;
+}
+
 .play-spotify {
   display: flex;
   justify-content: center;
@@ -145,7 +148,6 @@ hr.divider {
   }
 }
 
-
 .playerBar {
   position: fixed;
   float: right;
@@ -158,7 +160,6 @@ hr.divider {
 p {
   color: white;
 }
-
 
 .add-user-button {
   width: 40px;
@@ -183,6 +184,7 @@ p {
   display: grid;
   font-family: $Montserrat;
   font-weight: 200;
+  font-size: 1.1vw;
   color: white;
   text-align: justify;
 }
@@ -200,7 +202,7 @@ p {
 }
 
 .chakra-select__icon-wrapper {
- color: transparent;
+  color: transparent;
 }
 
 .play-button {
@@ -214,7 +216,7 @@ p {
   margin-right: 20px;
   width: 200px;
   height: 40px;
-  background: #3A406D;
+  background: #3a406d;
   border: none;
   border-radius: 50px;
   color: #1eb3ff;
@@ -229,8 +231,8 @@ p {
   }
 }
 
-.dropdown-menu{
-  background: #3A406D;
+.dropdown-menu {
+  background: #3a406d;
   margin-right: 120px;
   border: none;
   border-radius: 850px;
@@ -248,10 +250,9 @@ p {
 
 .delete-icon {
   color: #1eb3ff;
- padding-left: 20px;
+  padding-left: 20px;
 }
 
 .footer {
   margin-bottom: 40px;
 }
-
