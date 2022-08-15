@@ -145,7 +145,7 @@ export default function VotingPlaylist({
             data-my-value={"closed"}
             onClick={changePlaylistStatus}
           >
-            <div className="close-menu">Closed</div>
+            <div className="close-menu">Close</div>
           </MenuItem>
         </MenuList>
       </Menu>
