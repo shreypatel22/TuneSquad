@@ -9,10 +9,11 @@ export default function PlaylistItem({
   playlistID,
   setPlaylistID,
   setSpotifyPlaylistID,
-  coverImage
+  coverImage,
+  setOpenPlaylist
 }) { 
   return (
-    <div>
+    <div onClick={() => setOpenPlaylist(true)}>
         <Box className="playlistItem-container" onClick={() => {
           setSpotifyPlaylistID(spotifyPlaylistID);
           setPlaylistID(playlistID);
@@ -23,7 +24,7 @@ export default function PlaylistItem({
             src={coverImage}
             alt="Playlist"
           />
-          <div className="playlist-info-items">
+          <div className="playlist-info-items" >
           <p>{name}</p>
           </div>
         </Box>

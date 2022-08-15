@@ -37,9 +37,9 @@ export default function PlaylistContainer({
   }
 
   return (
-    <div>
+    <div onClick={false}>
       {/* <PlaylistItem code={code} /> */}
-      <SimpleGrid minChildWidth="320px" onClick={() => setOpenPlaylist(true)}>
+      <SimpleGrid minChildWidth="320px" >
         {playlistItems}
       </SimpleGrid>
     </div>
