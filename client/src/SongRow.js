@@ -75,8 +75,6 @@ export default function SongRow({song, index, playlistID, setPlayingTrack }) {
           <Td>{index + 1}</Td>
           <Td>{song.name}</Td>
           <Td>{song.artists[0].name}</Td>
-          <Td>Username</Td>
-          <Td> dateAdded </Td>
           <Td>
             {" "}
             <Typography component="legend"></Typography>

@@ -73,6 +73,16 @@ export default function FinalPlaylist({
       .catch((err) => console.log(err));
   }, []);
 
+  const followPlaylistOnSpotify = async (spotifyPlaylistID) => {
+   const {data} = await axios.get(`https://api.spotify.com/v1/playlists/${spotifyPlaylistID}/followers/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    });
+    console.log("FoLWOGIN", data)
+  };
+
+
   let tracks;
   console.log(allTracksInfo);
   if (allTracksInfo[0]) {
@@ -92,7 +102,6 @@ export default function FinalPlaylist({
           <Td>{index + 1}</Td>
           <Td>{track.trackName}</Td>
           <Td>{track.trackArtist}</Td>
-          <Td>Username</Td>
           <Td isNumeric>{track.dateAdded}</Td>
           <Td>
             {" "}
@@ -164,7 +173,6 @@ export default function FinalPlaylist({
               </section>
               <p> Admin: {playlistInfo.admin_username}</p>
               <p> Collaborators: {collaboratorsNames}</p>
-              <p> Songs: 100</p>
             </div>
           </div>
         </section>
@@ -183,7 +191,7 @@ export default function FinalPlaylist({
       </Button>
       <hr className="divider" />
       <section className="play-spotify-section">
-        <Button className="play-spotify">
+        <Button className="play-spotify" onClick={() => followPlaylistOnSpotify() }>
           <AudiotrackIcon /> Add Playlist to Spotify
         </Button>
       </section>
@@ -195,7 +203,6 @@ export default function FinalPlaylist({
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Artist</Th>
-              <Th>Added By</Th>
               <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
               <Th>Delete</Th>

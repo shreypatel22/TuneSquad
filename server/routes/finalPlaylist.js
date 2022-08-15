@@ -15,12 +15,6 @@ module.exports = (db) => {
     const { spotifyPlaylistID, accessToken } = req.query;
     const playlistID = req.params.playlistID;
 
-    // const spotifyApi = new spotifyWebApi({
-    //   redirectUri: process.env.REDIRECT_URI,
-    //   clientId: process.env.CLIENT_ID,
-    //   clientSecret: process.env.CLIENT_SECRET,
-    // });
-
     spotifyApi.setAccessToken(accessToken);
 
     spotifyApi.getPlaylistTracks(spotifyPlaylistID, {
@@ -45,8 +39,6 @@ module.exports = (db) => {
           allTracksInfo.push(indiviualTrackInfo);
         }
         getPlaylistTracks(db, playlistID).then((tracks) => {
-          // console.log('track', tracks)
-          // console.log('infoooo', allTracksInfo)
           for (const trackInfo of allTracksInfo) {
             for (const track of tracks) {
               if (trackInfo.trackID == track.spotify_track_id) {
@@ -54,7 +46,6 @@ module.exports = (db) => {
               }
             }
           }
-          // console.log('updated', allTracksInfo)
           res.json({ allTracksInfo, snapshotID: data.body.snapshot_id });
         })
         
@@ -81,12 +72,6 @@ module.exports = (db) => {
       let formattedSpotifyTrackIDsArray = passedTracksArray.map(
         (id) => "spotify:track:" + id
       );
-
-      const spotifyApi = new spotifyWebApi({
-        redirectUri: process.env.REDIRECT_URI,
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-      });
 
       spotifyApi.setAccessToken(accessToken);
 
@@ -120,6 +105,22 @@ module.exports = (db) => {
           console.log("Something went wrong!", err);
         }
       );
+
+      // router.post("/:playlistID/followOnSpotify", (req, res) => {
+    
+      //   spotifyApi.setAccessToken(accessToken);
+    
+      //   spotifyApi
+      //     .removeTracksFromPlaylist(spotifyPlaylistID, tracks, options)
+      //     .then(
+      //       (data) => {
+      //         console.log("Tracks removed from playlist!");
+      //       },
+      //       (err) => {
+      //         console.log("Something went wrong!", err);
+      //       }
+      //     );
+
   });
   return router;
 };
