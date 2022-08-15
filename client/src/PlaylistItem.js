@@ -17,6 +17,7 @@ export default function PlaylistItem({
           setSpotifyPlaylistID(spotifyPlaylistID);
           setPlaylistID(playlistID);
         }}>
+    
           <img
             className="playlist-item-image"
             src={coverImage}
@@ -24,7 +25,6 @@ export default function PlaylistItem({
           />
           <div className="playlist-info-items">
           <p>{name}</p>
-          <div className="playlist-info">                     
           </div>
         </Box>
     </div>
