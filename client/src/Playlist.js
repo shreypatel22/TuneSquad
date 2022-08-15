@@ -24,9 +24,8 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    console.log(playlistID);
+  
+  const getTrackIDs = () => {
     axios
       .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
       .then((res) => {
@@ -34,9 +33,11 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
         setspotifyTrackIDsArray(res.data.spotifyTrackIDsArray);
       })
       .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    getTrackIDs()
   }, []);
-
-
 
   // if (playlistStatus === "closed") {
   //   const accessToken = JSON.parse(localStorage.getItem("access_token"));    
@@ -68,6 +69,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           setCollaborators={setCollaborators}
           playlistStatus={playlistStatus}
           setPlaylistStatus={setPlaylistStatus}
+          getTrackIDs={getTrackIDs}
         />
       )}
       {/* <button onClick={finalPlaylistTest}>Default</button> */}
