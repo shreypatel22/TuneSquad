@@ -66,6 +66,10 @@ $Montserrat: 'Montserrat', serif;
 .side-playlists {
   word-wrap: break-word;
   width: 200px;
+  height: 199px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
 }
 
 
@@ -82,3 +86,8 @@ $Montserrat: 'Montserrat', serif;
 //   90%{background-position:100% 54%}
 //   100%{background-position:0% 47%}
 // }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
