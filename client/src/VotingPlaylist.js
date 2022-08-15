@@ -1,12 +1,10 @@
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
+import { Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Table,
   Thead,
@@ -20,8 +18,6 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
 import axios from "axios";
 import SongRow from "./SongRow"
 
@@ -136,18 +132,7 @@ export default function VotingPlaylist({
           </div>
         </section>
       </Box>
-      <Button className="edit-button">
-        <EditIcon />
-      </Button>
 
-      <div>
-        <Button
-          className="add-user-button"
-          onClick={() => setOpenAddVoterModal(true)}
-        >
-          <PersonAddIcon />
-        </Button>
-      </div>
 
       <Menu>
         <MenuButton
@@ -177,10 +162,10 @@ export default function VotingPlaylist({
 
       {openAddVoterModal && (
         <AddVoterModal
-          setOpenAddVoterModal={setOpenAddVoterModal}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
-          setCollaborators={setCollaborators}
+        setOpenAddVoterModal={setOpenAddVoterModal}
+        playlistID={playlistID}
+        spotifyPlaylistID={spotifyPlaylistID}
+        setCollaborators={setCollaborators}
         />
       )}
 
@@ -196,6 +181,12 @@ export default function VotingPlaylist({
       >
         Final
       </Button>
+          <Button
+            className="add-user-button"
+            onClick={() => setOpenAddVoterModal(true)}
+          >
+            <PersonAddIcon />
+          </Button>
       <hr className="divider" />
       {openSearchBar && (
         <SearchBar
