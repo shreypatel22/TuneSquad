@@ -93,7 +93,6 @@ hr.divider {
   border: solid #3a406d;
   border-radius: 12px;
   margin: 20px;
-  
 
   &:hover {
     background-color: #202542;
@@ -120,6 +119,7 @@ hr.divider {
 
 .playlist-text {
   font-family: $Montserrat;
+  display: inline-block;
 }
 
 .play-spotify {
