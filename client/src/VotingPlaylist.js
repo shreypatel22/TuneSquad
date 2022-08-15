@@ -131,7 +131,6 @@ export default function VotingPlaylist({
               </section>
               <p> Admin: {playlistInfo.admin_username}</p>
               <p> Voters: {collaboratorsNames}</p>
-              <p> Songs: 100</p>
             </div>
           </div>
         </section>
@@ -217,8 +216,6 @@ export default function VotingPlaylist({
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Artist</Th>
-              <Th>Added By</Th>
-              <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
               <Th>Delete</Th>
             </Tr>

@@ -92,7 +92,6 @@ export default function FinalPlaylist({
           <Td>{index + 1}</Td>
           <Td>{track.trackName}</Td>
           <Td>{track.trackArtist}</Td>
-          <Td>Username</Td>
           <Td isNumeric>{track.dateAdded}</Td>
           <Td>
             {" "}
@@ -164,7 +163,6 @@ export default function FinalPlaylist({
               </section>
               <p> Admin: {playlistInfo.admin_username}</p>
               <p> Collaborators: {collaboratorsNames}</p>
-              <p> Songs: 100</p>
             </div>
           </div>
         </section>
@@ -195,7 +193,6 @@ export default function FinalPlaylist({
               <Th>#</Th>
               <Th>Title</Th>
               <Th>Artist</Th>
-              <Th>Added By</Th>
               <Th isNumeric>Date Added</Th>
               <Th isNumeric>Rating</Th>
               <Th>Delete</Th>
