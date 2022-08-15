@@ -53,7 +53,7 @@ module.exports = (db) => {
       console.log(tracks);
       let passedTracksArray = [];
       for (const track of tracks) {
-        if (track.rating_number > 3) {
+        if (track.avg > 2) {
           passedTracksArray.push(track.spotify_track_id);
         }
       }

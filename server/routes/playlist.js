@@ -55,7 +55,7 @@ module.exports = (db) => {
                 (data) => { }
               );
             }
-            updateRating(db, trackPlaylistsID, newValue).then(
+            updateRating(db, trackPlaylistsID, newValue, userID).then(
               data => {}
             )
           });
