@@ -23,6 +23,7 @@ import {
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import SongRow from "./SongRow"
 
 export default function VotingPlaylist({
   setOpenPlaylistType,
@@ -37,6 +38,7 @@ export default function VotingPlaylist({
   setCollaborators,
   playlistStatus,
   setPlaylistStatus,
+  getTrackIDs
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -71,55 +73,13 @@ export default function VotingPlaylist({
     getTrack(spotifyTrackIDs);
   });
 
-  const setUserTrackRating = (userID, newValue, spotifyTrackID, playlistID) => {
-    axios
-      .post(`http://localhost:3001/playlist/${playlistID}/addTrackRating`, {
-        userID,
-        newValue,
-        spotifyTrackID,
-        playlistID,
-      })
-      .then(function ({ data }) {})
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
   let songs;
 
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
       return (
-        <Tr key={index + 1}>
-          <Td>
-            {" "}
-            <Button
-              className="play-button"
-              onClick={() => handlePlay(song.uri)}
-            >
-              <PlayArrowIcon />
-            </Button>{" "}
-          </Td>
-          <Td>{index + 1}</Td>
-          <Td>{song.name}</Td>
-          <Td>{song.artists[0].name}</Td>
-          <Td>Username</Td>
-          <Td> dateAdded </Td>
-          <Td>
-            {" "}
-            <Typography component="legend"></Typography>
-            <Rating
-              name={song.uri}
-              precision={0.5}
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-                setUserTrackRating(userID, newValue, song.id, playlistID);
-              }}
-            />
-          </Td>
-          <Td><DeleteIcon className="delete-icon"/></Td>
-        </Tr>
+        <SongRow song={song} key={index + 1} index={index} playlistID={playlistID}   setPlayingTrack={setPlayingTrack}        />
+       
       );
     });
   }
@@ -242,6 +202,7 @@ export default function VotingPlaylist({
           setOpenSearchBar={setOpenSearchBar}
           playlistID={playlistID}
           spotifyPlaylistID={spotifyPlaylistID}
+          getTrackIDs={getTrackIDs}
         />
       )}
 
