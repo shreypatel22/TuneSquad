@@ -21,8 +21,10 @@ export default function PlaylistItem({
             src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
             alt="Playlist"
           />
-
+          <div className="playlist-info-items">
           <p>{name}</p>
+
+          </div>
           <div className="playlist-info">            
             <p> PlaylistID: {playlistID}</p>            
             <p> Songs: 100</p>
