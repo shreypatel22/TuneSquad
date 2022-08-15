@@ -85,10 +85,20 @@ const getCollaborators = (db, playlistID) => {
 };
 
 const updatePlaylistStatus = (db, status, playlistID) => {
-  return db.query(`Update playlists SET status = $1 WHERE id = $2 RETURNING *;`, [status, playlistID])
+  return db.query(`UPDATE playlists SET status = $1 WHERE id = $2 RETURNING *;`, [status, playlistID])
     .catch((err) => console.log(err.message));
 };
 
+const getPlaylistTracks = (db, playlistID) => {
+  return db.query(`
+  SELECT * FROM playlists
+  JOIN track_playlists on playlist_id = playlists.id
+  JOIN ratings on track_playlist_id = track_playlists.id
+  WHERE playlists.id = $1`, [playlistID])
+    .then(data => {
+      return data.rows;
+    });
+};
 
 module.exports = {
   addPlaylist,
@@ -104,5 +114,6 @@ module.exports = {
   getTrackPlaylistsID,
   hasRatedTrack,
   getCollaborators,
-  updatePlaylistStatus
+  updatePlaylistStatus,
+  getPlaylistTracks
 };
