@@ -93,6 +93,7 @@ hr.divider {
   border: solid #3a406d;
   border-radius: 12px;
   margin: 20px;
+  
 
   &:hover {
     background-color: #202542;
@@ -108,7 +109,7 @@ hr.divider {
 }
 
 .playlist-name {
-  font-size: xx-large;
+  font-size: 3vw;
   font-style: italic;
   font-family: $Montserrat;
 }
@@ -267,4 +268,8 @@ p {
 
 .footer {
   margin-bottom: 40px;
+}
+
+.playlist-text{
+  font-size: 1.2vw;
 }

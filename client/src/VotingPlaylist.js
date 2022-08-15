@@ -63,7 +63,7 @@ export default function VotingPlaylist({
     setSongsInfo(data.tracks);
   };
 
-  const getTrack = (spotifyTrackIDs) => {
+  const getTrack = (spotifyTrackIDs, ) => {
     getTrackFromSpotify(spotifyTrackIDs);
   };
 
@@ -162,7 +162,7 @@ export default function VotingPlaylist({
           <div className="playlist-info">
             <img
               className="playlist-cover-image"
-              src="https://i.scdn.co/image/ab67706c0000bebb485cbbef86d7f7fb3fb6128e"
+              src={playlistInfo.image_url}
               alt="Playlist"
             />
             <div className="playlist-text">
@@ -170,9 +170,8 @@ export default function VotingPlaylist({
                 <p> {playlistInfo.name}</p>
               </section>
               <p> Admin: {playlistInfo.admin_username}</p>
-              <p> Collaborators: {collaboratorsNames}</p>
+              <p> Voters: {collaboratorsNames}</p>
               <p> Songs: 100</p>
-              <p> Voters: {collaborators.length}</p>
             </div>
           </div>
         </section>

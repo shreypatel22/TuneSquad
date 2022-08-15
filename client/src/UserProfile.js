@@ -15,11 +15,6 @@ export default function UserProfile({ code }) {
         as={Button}
         rightIcon={<TriangleDownIcon w={10} h={10} />}
       >
-        {/* <img
-          className="playlist-item-image"
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
-          alt="Playlist"
-        /> */}
         {username}
       </MenuButton>
       <MenuList >

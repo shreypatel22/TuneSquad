@@ -1,7 +1,7 @@
-const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
-  return db.query(`INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
-  VALUES ($1, $2, $3, $4, 'open', $5)
-  RETURNING *;`, [playlistName, userID, playlistID, date, username])
+const addPlaylist = (db, playlistName, coverURL, userID, playlistID, date, username) => {
+  return db.query(`INSERT INTO playlists (name, image_url, admin_id, spotify_playlist_id, date_created, status, admin_username) 
+  VALUES ($1, $2, $3, $4, $5, 'open', $6)
+  RETURNING *;`, [playlistName, coverURL, userID, playlistID, date, username])
     .catch((err) => console.log(err.message));
 };
 
@@ -108,6 +108,9 @@ const updateRating = (db, trackPlaylistsID, newValue) => {
     .catch((err) => console.error(err));
 }
 
+const deleteVotingTrack = (db, trackPlaylistsID) => {
+  // return db.query(`DELETE FROM)
+}
 
 module.exports = {
   addPlaylist,
