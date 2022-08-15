@@ -36,16 +36,15 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       .catch((err) => console.log(err));
   }, []);
 
-  const finalPlaylistTest = () => {        
-    const accessToken = JSON.parse(localStorage.getItem("access_token"));
-    let formattedSpotifyTrackIDsArray = spotifyTrackIDsArray.map(
-      (id) => "spotify:track:" + id
-    );
-    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, formattedSpotifyTrackIDsArray, accessToken})
-      .then(res => console.log(res))
-      .catch((err) => console.log(err));
-  };
 
+
+  // if (playlistStatus === "closed") {
+  //   const accessToken = JSON.parse(localStorage.getItem("access_token"));    
+  //   axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, accessToken})
+  //     .then(res => console.log(res))
+  //     .catch((err) => console.log(err));
+  // }
+  console.log(playlistStatus)
   return (
     <div>
       {openPlaylistType ? (
@@ -71,7 +70,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           setPlaylistStatus={setPlaylistStatus}
         />
       )}
-      <button onClick={finalPlaylistTest}>Default</button>
+      {/* <button onClick={finalPlaylistTest}>Default</button> */}
       <section className="playerBar">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>
