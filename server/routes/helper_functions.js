@@ -1,11 +1,7 @@
-const addPlaylist = (db, playlistName, userID, playlistID, date, username) => {
-  return db
-    .query(
-      `INSERT INTO playlists (name, admin_id, spotify_playlist_id, date_created, status, admin_username) 
-  VALUES ($1, $2, $3, $4, 'open', $5)
-  RETURNING *;`,
-      [playlistName, userID, playlistID, date, username]
-    )
+const addPlaylist = (db, playlistName, coverURL, userID, playlistID, date, username) => {
+  return db.query(`INSERT INTO playlists (name, image_url, admin_id, spotify_playlist_id, date_created, status, admin_username) 
+  VALUES ($1, $2, $3, $4, $5, 'open', $6)
+  RETURNING *;`, [playlistName, coverURL, userID, playlistID, date, username])
     .catch((err) => console.log(err.message));
 };
 
@@ -155,8 +151,7 @@ const getPlaylistTracks = (db, playlistID) => {
       JOIN track_playlists on playlist_id = playlists.id
       JOIN ratings on track_playlist_id = track_playlists.id
       WHERE playlists.id = $1
-      GROUP BY track_playlist_id, spotify_track_id;`,
-      [playlistID]
+      GROUP BY track_playlist_id, spotify_track_id;`, [playlistID]
     )
     .then((data) => {
       return data.rows;
@@ -173,20 +168,6 @@ const updateRating = (db, trackPlaylistsID, newValue, userID) => {
     .catch((err) => console.error(err));
 };
 
-const getPlaylistTracksTwo = (db) => {
-  return db
-    .query(
-      `SELECT track_playlist_id, AVG(rating_number), spotify_track_id 
-      FROM playlists 
-      JOIN track_playlists on playlist_id = playlists.id
-      JOIN ratings on track_playlist_id = track_playlists.id
-      WHERE playlists.id = 4
-      GROUP BY track_playlist_id, spotify_track_id;`
-    )
-    .then((data) => {
-      return data.rows;
-    });
-};
 
 module.exports = {
   addPlaylist,
