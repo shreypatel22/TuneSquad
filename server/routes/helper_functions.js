@@ -160,8 +160,19 @@ const getPlaylistTracks = (db, playlistID) => {
 const updateRating = (db, trackPlaylistsID, newValue, userID) => {
   return db
     .query(
-      `UPDATE ratings SET rating_number = $1 WHERE track_playlist_id = $2 AND userID = $3`,
+      `UPDATE ratings SET rating_number = $1 WHERE track_playlist_id = $2 AND user_id = $3`,
       [newValue, trackPlaylistsID, userID]
+    )
+    .then((data) => {})
+    .catch((err) => console.error(err));
+};
+
+
+const removeVotingTrack = (db, spotifyTrackID, playlistID) => { 
+  return db
+    .query(
+      `DELETE FROM track_playlists WHERE spotify_track_id = $1 AND playlist_id = $2 `,
+      [spotifyTrackID, playlistID]
     )
     .then((data) => {})
     .catch((err) => console.error(err));
@@ -185,4 +196,5 @@ module.exports = {
   updatePlaylistStatus,
   getPlaylistTracks,
   updateRating,
+  removeVotingTrack
 };
