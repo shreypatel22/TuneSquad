@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Table,
   Thead,
@@ -23,16 +23,23 @@ export default function FinalPlaylist({
   playlistID,
   spotifyPlaylistID,
   setPlayingTrack,
-  collaborators
+  collaborators,
 }) {
   const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
+  const [snapshotID, setSnapshotID] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
+  const userID = JSON.parse(localStorage.getItem("userID"));
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
     setPlayingTrack(uriObj);
   }
+
+  const handleDeleteTrack = (trackURI, snapshotID) => {
+   axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/deleteTrack`, {trackURI, snapshotID, accessToken, spotifyPlaylistID})
+   .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axios
@@ -41,6 +48,7 @@ export default function FinalPlaylist({
       })
       .then((res) => {
         setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
+        setSnapshotID(res.data.snapshotID);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -70,7 +78,14 @@ export default function FinalPlaylist({
             <Typography component="legend"></Typography>
             <Rating name="read-only" value={value} readOnly />
           </Td>
-          <Td><DeleteIcon className="delete-icon"/></Td>
+          <Td>
+            <DeleteIcon
+              className="delete-icon"
+              onClick={() => {
+                handleDeleteTrack(track.trackURI, snapshotID);
+              }}
+            />
+          </Td>
         </Tr>
       );
     });

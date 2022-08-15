@@ -92,7 +92,8 @@ hr.divider {
   color: white;
   border: solid #3a406d;
   border-radius: 12px;
-  margin: 20px;
+  margin: 20px 0px;
+
 
   &:hover {
     background-color: #202542;
@@ -120,6 +121,11 @@ hr.divider {
 .playlist-text {
   font-family: $Montserrat;
   display: inline-block;
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: row;
 }
 
 .play-spotify {
@@ -163,7 +169,7 @@ p {
   margin-bottom: 20px;
   margin-right: 20px;
   background: #3a406d;
-  border: 1px solid #000000;
+  border: none;
   border-radius: 15px;
   color: #1eb3ff;
   font-family: $Montserrat;
@@ -182,7 +188,7 @@ p {
   margin-bottom: 20px;
   margin-left: 20px;
   background: #3a406d;
-  border: 1px solid #000000;
+  border: none;
   border-radius: 15px;
   color: #1eb3ff;
   font-family: $Montserrat;
@@ -198,6 +204,7 @@ p {
   display: grid;
   font-family: $Montserrat;
   font-weight: 200;
+  font-size: 1.1vw;
   color: white;
   text-align: justify;
 }

@@ -195,7 +195,7 @@ export default function VotingPlaylist({
           as={Button}
           rightIcon={<TriangleDownIcon w={10} h={10} />}
         >
-          Playlist Status
+          Voting Status
         </MenuButton>
         <MenuList>
           <MenuItem
