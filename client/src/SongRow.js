@@ -1,5 +1,5 @@
 import "./style/SideNav.scss";
-import React from "react";
+import React,{ useState, useEffect } from "react";
 import { Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -20,8 +20,16 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useDisclosure } from "@chakra-ui/react";
 
-export default function SongRow({ song, index, playlistID, setPlayingTrack, thisSongTrack }) {
-  const [rating, setRating] = React.useState(thisSongTrack.rating);
+export default function SongRow({
+  song,
+  index,
+  playlistID,
+  setPlayingTrack,
+  thisSongTrack,
+}) {
+  console.log("----------------------!!!", thisSongTrack);
+  const [defaultRating, setDefaultRating] = useState(0);
+  const [rating, setRating] = React.useState(defaultRating);
   const userID = JSON.parse(localStorage.getItem("userID"));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
@@ -30,6 +38,12 @@ export default function SongRow({ song, index, playlistID, setPlayingTrack, this
     let uriObj = { uri: trackURI };
     setPlayingTrack(uriObj);
   }
+
+  useEffect(() => {
+    if (thisSongTrack) {
+      setRating(thisSongTrack.rating);
+    }
+  }, [])
 
   const handleDeleteTrack = (playlistID, spotifyTrackID) => {
     axios
