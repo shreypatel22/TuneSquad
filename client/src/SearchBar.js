@@ -23,7 +23,7 @@ const spotifyApi = new spotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET,
 });
 
-export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlistID, getTrackIDs }) {
+export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlistID, getTrackIDs, setSavedSong }) {
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -105,6 +105,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
                     setSpotifyTrackID={setSpotifyTrackID}
                     spotifyTrackID={track.spotifyTrackID}
                     getTrackIDs={getTrackIDs}
+                    setSavedSong={setSavedSong}
                   />
 
                   <hr />

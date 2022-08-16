@@ -24,7 +24,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       })
       .catch((err) => console.log(err));
   }, []);
-  
+
   const getTrackIDs = () => {
     axios
       .get(`http://localhost:3001/playlist/${playlistID}/getSongsVoting`)
@@ -33,31 +33,22 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
         setspotifyTrackIDsArray(res.data.spotifyTrackIDsArray);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   useEffect(() => {
-    getTrackIDs()
+    getTrackIDs();
   }, []);
 
   // if (playlistStatus === "closed") {
-  //   const accessToken = JSON.parse(localStorage.getItem("access_token"));    
+  //   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   //   axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, accessToken})
   //     .then(res => console.log(res))
   //     .catch((err) => console.log(err));
   // }
-  console.log(playlistStatus)
+  console.log(playlistStatus);
   return (
     <div>
       {openPlaylistType ? (
-        <FinalPlaylist
-          setOpenPlaylistType={setOpenPlaylistType}
-          setPlayingTrack={setPlayingTrack}
-          playlistID={playlistID}
-          spotifyPlaylistID={spotifyPlaylistID}
-          playlistInfo={playlistInfo}
-          collaborators={collaborators}
-        />
-      ) : (
         <VotingPlaylist
           spotifyTrackIDs={spotifyTrackIDs}
           setOpenPlaylistType={setOpenPlaylistType}
@@ -71,8 +62,16 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           setPlaylistStatus={setPlaylistStatus}
           getTrackIDs={getTrackIDs}
         />
+      ) : (
+        <FinalPlaylist
+          setOpenPlaylistType={setOpenPlaylistType}
+          setPlayingTrack={setPlayingTrack}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+          playlistInfo={playlistInfo}
+          collaborators={collaborators}
+        />
       )}
-      {/* <button onClick={finalPlaylistTest}>Default</button> */}
       <section className="playerBar">
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </section>

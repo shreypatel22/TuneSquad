@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-export default function TrackSearchResult({ track, spotifyTrackID, playlistID, setSpotifyTrackID, getTrackIDs }) {
+export default function TrackSearchResult({ track, spotifyTrackID, playlistID, setSpotifyTrackID, getTrackIDs, setSavedSong }) {
 
   const username = JSON.parse(localStorage.getItem('username'));
 
@@ -13,6 +13,7 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
     axios.post('http://localhost:3001/addSongVoting', { playlistID, spotifyTrackID, username })
       .then(function({ data }) {
         getTrackIDs()
+        setSavedSong(spotifyTrackID)
 
       })
       .catch(function(error) {
