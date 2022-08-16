@@ -4,31 +4,28 @@ import { Box } from "@chakra-ui/react";
 
 export default function PlaylistItem({
   name,
-  admin,
   spotifyPlaylistID,
   playlistID,
   setPlaylistID,
   setSpotifyPlaylistID,
   coverImage,
-  setOpenPlaylist
-}) { 
+  setOpenPlaylist,
+}) {
   return (
-    <div onClick={() => setOpenPlaylist(true)}>
-        <Box className="playlistItem-container" onClick={() => {
+    <div>
+      <Box
+        className="playlistItem-container"
+        onClick={() => {
           setSpotifyPlaylistID(spotifyPlaylistID);
           setPlaylistID(playlistID);
-        }}>
-    
-          <img
-            className="playlist-item-image"
-            src={coverImage}
-            alt="Playlist"
-          />
-          <div className="playlist-info-items" >
+          setOpenPlaylist(true);
+        }}
+      >
+        <img className="playlist-item-image" src={coverImage} alt="Playlist" />
+        <div className="playlist-info-items">
           <p>{name}</p>
-          </div>
-        </Box>
+        </div>
+      </Box>
     </div>
   );
 }
-

@@ -11,7 +11,6 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   TableContainer,
   Menu,
   MenuButton,
@@ -27,8 +26,6 @@ export default function VotingPlaylist({
   spotifyPlaylistID,
   playlistInfo,
   spotifyTrackIDs,
-  track,
-  chooseTrack,
   setPlayingTrack,
   collaborators,
   setCollaborators,
@@ -40,14 +37,10 @@ export default function VotingPlaylist({
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [songsInfo, setSongsInfo] = useState();
-  const [value, setValue] = React.useState();
   const userID = JSON.parse(localStorage.getItem("userID"));
   const [savedSong, setSavedSong] = useState();
 
-  function handlePlay(trackURI) {
-    let uriObj = { uri: trackURI };
-    setPlayingTrack(uriObj);
-  }
+
 
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {

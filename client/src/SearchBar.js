@@ -9,13 +9,11 @@ import {
   ModalCloseButton,
   useDisclosure,
   FormControl,
-  FormLabel,
   Input,
-  Button,
   ChakraProvider,
 } from "@chakra-ui/react";
 import TrackSearchResult from "./TrackSearchResult";
-import Player from "./Player";
+
 const spotifyWebApi = require("spotify-web-api-node");
 const spotifyApi = new spotifyWebApi({
   redirectUri: process.env.REDIRECT_URI,
@@ -23,15 +21,20 @@ const spotifyApi = new spotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET,
 });
 
-export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlistID, getTrackIDs, setSavedSong }) {
+export default function SearchBar({
+  setOpenSearchBar,
+  spotifyPlaylistID,
+  playlistID,
+  getTrackIDs,
+  setSavedSong,
+}) {
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [playingTrack, setPlayingTrack] = useState();
   const [spotifyTrackID, setSpotifyTrackID] = useState("");
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-
+  const { onClose } = useDisclosure();
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
@@ -44,7 +47,6 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
       if (cancel) return;
       setSearchResults(
         res.body.tracks.items.map((track) => {
-
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
               if (image.height < smallest.height) return image;
@@ -53,13 +55,12 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
             track.album.images[0]
           );
 
-
           return {
             artist: track.artists[0].name,
             title: track.name,
             uri: track.uri,
             albumUrl: smallestAlbumImage.url,
-            spotifyTrackID: track.id
+            spotifyTrackID: track.id,
           };
         })
       );
@@ -67,7 +68,6 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
     return () => (cancel = true);
   }, [search, accessToken]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <ChakraProvider>
@@ -80,7 +80,7 @@ export default function SearchBar({ setOpenSearchBar, spotifyPlaylistID, playlis
       >
         <ModalOverlay />
         <ModalContent backgroundColor="#03082b" color="white">
-          <ModalHeader color="#ee5d88" fontWeight="bold"  >
+          <ModalHeader color="#ee5d88" fontWeight="bold">
             Search for a song
           </ModalHeader>
           <ModalCloseButton onClick={() => setOpenSearchBar(false)} />

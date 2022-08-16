@@ -89,6 +89,7 @@ export default function App() {
           <EasterEgg keys={konamiCode} timeout={15500}>
             <div class="overlay">
               <iframe
+                title="Bogo Cat"
                 className="video-pop"
                 src="https://www.youtube.com/embed/eCOdMdWbP_4?autoplay=1"
                 frameborder="0"

@@ -11,7 +11,6 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [playlistInfo, setPlaylistInfo] = useState([]);
   const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
   const [spotifyTrackIDsArray, setspotifyTrackIDsArray] = useState([]);
-  const [songList, setSongList] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
   const [playlistStatus, setPlaylistStatus] = useState("open");
 

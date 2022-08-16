@@ -1,9 +1,7 @@
 import "./style/SideNav.scss";
-import React, { useState, useEffect } from "react";
-import { Box, Button } from "@chakra-ui/react";
-import { EditIcon, Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
+import React from "react";
+import { Button } from "@chakra-ui/react";
 import "./style/Playlist.scss";
-import AddVoterModal from "./AddVoterModal";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
