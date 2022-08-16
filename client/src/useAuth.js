@@ -9,15 +9,15 @@ export default function useAuth(code) {
   const [userID, setUserID] = useState();
 
   useEffect(() => {
-
     if (code) {
       axios
-        .post("http://localhost:3001/login", {
-          code,
-        })
+        .post("http://localhost:3001/login", { code })
         .then((res) => {
           setAccessToken(res.data.accessToken);
-          localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
+          localStorage.setItem(
+            "access_token",
+            JSON.stringify(res.data.accessToken)
+          );
           setRefreshToken(res.data.refreshToken);
           setExpiresIn(res.data.expiresIn);
           setUsername(res.data.name);
@@ -26,10 +26,8 @@ export default function useAuth(code) {
           localStorage.setItem("userID", JSON.stringify(res.data.userID));
           window.history.pushState({}, null, "/");
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     }
-
   }, [code]);
 
   useEffect(() => {
@@ -39,9 +37,12 @@ export default function useAuth(code) {
         .post("http://localhost:3001/refresh", {
           refreshToken,
         })
-        .then(res => {
+        .then((res) => {
           setAccessToken(res.data.accessToken);
-          localStorage.setItem("access_token", JSON.stringify(res.data.accessToken));
+          localStorage.setItem(
+            "access_token",
+            JSON.stringify(res.data.accessToken)
+          );
           setExpiresIn(res.data.expiresIn);
         })
         .catch((err) => {
@@ -52,7 +53,5 @@ export default function useAuth(code) {
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 
-
-  return { accessToken, setAccessToken, refreshToken, username };
-
+  return { accessToken, setAccessToken, refreshToken, username, userID };
 }

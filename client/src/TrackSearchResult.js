@@ -27,7 +27,7 @@ export default function TrackSearchResult({ track, spotifyTrackID, playlistID, s
       style={{ cursor: "pointer" }}
 
     >
-      <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} />
+      <img src={track.albumUrl} style={{ height: "64px", width: "64px" }} alt="Artists album cover"/>
       <div className="track-info" >
         <div>{track.title}</div>
         <div className="text-muted">{track.artist}</div>

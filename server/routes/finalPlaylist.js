@@ -98,6 +98,7 @@ module.exports = (db) => {
       .removeTracksFromPlaylist(spotifyPlaylistID, tracks, options)
       .then(
         (data) => {
+          res.json({ data })
           console.log("Tracks removed from playlist!");
         },
         (err) => {

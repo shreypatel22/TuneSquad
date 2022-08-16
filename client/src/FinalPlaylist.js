@@ -33,21 +33,42 @@ export default function FinalPlaylist({
   setPlayingTrack,
   collaborators,
 }) {
-  // const [value, setValue] = React.useState(2);
   const [allTracksInfo, setAllTrackInfo] = useState([]);
   const [snapshotID, setSnapshotID] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const userID = JSON.parse(localStorage.getItem("userID"));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  const [deletedTrack, setDeletedTrack] = useState([]);
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
     setPlayingTrack(uriObj);
   }
 
+  const followPlaylistOnSpotify = () => {
+    axios.post(
+      `http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`,
+      { spotifyPlaylistID }
+      );
+    };
+    
+    const getFinalTracks = () => {
+      axios
+        .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
+          params: { spotifyPlaylistID, accessToken },
+        })
+        .then((res) => {
+          // setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
+          setAllTrackInfo([res.data.allTracksInfo]);
+
+          setSnapshotID(res.data.snapshotID);
+        })
+        .catch((err) => console.log(err));
+    };
+
   const handleDeleteTrack = (trackURI, snapshotID) => {
-    if(userID !== playlistInfo.admin_id) {
+    if (userID !== playlistInfo.admin_id) {
       alert("Only the admin can delete tracks!");
       return;
     }
@@ -58,31 +79,19 @@ export default function FinalPlaylist({
         accessToken,
         spotifyPlaylistID,
       })
+      .then((res) => {
+        getFinalTracks();
+      })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
-        params: { spotifyPlaylistID, accessToken },
-      })
-      .then((res) => {
-        setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
-        setSnapshotID(res.data.snapshotID);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const followPlaylistOnSpotify = () => {
-    console.log("IT IS CALLED")
-    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID })
-  }
+    getFinalTracks();
+  }, [])
 
   let tracks;
-  console.log(allTracksInfo);
   if (allTracksInfo[0]) {
     tracks = allTracksInfo[0].map((track, index) => {
-      console.log("HEREEEEEE", track)
       return (
         <Tr key={track.trackID}>
           <Td>
@@ -101,7 +110,12 @@ export default function FinalPlaylist({
           <Td>
             {" "}
             <Typography component="legend"></Typography>
-            <Rating precision={0.5} name="read-only" value={track.rating} readOnly />
+            <Rating
+              precision={0.5}
+              name="read-only"
+              value={track.rating}
+              readOnly
+            />
           </Td>
           <Td>
             <ChakraProvider>
@@ -150,7 +164,7 @@ export default function FinalPlaylist({
     });
   }
 
-  let collaboratorsNames = collaborators.join(", ");
+  let collaboratorsNames = collaborators.join("");
 
   return (
     <>
@@ -186,7 +200,10 @@ export default function FinalPlaylist({
       </Button>
       <hr className="divider" />
       <section className="play-spotify-section">
-        <Button className="play-spotify" onClick={() => followPlaylistOnSpotify()}>
+        <Button
+          className="play-spotify"
+          onClick={() => followPlaylistOnSpotify()}
+        >
           <AudiotrackIcon /> Add Playlist to Spotify
         </Button>
       </section>

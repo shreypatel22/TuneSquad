@@ -11,19 +11,9 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
   const [playlistInfo, setPlaylistInfo] = useState([]);
   const [spotifyTrackIDs, setspotifyTrackIDs] = useState([]);
   const [spotifyTrackIDsArray, setspotifyTrackIDsArray] = useState([]);
-  const [songList, setSongList] = useState([]);
   const [collaborators, setCollaborators] = useState([]);
   const [playlistStatus, setPlaylistStatus] = useState("open");
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/playlist/${playlistID}`)
-      .then((res) => {
-        setPlaylistInfo(res.data.playlist[0]);
-        setCollaborators((prev) => [...prev, ...res.data.collaborators]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const [allTracksInfo, setAllTrackInfo] = useState([]);
 
   const getTrackIDs = () => {
     axios
@@ -35,9 +25,38 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
       .catch((err) => console.log(err));
   };
 
+  const getFinalTracks = () => {
+    axios
+      .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
+        params: { spotifyPlaylistID, accessToken },
+      })
+      .then((res) => {
+        setAllTrackInfo(res.data.allTracksInfo);
+      })
+      .catch((err) => console.log(err));
+  };
+  
+  const getVotingTracks = () => {
+    axios
+    .get(`http://localhost:3001/playlist/${playlistID}`)
+    .then((res) => {
+      setPlaylistInfo(res.data.playlist[0]);
+      setCollaborators((prev) => [...prev, ...res.data.collaborators]);
+    })
+    .catch((err) => console.log(err));
+  }
+
   useEffect(() => {
+    getVotingTracks();
     getTrackIDs();
   }, []);
+
+  useEffect(() => {
+    if(playlistInfo.status === "closed") {
+      getFinalTracks();
+    }
+   
+  }, [playlistInfo]);
 
   // if (playlistStatus === "closed") {
   //   const accessToken = JSON.parse(localStorage.getItem("access_token"));
@@ -61,6 +80,7 @@ export default function Playlist({ playlistID, spotifyPlaylistID }) {
           playlistStatus={playlistStatus}
           setPlaylistStatus={setPlaylistStatus}
           getTrackIDs={getTrackIDs}
+          allTracksInfo={allTracksInfo}
         />
       ) : (
         <FinalPlaylist

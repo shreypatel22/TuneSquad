@@ -17,7 +17,7 @@ import {
 import axios from 'axios';
 
 export default function PlaylistModal({ setOpenModal, playlists, setPlaylists }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 

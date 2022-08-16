@@ -13,11 +13,10 @@ export default function PlaylistContainer({
 
   if (playlists) {
     playlistItems = playlists.map((playlist) => {
-      console.log("PLAULIST INFO", playlist)
       let playlistID;
-      if(playlist.playlist_id) {
+      if (playlist.playlist_id) {
         playlistID = playlist.playlist_id;
-      } else{
+      } else {
         playlistID = playlist.id;
       }
 
@@ -30,15 +29,14 @@ export default function PlaylistContainer({
           playlistID={playlistID}
           setPlaylistID={setPlaylistID}
           setSpotifyPlaylistID={setSpotifyPlaylistID}
-          coverImage = {playlist.image_url}
+          coverImage={playlist.image_url}
         />
       );
     });
   }
 
   return (
-    <div onClick={false}>
-      {/* <PlaylistItem code={code} /> */}
+    <div>
       <SimpleGrid minChildWidth="320px" >
         {playlistItems}
       </SimpleGrid>

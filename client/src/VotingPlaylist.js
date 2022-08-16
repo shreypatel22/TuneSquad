@@ -11,7 +11,6 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   TableContainer,
   Menu,
   MenuButton,
@@ -27,27 +26,22 @@ export default function VotingPlaylist({
   spotifyPlaylistID,
   playlistInfo,
   spotifyTrackIDs,
-  track,
-  chooseTrack,
   setPlayingTrack,
   collaborators,
   setCollaborators,
   playlistStatus,
   setPlaylistStatus,
   getTrackIDs,
+  allTracksInfo
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
   const accessToken = JSON.parse(localStorage.getItem("access_token"));
   const [songsInfo, setSongsInfo] = useState();
-  const [value, setValue] = React.useState();
   const userID = JSON.parse(localStorage.getItem("userID"));
   const [savedSong, setSavedSong] = useState();
 
-  function handlePlay(trackURI) {
-    let uriObj = { uri: trackURI };
-    setPlayingTrack(uriObj);
-  }
+
 
   const getTrackFromSpotify = async (spotifyTrackIDs) => {
     const { data } = await axios.get(`https://api.spotify.com/v1/tracks/`, {
@@ -75,6 +69,11 @@ export default function VotingPlaylist({
 
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
+      const thisSongTrack = allTracksInfo.find((track) => {
+        return song.id === track.trackID
+      }) 
+
+      console.log("-------------!!!!!!!!!!!!!!",thisSongTrack);
       return (
         <SongRow
           song={song}
@@ -82,6 +81,8 @@ export default function VotingPlaylist({
           index={index}
           playlistID={playlistID}
           setPlayingTrack={setPlayingTrack}
+          thisSongTrack={thisSongTrack}
+          
         />
       );
     });
@@ -121,7 +122,7 @@ export default function VotingPlaylist({
         console.log(err);
       });
   };
-
+  console.log(playlistInfo.status)
   return (
     <>
       <Box>
