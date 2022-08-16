@@ -20,8 +20,8 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useDisclosure } from "@chakra-ui/react";
 
-export default function SongRow({ song, index, playlistID, setPlayingTrack }) {
-  const [rating, setRating] = React.useState();
+export default function SongRow({ song, index, playlistID, setPlayingTrack, thisSongTrack }) {
+  const [rating, setRating] = React.useState(thisSongTrack.rating);
   const userID = JSON.parse(localStorage.getItem("userID"));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();

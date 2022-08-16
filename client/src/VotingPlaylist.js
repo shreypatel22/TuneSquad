@@ -32,6 +32,7 @@ export default function VotingPlaylist({
   playlistStatus,
   setPlaylistStatus,
   getTrackIDs,
+  allTracksInfo
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -68,6 +69,11 @@ export default function VotingPlaylist({
 
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
+      const thisSongTrack = allTracksInfo.find((track) => {
+        return song.id === track.trackID
+      }) 
+
+      console.log("-------------!!!!!!!!!!!!!!",thisSongTrack);
       return (
         <SongRow
           song={song}
@@ -75,6 +81,8 @@ export default function VotingPlaylist({
           index={index}
           playlistID={playlistID}
           setPlayingTrack={setPlayingTrack}
+          thisSongTrack={thisSongTrack}
+          
         />
       );
     });
@@ -114,7 +122,7 @@ export default function VotingPlaylist({
         console.log(err);
       });
   };
-
+  console.log(playlistInfo.status)
   return (
     <>
       <Box>

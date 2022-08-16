@@ -39,6 +39,7 @@ export default function FinalPlaylist({
   const userID = JSON.parse(localStorage.getItem("userID"));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
+  const [deletedTrack, setDeletedTrack] = useState([]);
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
@@ -49,8 +50,22 @@ export default function FinalPlaylist({
     axios.post(
       `http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`,
       { spotifyPlaylistID }
-    );
-  };
+      );
+    };
+    
+    const getFinalTracks = () => {
+      axios
+        .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
+          params: { spotifyPlaylistID, accessToken },
+        })
+        .then((res) => {
+          // setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
+          setAllTrackInfo([res.data.allTracksInfo]);
+
+          setSnapshotID(res.data.snapshotID);
+        })
+        .catch((err) => console.log(err));
+    };
 
   const handleDeleteTrack = (trackURI, snapshotID) => {
     if (userID !== playlistInfo.admin_id) {
@@ -64,26 +79,19 @@ export default function FinalPlaylist({
         accessToken,
         spotifyPlaylistID,
       })
+      .then((res) => {
+        getFinalTracks();
+      })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/finalPlaylist/${playlistID}`, {
-        params: { spotifyPlaylistID, accessToken },
-      })
-      .then((res) => {
-        setAllTrackInfo((prev) => [...prev, res.data.allTracksInfo]);
-        setSnapshotID(res.data.snapshotID);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    getFinalTracks();
+  }, [])
 
   let tracks;
-  console.log(allTracksInfo);
   if (allTracksInfo[0]) {
     tracks = allTracksInfo[0].map((track, index) => {
-      console.log("HEREEEEEE", track);
       return (
         <Tr key={track.trackID}>
           <Td>
@@ -156,7 +164,7 @@ export default function FinalPlaylist({
     });
   }
 
-  let collaboratorsNames = collaborators.join(", ");
+  let collaboratorsNames = collaborators.join("");
 
   return (
     <>
