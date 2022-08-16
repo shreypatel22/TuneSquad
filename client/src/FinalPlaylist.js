@@ -75,7 +75,7 @@ export default function FinalPlaylist({
 
   const followPlaylistOnSpotify = () => {
     console.log("IT IS CALLED")
-    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID, accessToken })
+    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}/followOnSpotify`, { spotifyPlaylistID })
   }
 
   let tracks;
@@ -174,13 +174,13 @@ export default function FinalPlaylist({
       </Box>
       <Button
         className="playlist-type-off"
-        onClick={() => setOpenPlaylistType(false)}
+        onClick={() => setOpenPlaylistType(true)}
       >
         Voting
       </Button>
       <Button
         className="playlist-type-on"
-        onClick={() => setOpenPlaylistType(true)}
+        onClick={() => setOpenPlaylistType(false)}
       >
         Final
       </Button>

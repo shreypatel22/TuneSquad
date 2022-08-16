@@ -104,25 +104,24 @@ module.exports = (db) => {
           console.log("Something went wrong!", err);
         }
       );
-    });
+  });
 
-    router.post("/:playlistID/followOnSpotify", (req, res) => {
-      console.log("==========", req.body);
-      const {spotifyPlaylistID, accessToken} = req.body;
-      spotifyApi.setAccessToken(accessToken);
+  router.post("/:playlistID/followOnSpotify", (req, res) => {
+    const { spotifyPlaylistID, accessToken } = req.body;
+    spotifyApi.setAccessToken(accessToken);
 
-      spotifyApi
-        .followPlaylist(spotifyPlaylistID, {
-          public: false,
-        })
-        .then(
-          function (data) {
-            console.log("Playlist successfully followed privately!");
-          },
-          function (err) {
-            console.log("Something went wrong!", err);
-          }
-        );
+    spotifyApi
+      .followPlaylist(spotifyPlaylistID, {
+        public: false,
+      })
+      .then(
+        function (data) {
+          console.log("Playlist successfully followed privately!");
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
   });
   return router;
 };

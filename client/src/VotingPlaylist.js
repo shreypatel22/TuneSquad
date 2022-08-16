@@ -5,9 +5,21 @@ import { Search2Icon, TriangleDownIcon } from "@chakra-ui/icons";
 import SearchBar from "./SearchBar";
 import "./style/Playlist.scss";
 import AddVoterModal from "./AddVoterModal";
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import axios from "axios";
-import SongRow from "./SongRow"
+import SongRow from "./SongRow";
 
 export default function VotingPlaylist({
   setOpenPlaylistType,
@@ -22,7 +34,7 @@ export default function VotingPlaylist({
   setCollaborators,
   playlistStatus,
   setPlaylistStatus,
-  getTrackIDs
+  getTrackIDs,
 }) {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openAddVoterModal, setOpenAddVoterModal] = useState(false);
@@ -30,6 +42,7 @@ export default function VotingPlaylist({
   const [songsInfo, setSongsInfo] = useState();
   const [value, setValue] = React.useState();
   const userID = JSON.parse(localStorage.getItem("userID"));
+  const [savedSong, setSavedSong] = useState();
 
   function handlePlay(trackURI) {
     let uriObj = { uri: trackURI };
@@ -49,32 +62,41 @@ export default function VotingPlaylist({
     setSongsInfo(data.tracks);
   };
 
-  const getTrack = (spotifyTrackIDs, ) => {
+  const getTrack = (spotifyTrackIDs) => {
     getTrackFromSpotify(spotifyTrackIDs);
   };
 
   useEffect(() => {
+    console.log("useEffect");
     getTrack(spotifyTrackIDs);
-  });
+  }, [savedSong]);
 
   let songs;
 
   if (songsInfo) {
     songs = songsInfo.map((song, index) => {
       return (
-        <SongRow song={song} key={index + 1} index={index} playlistID={playlistID}   setPlayingTrack={setPlayingTrack}        />
-       
+        <SongRow
+          song={song}
+          key={index + 1}
+          index={index}
+          playlistID={playlistID}
+          setPlayingTrack={setPlayingTrack}
+        />
       );
     });
   }
 
   let collaboratorsNames = collaborators.join("");
- 
 
-  const createFinalPlaylist = () => {        
-    const accessToken = JSON.parse(localStorage.getItem("access_token"));    
-    axios.post(`http://localhost:3001/finalPlaylist/${playlistID}`, {spotifyPlaylistID, accessToken})
-      .then(res => console.log(res))
+  const createFinalPlaylist = () => {
+    const accessToken = JSON.parse(localStorage.getItem("access_token"));
+    axios
+      .post(`http://localhost:3001/finalPlaylist/${playlistID}`, {
+        spotifyPlaylistID,
+        accessToken,
+      })
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
@@ -85,12 +107,12 @@ export default function VotingPlaylist({
     }
     const { myValue } = event.currentTarget.dataset;
     setPlaylistStatus(myValue);
-    
-    console.log("vlaue", myValue)
+
+    console.log("vlaue", myValue);
 
     if (myValue === "closed") {
       createFinalPlaylist();
-    }    
+    }
 
     axios
       .post(`http://localhost:3001/playlist/status/${playlistID}`, { myValue })
@@ -99,8 +121,6 @@ export default function VotingPlaylist({
         console.log(err);
       });
   };
-
-
 
   return (
     <>
@@ -122,7 +142,6 @@ export default function VotingPlaylist({
           </div>
         </section>
       </Box>
-
 
       <Menu>
         <MenuButton
@@ -152,31 +171,31 @@ export default function VotingPlaylist({
 
       {openAddVoterModal && (
         <AddVoterModal
-        setOpenAddVoterModal={setOpenAddVoterModal}
-        playlistID={playlistID}
-        spotifyPlaylistID={spotifyPlaylistID}
-        setCollaborators={setCollaborators}
+          setOpenAddVoterModal={setOpenAddVoterModal}
+          playlistID={playlistID}
+          spotifyPlaylistID={spotifyPlaylistID}
+          setCollaborators={setCollaborators}
         />
       )}
 
       <Button
         className="playlist-type-on"
-        onClick={() => setOpenPlaylistType(false)}
+        onClick={() => setOpenPlaylistType(true)}
       >
         Voting
       </Button>
       <Button
         className="playlist-type-off"
-        onClick={() => setOpenPlaylistType(true)}
+        onClick={() => setOpenPlaylistType(false)}
       >
         Final
       </Button>
-          <Button
-            className="add-user-button"
-            onClick={() => setOpenAddVoterModal(true)}
-          >
-            <PersonAddIcon />
-          </Button>
+      <Button
+        className="add-user-button"
+        onClick={() => setOpenAddVoterModal(true)}
+      >
+        <PersonAddIcon />
+      </Button>
       <hr className="divider" />
       {openSearchBar && (
         <SearchBar
@@ -184,6 +203,7 @@ export default function VotingPlaylist({
           playlistID={playlistID}
           spotifyPlaylistID={spotifyPlaylistID}
           getTrackIDs={getTrackIDs}
+          setSavedSong={setSavedSong}
         />
       )}
 
