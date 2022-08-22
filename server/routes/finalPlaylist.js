@@ -109,6 +109,7 @@ module.exports = (db) => {
 
   router.post("/:playlistID/followOnSpotify", (req, res) => {
     const { spotifyPlaylistID, accessToken } = req.body;
+    console.log(accessToken)
     spotifyApi.setAccessToken(accessToken);
 
     spotifyApi
