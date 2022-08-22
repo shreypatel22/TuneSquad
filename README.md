@@ -36,7 +36,9 @@ TuneSquad is a voting based playlist creation app built using React, Spotify API
   
 ## UI/UX
 
-![Login Screen](https://github.com/shreypatel22/TuneSquad/blob/main/client/src/style/playlist-clips/Screen%20Recording%202022-08-19%20at%2011.35.08%20AM.mov)
+![Login Screen] (https://user-images.githubusercontent.com/103383384/185939089-7be4ee1c-a7f8-4544-9624-f9d6b362eb93.mov)
+
+
 
 
 ## Getting Started
